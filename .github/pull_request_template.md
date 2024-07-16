@@ -1,11 +1,13 @@
 # 🚀 What changes were made? 
 
-- Added new Android project
-
+- Description about new changes
+ 
 # 👀 Evidence #
 
-N/A
+Screen shots or video
 
 # ⚠ More information #
 
 - [x] I have performed a self-review of my code
+
+Any developer note
