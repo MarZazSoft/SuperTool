@@ -45,6 +45,8 @@ jobs:
 
     - name: Generating Markdown report 🤖
       id: generate-report
+      env: 
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         issues=$(gh api --paginate repos/${{ github.repository }}/code-scanning/alerts --jq '.[] | select(.state=="open") | [.rule.id,.rule.description,.most_recent_instance.location.path,.most_recent_instance.location.start_line] | @tsv' | sort | column -t -s$'\t')
         if [ -z "$issues" ]; then
