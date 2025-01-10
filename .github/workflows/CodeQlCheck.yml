@@ -1,0 +1,74 @@
+name: CodeQL Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  codeql:
+    name: Checking code with CodeQL and build process 🚁
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: read
+      contents: write
+      pull-requests: write
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'kotlin' ]
+
+    steps:
+    - name: CheckOut repository ⚓
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 17 🚥
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Verify Java version 👀
+      run: java -version
+
+    - name: Initialize CodeQL 🐱‍👤
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ matrix.language }}
+
+    - name: Create google-services.json 🤖
+      run: |
+        echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > $GITHUB_WORKSPACE/SuperTool/app/google-services.json
+        cat $GITHUB_WORKSPACE/SuperTool/app/google-services.json
+
+
+    - name: Build the code 🚀
+      run: cd SuperTool && ./gradlew build
+
+    - name: Run CodeQL Analysis 👀
+      uses: github/codeql-action/analyze@v3
+
+    - name: Generating Markdown report 🤖
+      id: generate-report
+      env: 
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        issues=$(gh api --paginate repos/${{ github.repository }}/code-scanning/alerts --jq '.[] | select(.state=="open") | [.rule.id,.rule.description,.most_recent_instance.location.path,.most_recent_instance.location.start_line] | @tsv' | sort | column -t -s$'\t')
+        if [ -z "$issues" ]; then
+          echo "No issues found 👌" > report.md
+        else
+          echo "### CodeQL Report" > report.md
+          echo "| Rule ID | Description | File | Line |" >> report.md
+          echo "|---------|-------------|------|------|" >> report.md
+          echo "$issues" | while IFS=$'\t' read -r id description path line; do
+            echo "| $id | $description | [$path](https://github.com/${{ github.repository }}/blob/${{ github.sha }}/$path#L$line) | $line |" >> report.md
+          done
+        fi
+
+    - name: Post report to PR 🤖
+      if: github.event_name == 'pull_request'
+      uses: marocchino/sticky-pull-request-comment@v2
+      with:
+        path: report.md
