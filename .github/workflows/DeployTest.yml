@@ -42,7 +42,7 @@ jobs:
 
       - name: Build APK 🤖🚥
         run: |
-          ./gradlew assembleRelease
+          cd SuperTool && ./gradlew assembleRelease
 
       - name: Upload APK to Firebase 🤖🚀
         env:
