@@ -21,7 +21,7 @@ jobs:
           ref: ${{ inputs.target_branch }}
 
       - name: Grant execution permissions to gradlew 🤖
-        run: chmod +x ./gradlew
+        run: cd SuperTool && chmod +x ./gradlew
     
       - name: Set up JDK 17 🚥
         uses: actions/setup-java@v3
