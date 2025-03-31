@@ -2,6 +2,10 @@ name: Deploy QA release (Manual)
 
 on:
   workflow_dispatch:
+    inputs:
+      target_branch:
+        description: 'Branch to build APK from'
+        required: true
   push: 
     branches: 
       - 'test'
@@ -13,6 +17,8 @@ jobs:
     steps:
       - name: CheckOut repository ⚓
         uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.target_branch }}
 
       - name: Set up JDK 17 🚥
         uses: actions/setup-java@v3
@@ -31,9 +37,14 @@ jobs:
       - name: Build the code 🚀
         run: cd SuperTool && ./gradlew build
 
-      - name: Upload APK to Firebase App Distribution 
-        uses: FirebaseAppDistribution/upload-apk@v1 
-        with: 
-          token: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }} 
-          app_id: ${{ secrets.FIREBASE_APP_ID }} 
-          file: 'app/build/outputs/apk/release/app-release.apk'
+      - name: Build APK 🤖🚥
+        run: |
+          ./gradlew assembleRelease
+
+      - name: Upload APK to Firebase 🤖🚀
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_APP_DISTRIBUTION_TOKEN }}
+        run: |
+          firebase appdistribution:distribute \
+          SuperTool/app/build/outputs/apk/release/app-release-unsigned.apk \
+          --app ${{ secrets.FIREBASE_APP_ID }}
