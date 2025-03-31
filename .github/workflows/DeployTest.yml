@@ -1,4 +1,4 @@
-name: Deploy QA release (Manual)
+name: Deploy QA release
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ on:
       - 'test'
     
 jobs:
-  build: 
+  build-and-deploy: 
     runs-on: ubuntu-latest
      
     steps:
@@ -39,6 +39,10 @@ jobs:
 
       - name: Build the code 🚀
         run: cd SuperTool && ./gradlew build
+
+      - name: Install Firebase CLI 🤖🚥
+        run: |
+          curl -sL https://firebase.tools | bash
 
       - name: Build APK 🤖🚥
         run: |
