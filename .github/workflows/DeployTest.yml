@@ -44,14 +44,39 @@ jobs:
         run: |
           curl -sL https://firebase.tools | bash
 
-      - name: Build APK 🤖🚥
+      - name: Build unsigned APK 🤖🚥
         run: |
           cd SuperTool && ./gradlew assembleRelease
 
+      - name: Sign the APK 🤖🖋️
+        env:
+          KEYSTORE_FILE: ${{ secrets.KEYSTORE_FILE }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        run: |
+          # Create the jks temporal
+          echo "$KEYSTORE_FILE" | base64 -d > my-release-key.jks
+    
+          # Sign the APK with apksigner (Android Build Tools)
+          apksigner sign --ks my-release-key.jks \
+            --ks-pass pass:$KEYSTORE_PASSWORD \
+            --key-pass pass:$KEY_PASSWORD \
+            --ks-key-alias $KEY_ALIAS \
+            app/build/outputs/apk/release/app-release-unsigned.apk
+    
+          # Verify the sign
+          apksigner verify app/build/outputs/apk/release/app-release-unsigned.apk
+    
+          # Aling the APK signed with zipalign
+          zipalign -v 4 \
+            app/build/outputs/apk/release/app-release-unsigned.apk \
+            app/build/outputs/apk/release/app-release.apk
+    
       - name: Upload APK to Firebase 🤖🚀
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_AUTH_TOKEN }}
         run: |
           firebase appdistribution:distribute \
-          SuperTool/app/build/outputs/apk/release/app-release-unsigned.apk \
+          SuperTool/app/build/outputs/apk/release/app-release.apk \
           --app ${{ secrets.FIREBASE_APP_ID }}
