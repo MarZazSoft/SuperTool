@@ -40,56 +40,14 @@ jobs:
       - name: Build the code 🚀
         run: cd SuperTool && ./gradlew build
 
-      - name: Install Firebase CLI 🤖🚥
-        run: |
-          curl -sL https://firebase.tools | bash
-
-      - name: Install Android SDK and Build Tools 🤖🚥
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y openjdk-11-jdk wget unzip
-          wget https://dl.google.com/android/repository/commandlinetools-linux-9123335_latest.zip -O cmdline-tools.zip
-          unzip cmdline-tools.zip -d $HOME/android-sdk/cmdline-tools
-          export ANDROID_SDK_ROOT=$HOME/android-sdk
-          export PATH=$ANDROID_SDK_ROOT/cmdline-tools/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/build-tools/33.0.2:$PATH
-          ls $ANDROID_SDK_ROOT/cmdline-tools/bin
-          yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --licenses
-          $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager "platform-tools" "build-tools;33.0.2"
-
-
       - name: Build unsigned APK 🤖🚥
         run: |
-          cd SuperTool && ./gradlew assembleRelease
+          cd SuperTool && ./gradlew assembleDebug
 
-      - name: Sign the APK 🤖🖋️
-        env:
-          KEYSTORE_FILE: ${{ secrets.KEYSTORE_FILE }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-        run: |
-          # Create the jks temporal
-          echo "$KEYSTORE_FILE" | base64 -d > my-release-key.jks
-    
-          # Sign the APK with apksigner (Android Build Tools)
-          apksigner sign --ks my-release-key.jks \
-            --ks-pass pass:$KEYSTORE_PASSWORD \
-            --key-pass pass:$KEY_PASSWORD \
-            --ks-key-alias $KEY_ALIAS \
-            app/build/outputs/apk/release/app-release-unsigned.apk
-    
-          # Verify the sign
-          apksigner verify app/build/outputs/apk/release/app-release-unsigned.apk
-    
-          # Aling the APK signed with zipalign
-          zipalign -v 4 \
-            app/build/outputs/apk/release/app-release-unsigned.apk \
-            app/build/outputs/apk/release/app-release.apk
-    
-      - name: Upload APK to Firebase 🤖🚀
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_AUTH_TOKEN }}
-        run: |
-          firebase appdistribution:distribute \
-          SuperTool/app/build/outputs/apk/release/app-release.apk \
-          --app ${{ secrets.FIREBASE_APP_ID }}
+      - name: upload artifact to Firebase App Distribution 🤖🚀
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.5.1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}   
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIAL_FILE_CONTENT }}      
+          groups: testers
+          file: SuperTool/app/build/outputs/apk/debug/app-debug.apk
