@@ -45,9 +45,9 @@ jobs:
           cd SuperTool && ./gradlew assembleDebug
 
       - name: upload artifact to Firebase App Distribution 🤖🚀
-        uses: wzieba/Firebase-Distribution-Github-Action@v1.5.1
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.7.1
         with:
-          appId: ${{secrets.FIREBASE_APP_ID}}   
-          serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIAL_FILE_CONTENT }}      
-          groups: testers
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIAL_FILE_CONTENT }}
+          groups: Testers
           file: SuperTool/app/build/outputs/apk/debug/app-debug.apk
