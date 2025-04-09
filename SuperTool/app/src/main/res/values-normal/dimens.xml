@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Elements -->
-    <dimen name="large_image" tools:ignore="MissingDefaultResource">150dp</dimen>
+    <dimen name="large_image" tools:ignore="MissingDefaultResource">130dp</dimen>
 
     <!-- Text -->
     <dimen name="large_text" tools:ignore="MissingDefaultResource">30sp</dimen>

@@ -1,6 +1,7 @@
 package com.marzazsoft.supertool.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -9,7 +10,7 @@ import com.marzazsoft.supertool.ui.screens.SplashScreen
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun AppNavigation() {
+fun AppNavigation(modifier: Modifier) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -19,7 +20,7 @@ fun AppNavigation() {
             SplashScreen(navController)
         }
         composable(NavigationScreens.MainScreen.route) {
-            MainScreen()
+            MainScreen(navController, modifier)
         }
     }
 }
