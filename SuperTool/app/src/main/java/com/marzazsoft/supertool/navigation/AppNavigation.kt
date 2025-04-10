@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.marzazsoft.supertool.ui.screens.MainScreen
+import com.marzazsoft.supertool.ui.screens.LoginScreen
 import com.marzazsoft.supertool.ui.screens.SplashScreen
 
 @Suppress("ktlint:standard:function-naming")
@@ -20,7 +20,7 @@ fun AppNavigation(modifier: Modifier) {
             SplashScreen(navController)
         }
         composable(NavigationScreens.MainScreen.route) {
-            MainScreen(navController, modifier)
+            LoginScreen(navController, modifier)
         }
     }
 }
