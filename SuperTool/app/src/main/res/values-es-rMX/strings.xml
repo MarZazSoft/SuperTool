@@ -2,4 +2,9 @@
 <resources>
     <string name="app_name">SuperTool</string>
     <string name="icon_super_tool_description">Ícono de SuperTool</string>
+    <string name="icon_password_description">Ícono de contraseña</string>
+    <string name="user_label">Usuario</string>
+    <string name="password_label">Contraseña</string>
+    <string name="enter_label">Ingresar</string>
+    <string name="guest_label">Ingresar como invitado</string>
 </resources>
