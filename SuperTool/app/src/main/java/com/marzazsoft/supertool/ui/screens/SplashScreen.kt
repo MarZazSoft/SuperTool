@@ -25,16 +25,19 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
+import com.marzazsoft.supertool.utils.DELAY_TIME_SPLASH_SCREEN
+import com.marzazsoft.supertool.utils.LARGE_FONT_SIZE
+import com.marzazsoft.supertool.utils.LARGE_IMAGE
+import com.marzazsoft.supertool.utils.MEDIUM_PADDING
+import com.marzazsoft.supertool.utils.NORMAL_STROKE_WIDTH
+import com.marzazsoft.supertool.utils.SIMPLE_TIME_ANIMATION
 import kotlinx.coroutines.delay
 
 @Suppress("ktlint:standard:function-naming")
@@ -43,9 +46,9 @@ fun SplashScreen(navController: NavController) {
     SplashUi()
 
     LaunchedEffect(key1 = true) {
-        delay(2000)
+        delay(DELAY_TIME_SPLASH_SCREEN)
         navController.popBackStack()
-        navController.navigate(NavigationScreens.MainScreen.route)
+        navController.navigate(NavigationScreens.LoginScreen.route)
     }
 }
 
@@ -58,7 +61,7 @@ fun SplashUi() {
         infiniteTransition.animateFloat(
             initialValue = 0f,
             targetValue = 360f,
-            animationSpec = infiniteRepeatable(tween(1000, easing = LinearEasing)),
+            animationSpec = infiniteRepeatable(tween(SIMPLE_TIME_ANIMATION, easing = LinearEasing)),
         )
 
     val brush =
@@ -79,7 +82,7 @@ fun SplashUi() {
                             drawCircle(
                                 brush = brush,
                                 radius = size.minDimension / 2,
-                                style = Stroke(width = 20f),
+                                style = Stroke(width = NORMAL_STROKE_WIDTH),
                             )
                         }
                     },
@@ -90,16 +93,16 @@ fun SplashUi() {
                 modifier =
                     Modifier
                         .size(
-                            dimensionResource(id = R.dimen.large_image),
-                            dimensionResource(id = R.dimen.large_image),
+                            width = LARGE_IMAGE,
+                            height = LARGE_IMAGE,
                         ).clip(CircleShape),
             )
         }
         Text(
             text = stringResource(id = R.string.app_name),
-            fontSize = 25.sp,
+            fontSize = LARGE_FONT_SIZE,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(all = 25.dp),
+            modifier = Modifier.padding(all = MEDIUM_PADDING),
         )
     }
 }

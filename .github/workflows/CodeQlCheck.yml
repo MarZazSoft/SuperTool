@@ -41,8 +41,6 @@ jobs:
     - name: Create google-services.json 🤖
       run: |
         echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > $GITHUB_WORKSPACE/SuperTool/app/google-services.json
-        cat $GITHUB_WORKSPACE/SuperTool/app/google-services.json
-
 
     - name: Build the code 🚀
       run: cd SuperTool && ./gradlew build
