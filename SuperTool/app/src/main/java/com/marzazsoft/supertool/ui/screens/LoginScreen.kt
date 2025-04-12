@@ -36,12 +36,15 @@ import com.marzazsoft.supertool.utils.NORMAL_ROUNDED_CORNER
 import com.marzazsoft.supertool.utils.SIMPLE_HEIGHT_BUTTON
 import com.marzazsoft.supertool.utils.SIMPLE_PADDING
 import com.marzazsoft.supertool.utils.SMALL_IMAGE
+import com.marzazsoft.supertool.viewModels.LoginViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun LoginScreen(
     navController: NavHostController,
     modifier: Modifier,
+    viewModel: LoginViewModel = koinViewModel()
 ) {
     val userValue = rememberSaveable { mutableStateOf("") }
     val passValue = rememberSaveable { mutableStateOf("") }
@@ -148,5 +151,5 @@ fun LoginScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen(rememberNavController(), Modifier)
+    LoginScreen(rememberNavController(), Modifier, LoginViewModel())
 }

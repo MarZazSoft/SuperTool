@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.marzazsoft.supertool"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.marzazsoft.supertool"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -70,6 +70,7 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.koin)
 
     implementation(libs.bundles.compose.utils)
 }
