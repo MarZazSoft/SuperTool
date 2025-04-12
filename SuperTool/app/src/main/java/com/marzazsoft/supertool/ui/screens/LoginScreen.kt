@@ -44,7 +44,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun LoginScreen(
     navController: NavHostController,
     modifier: Modifier,
-    viewModel: LoginViewModel = koinViewModel()
+    viewModel: LoginViewModel = koinViewModel(),
 ) {
     val userValue = rememberSaveable { mutableStateOf("") }
     val passValue = rememberSaveable { mutableStateOf("") }
