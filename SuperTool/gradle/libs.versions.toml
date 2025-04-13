@@ -39,6 +39,7 @@ koin = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref =
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "firebase"  }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 [bundles]
 compose-utils = ["constraint-compose"]
