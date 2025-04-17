@@ -15,8 +15,12 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
@@ -46,9 +50,17 @@ fun LoginScreen(
     modifier: Modifier,
     viewModel: LoginViewModel = koinViewModel(),
 ) {
-    val userValue = rememberSaveable { mutableStateOf("") }
-    val passValue = rememberSaveable { mutableStateOf("") }
-    val passHide = rememberSaveable { mutableStateOf(true) }
+    var userValue by rememberSaveable { mutableStateOf("") }
+    var passValue by rememberSaveable { mutableStateOf("") }
+    var passHide by rememberSaveable { mutableStateOf(true) }
+
+    val firebaseAuthState by viewModel.firebaseAuthResponse.collectAsState()
+
+    LaunchedEffect(firebaseAuthState) {
+        if (firebaseAuthState) {
+            navController.navigate(NavigationScreens.MainScreen.route)
+        }
+    }
 
     ConstraintLayout(modifier = modifier.fillMaxWidth().fillMaxHeight().padding(all = MEDIUM_PADDING)) {
         val (imageIconId, inputUserId, inputPassId, btnLogin, btnGuest) = createRefs()
@@ -70,8 +82,8 @@ fun LoginScreen(
         )
 
         OutlinedTextField(
-            value = userValue.value,
-            onValueChange = { userValue.value = it },
+            value = userValue,
+            onValueChange = { userValue = it },
             label = { Text(text = stringResource(R.string.user_label)) },
             singleLine = true,
             modifier =
@@ -84,22 +96,22 @@ fun LoginScreen(
         )
 
         OutlinedTextField(
-            value = passValue.value,
-            onValueChange = { newText -> passValue.value = newText },
+            value = passValue,
+            onValueChange = { newText -> passValue = newText },
             label = { Text(text = stringResource(R.string.password_label)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            visualTransformation = if (passHide.value) PasswordVisualTransformation() else VisualTransformation.None,
+            visualTransformation = if (passHide) PasswordVisualTransformation() else VisualTransformation.None,
             trailingIcon = {
                 Image(
                     painter =
                         painterResource(
-                            if (passHide.value) R.drawable.ic_eye_24 else R.drawable.ic_disabled_visible_24,
+                            if (passHide) R.drawable.ic_eye_24 else R.drawable.ic_disabled_visible_24,
                         ),
                     contentDescription = stringResource(R.string.icon_password_description),
                     modifier =
                         Modifier.size(SMALL_IMAGE).clickable {
-                            passHide.value = !passHide.value
+                            passHide = !passHide
                         },
                 )
             },
