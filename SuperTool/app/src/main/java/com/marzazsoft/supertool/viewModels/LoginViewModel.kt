@@ -25,7 +25,7 @@ class LoginViewModel : ViewModel() {
             auth
                 .signInWithCredential(credentials)
                 .addOnCompleteListener { task ->
-                    if(task.isSuccessful) {
+                    if (task.isSuccessful) {
                         Log.d("TAG_MTZ", "Logeado con éxito")
                         firebaseAuthResponse.value = true
                     } else {
