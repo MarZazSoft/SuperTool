@@ -1,11 +1,9 @@
 package com.marzazsoft.supertool.ui.screens
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -42,7 +40,7 @@ fun MainScreen(
                 .fillMaxHeight()
                 .background(Brush.verticalGradient(listOf(lightBlue, darkBlue), startY = 0f, endY = 1500f))
                 .padding(all = SIMPLE_PADDING),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().height(100.dp).background(Color.Red),
