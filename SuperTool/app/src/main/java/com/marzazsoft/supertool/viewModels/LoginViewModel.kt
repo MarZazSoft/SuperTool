@@ -12,8 +12,6 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
-
-    @Suppress("ktlint:standard:backing-property-naming")
     private val _firebaseAuthResponse = MutableStateFlow(false)
     val firebaseAuthResponse = _firebaseAuthResponse
 

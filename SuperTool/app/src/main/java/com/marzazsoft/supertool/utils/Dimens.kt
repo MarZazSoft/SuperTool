@@ -6,6 +6,8 @@ import androidx.compose.ui.unit.sp
 val LARGE_IMAGE = 130.dp
 val SMALL_IMAGE = 24.dp
 
+val SIMPLE_BORDER = 2.dp
+
 val MEDIUM_PADDING = 25.dp
 val SIMPLE_PADDING = 10.dp
 

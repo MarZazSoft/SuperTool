@@ -1,7 +1,11 @@
 package com.marzazsoft.supertool.ui.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,22 +25,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
+import com.marzazsoft.supertool.ui.theme.black
+import com.marzazsoft.supertool.ui.theme.gray
+import com.marzazsoft.supertool.ui.theme.superLightBlue
 import com.marzazsoft.supertool.utils.LARGE_IMAGE
 import com.marzazsoft.supertool.utils.MEDIUM_PADDING
 import com.marzazsoft.supertool.utils.NORMAL_ROUNDED_CORNER
+import com.marzazsoft.supertool.utils.SIMPLE_BORDER
 import com.marzazsoft.supertool.utils.SIMPLE_HEIGHT_BUTTON
 import com.marzazsoft.supertool.utils.SIMPLE_PADDING
 import com.marzazsoft.supertool.utils.SMALL_IMAGE
@@ -62,8 +73,15 @@ fun LoginScreen(
         }
     }
 
-    ConstraintLayout(modifier = modifier.fillMaxWidth().fillMaxHeight().padding(all = MEDIUM_PADDING)) {
-        val (imageIconId, inputUserId, inputPassId, btnLogin, btnGuest) = createRefs()
+    ConstraintLayout(
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .background(Brush.verticalGradient(listOf(gray, black), startY = 100f, endY = 800f))
+                .padding(all = MEDIUM_PADDING),
+    ) {
+        val (imageIconId, inputUserId, inputPassId, btnLogin, btnGuest, btnGoogleAuth) = createRefs()
 
         Image(
             painter = painterResource(id = R.drawable.super_tool_icon),
@@ -153,8 +171,40 @@ fun LoginScreen(
                 navController.navigate(NavigationScreens.MainScreen.route)
             },
             shape = RoundedCornerShape(NORMAL_ROUNDED_CORNER),
+            border = BorderStroke(SIMPLE_BORDER, superLightBlue),
         ) {
             Text(text = stringResource(R.string.guest_label))
+        }
+
+        OutlinedButton(
+            modifier =
+                Modifier
+                    .constrainAs(btnGoogleAuth) {
+                        top.linkTo(btnGuest.bottom, margin = SIMPLE_PADDING)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }.height(SIMPLE_HEIGHT_BUTTON),
+            onClick = {
+            },
+            shape = RoundedCornerShape(NORMAL_ROUNDED_CORNER),
+            border = BorderStroke(SIMPLE_BORDER, superLightBlue),
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.ic_google),
+                    contentDescription = stringResource(R.string.icon_google_description),
+                    modifier = Modifier.weight(1.1f),
+                )
+                Text(
+                    text = stringResource(R.string.google_label),
+                    modifier = Modifier.weight(2f),
+                    textAlign = TextAlign.Start,
+                )
+            }
         }
     }
 }
