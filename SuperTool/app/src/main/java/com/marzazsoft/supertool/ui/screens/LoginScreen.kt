@@ -1,5 +1,8 @@
 package com.marzazsoft.supertool.ui.screens
 
+import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -39,6 +43,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
 import com.marzazsoft.supertool.ui.theme.black
@@ -51,6 +58,7 @@ import com.marzazsoft.supertool.utils.SIMPLE_BORDER
 import com.marzazsoft.supertool.utils.SIMPLE_HEIGHT_BUTTON
 import com.marzazsoft.supertool.utils.SIMPLE_PADDING
 import com.marzazsoft.supertool.utils.SMALL_IMAGE
+import com.marzazsoft.supertool.utils.TAG_LOG
 import com.marzazsoft.supertool.viewModels.LoginViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -61,6 +69,7 @@ fun LoginScreen(
     modifier: Modifier,
     viewModel: LoginViewModel = koinViewModel(),
 ) {
+    val context = LocalContext.current
     var userValue by rememberSaveable { mutableStateOf("") }
     var passValue by rememberSaveable { mutableStateOf("") }
     var passHide by rememberSaveable { mutableStateOf(true) }
@@ -69,9 +78,24 @@ fun LoginScreen(
 
     LaunchedEffect(firebaseAuthState) {
         if (firebaseAuthState) {
+            navController.popBackStack()
             navController.navigate(NavigationScreens.MainScreen.route)
         }
     }
+
+    val launcher =
+        rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.StartActivityForResult(),
+        ) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                viewModel.signInWithGoogleCredentials(credential)
+            } catch (e: Exception) {
+                Log.d(TAG_LOG, "Failed Google Sign In")
+            }
+        }
 
     ConstraintLayout(
         modifier =
@@ -185,6 +209,8 @@ fun LoginScreen(
                         end.linkTo(parent.end)
                     }.height(SIMPLE_HEIGHT_BUTTON),
             onClick = {
+                val googleSignClient = GoogleSignIn.getClient(context, viewModel.getGoogleSignInOptions())
+                launcher.launch(googleSignClient.signInIntent)
             },
             shape = RoundedCornerShape(NORMAL_ROUNDED_CORNER),
             border = BorderStroke(SIMPLE_BORDER, superLightBlue),

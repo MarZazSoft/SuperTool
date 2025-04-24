@@ -1,9 +1,18 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.services)
     alias(libs.plugins.compose.compiler)
 }
+
+val localProperties =
+    Properties().apply {
+        load(rootProject.file("local.properties").inputStream())
+    }
+
+android.buildFeatures.buildConfig = true
 
 android {
     namespace = "com.marzazsoft.supertool"
@@ -20,6 +29,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "WEB_ID", "${localProperties["WEB_ID"]}")
     }
 
     buildTypes {
