@@ -14,6 +14,9 @@ firebaseAuthPlayServices = "21.3.0"
 navigationCompose = "2.8.9"
 constraintCompose = "1.1.1"
 koinVersion = "4.0.4"
+credentialsVersion = "1.5.0"
+credentialsPlayServicesVersion = "1.5.0"
+identityVersion = "1.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,6 +37,9 @@ androidx-navigation = { group = "androidx.navigation", name = "navigation-compos
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 firebase-auth-play-services = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "firebaseAuthPlayServices"}
+credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentialsVersion" }
+credentialsPlayServices = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentialsPlayServicesVersion" }
+identity = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "identityVersion"}
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 constraint-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintCompose" }
 koin = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koinVersion" }
@@ -46,6 +52,6 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 
 [bundles]
 compose-utils = ["constraint-compose"]
-firebase = ["firebase-analytics", "firebase-auth", "firebase-auth-play-services"]
+firebase = ["firebase-analytics", "firebase-auth", "firebase-auth-play-services", "credentials", "credentialsPlayServices", "identity"]
 
 
