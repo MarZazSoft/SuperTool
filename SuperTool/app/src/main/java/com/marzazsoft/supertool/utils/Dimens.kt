@@ -4,7 +4,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 val LARGE_IMAGE = 130.dp
+val MEDIUM_IMAGE = 65.dp
 val SMALL_IMAGE = 24.dp
+
+val LARGE_INDICATOR = 120.dp
+val MEDIUM_INDICATOR = 100.dp
+val SMALL_INDICATOR = 80.dp
 
 val SIMPLE_BORDER = 2.dp
 

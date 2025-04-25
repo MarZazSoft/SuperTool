@@ -1,106 +1,215 @@
 package com.marzazsoft.supertool.ui.screens
 
+import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 import com.marzazsoft.supertool.R
-import com.marzazsoft.supertool.ui.theme.darkBlue
-import com.marzazsoft.supertool.ui.theme.lightBlue
-import com.marzazsoft.supertool.utils.SIMPLE_PADDING
+import com.marzazsoft.supertool.navigation.NavigationScreens
+import com.marzazsoft.supertool.ui.share.SuperToolProgressIndicator
+import com.marzazsoft.supertool.ui.theme.black
+import com.marzazsoft.supertool.ui.theme.gray
+import com.marzazsoft.supertool.ui.theme.superLightBlue
+import com.marzazsoft.supertool.utils.ApiStatus
+import com.marzazsoft.supertool.utils.LARGE_IMAGE
+import com.marzazsoft.supertool.utils.MEDIUM_PADDING
+import com.marzazsoft.supertool.utils.NORMAL_ROUNDED_CORNER
+import com.marzazsoft.supertool.utils.SIMPLE_BORDER
+import com.marzazsoft.supertool.utils.SIMPLE_HEIGHT_BUTTON
+import com.marzazsoft.supertool.utils.SMALL_IMAGE
+import com.marzazsoft.supertool.utils.TAG_LOG
+import com.marzazsoft.supertool.viewModels.MainViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun MainScreen(
     navController: NavHostController,
     modifier: Modifier,
+    viewModel: MainViewModel = koinViewModel(),
 ) {
-    Column(
+    val context = LocalContext.current
+    var showProgressBar by rememberSaveable { mutableStateOf(false) }
+
+    val firebaseAuthState by viewModel.firebaseAuthState.collectAsState()
+
+    LaunchedEffect(firebaseAuthState) {
+        when (firebaseAuthState) {
+            is ApiStatus.Loading -> showProgressBar = true
+            is ApiStatus.Success -> {
+                showProgressBar = false
+                navController.popBackStack()
+                navController.navigate(NavigationScreens.HomeScreen.route)
+            }
+            else -> showProgressBar = false
+        }
+    }
+
+    val launcher =
+        rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.StartActivityForResult(),
+        ) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                viewModel.signInWithGoogleCredentials(credential)
+            } catch (e: Exception) {
+                Log.d(TAG_LOG, "Failed Google Sign In")
+            }
+        }
+
+    ConstraintLayout(
         modifier =
             modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .background(Brush.verticalGradient(listOf(lightBlue, darkBlue), startY = 0f, endY = 1500f))
-                .padding(all = SIMPLE_PADDING),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+                .background(Brush.verticalGradient(listOf(gray, black), startY = 100f, endY = 800f))
+                .padding(all = MEDIUM_PADDING),
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth().height(100.dp).background(Color.Red),
+        val (imageIconId, btnGuest, btnEmail, btnGoogleAuth) = createRefs()
+
+        Image(
+            painter = painterResource(id = R.drawable.super_tool_icon),
+            contentDescription = stringResource(id = R.string.icon_super_tool_description),
+            modifier =
+                Modifier
+                    .size(
+                        LARGE_IMAGE,
+                        LARGE_IMAGE,
+                    ).clip(CircleShape)
+                    .constrainAs(imageIconId) {
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(btnGuest.top, margin = MEDIUM_PADDING)
+                    },
+        )
+
+        OutlinedButton(
+            modifier =
+                Modifier
+                    .constrainAs(btnGuest) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom)
+                    }.fillMaxWidth()
+                    .height(SIMPLE_HEIGHT_BUTTON),
+            onClick = {
+                navController.navigate(NavigationScreens.HomeScreenGuest.route)
+            },
+            shape = RoundedCornerShape(NORMAL_ROUNDED_CORNER),
+            border = BorderStroke(SIMPLE_BORDER, superLightBlue),
         ) {
-            Image(
-                painter = painterResource(R.drawable.ic_google),
-                contentDescription = "",
-                modifier = Modifier.weight(2f),
-            )
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier.height(100.dp).weight(4f),
+            Text(text = stringResource(R.string.guest_label))
+        }
+
+        OutlinedButton(
+            modifier =
+                Modifier
+                    .constrainAs(btnEmail) {
+                        top.linkTo(btnGuest.bottom, margin = MEDIUM_PADDING)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }.height(SIMPLE_HEIGHT_BUTTON),
+            onClick = {
+                navController.navigate(NavigationScreens.LoginScreen.route)
+            },
+            shape = RoundedCornerShape(NORMAL_ROUNDED_CORNER),
+            border = BorderStroke(SIMPLE_BORDER, superLightBlue),
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(text = "Título")
-                Text(text = "Contenido")
+                Image(
+                    painter = painterResource(R.drawable.ic_email),
+                    contentDescription = stringResource(R.string.icon_email_description),
+                    modifier = Modifier.weight(1.1f).size(SMALL_IMAGE),
+                )
+                Text(
+                    text = stringResource(R.string.email_label),
+                    modifier = Modifier.weight(2f),
+                    textAlign = TextAlign.Start,
+                )
             }
         }
 
-        Row(
-            modifier = Modifier.fillMaxWidth().height(100.dp).background(Color.Yellow),
+        OutlinedButton(
+            modifier =
+                Modifier
+                    .constrainAs(btnGoogleAuth) {
+                        top.linkTo(btnEmail.bottom, margin = MEDIUM_PADDING)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }.height(SIMPLE_HEIGHT_BUTTON),
+            onClick = {
+                val googleSignClient = GoogleSignIn.getClient(context, viewModel.getGoogleSignInOptions())
+                launcher.launch(googleSignClient.signInIntent)
+            },
+            shape = RoundedCornerShape(NORMAL_ROUNDED_CORNER),
+            border = BorderStroke(SIMPLE_BORDER, superLightBlue),
         ) {
-            Image(
-                painter = painterResource(R.drawable.ic_google),
-                contentDescription = "",
-                modifier = Modifier.weight(2f),
-            )
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier.height(100.dp).weight(4f),
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(text = "Título")
-                Text(text = "Contenido")
-            }
-        }
-
-        Row(
-            modifier = Modifier.fillMaxWidth().height(100.dp).background(Color.Green),
-        ) {
-            Image(
-                painter = painterResource(R.drawable.ic_google),
-                contentDescription = "",
-                modifier = Modifier.weight(2f),
-            )
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier.height(100.dp).weight(4f),
-            ) {
-                Text(text = "Título", fontWeight = FontWeight.ExtraBold)
-                Text(text = "Contenido")
+                Image(
+                    painter = painterResource(R.drawable.ic_google),
+                    contentDescription = stringResource(R.string.icon_google_description),
+                    modifier = Modifier.weight(1.1f).size(SMALL_IMAGE),
+                )
+                Text(
+                    text = stringResource(R.string.google_label),
+                    modifier = Modifier.weight(2f),
+                    textAlign = TextAlign.Start,
+                )
             }
         }
     }
+    if (showProgressBar) SuperToolProgressIndicator()
 }
 
 @Suppress("ktlint:standard:function-naming")
-@Composable
 @Preview(showBackground = true, showSystemUi = true)
+@Composable
 fun MainScreenPreview() {
-    MainScreen(rememberNavController(), Modifier.fillMaxSize())
+    MainScreen(rememberNavController(), Modifier, MainViewModel())
 }

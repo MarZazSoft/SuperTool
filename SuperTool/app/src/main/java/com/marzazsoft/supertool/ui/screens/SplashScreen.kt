@@ -48,7 +48,7 @@ fun SplashScreen(navController: NavController) {
     LaunchedEffect(key1 = true) {
         delay(DELAY_TIME_SPLASH_SCREEN)
         navController.popBackStack()
-        navController.navigate(NavigationScreens.LoginScreen.route)
+        navController.navigate(NavigationScreens.MainScreen.route)
     }
 }
 
