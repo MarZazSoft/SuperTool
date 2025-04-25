@@ -3,9 +3,11 @@
     <string name="icon_super_tool_description">SuperTool icon</string>
     <string name="icon_password_description">Password icon</string>
     <string name="icon_google_description">Google icon</string>
+    <string name="icon_email_description">Email icon</string>
     <string name="user_label">User</string>
     <string name="password_label">Password</string>
     <string name="enter_label">Enter</string>
     <string name="guest_label">Enter like guest</string>
     <string name="google_label">Enter with Google</string>
+    <string name="email_label">Enter with Email</string>
 </resources>
