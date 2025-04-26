@@ -12,4 +12,10 @@ sealed class NavigationScreens(
     data object HomeScreenGuest : NavigationScreens("home_guest_screen")
 
     data object HomeScreen : NavigationScreens("home_screen")
+
+    data object ToolsScreen : NavigationScreens("tools_screen")
+
+    data object ProfileScreen : NavigationScreens("profile_screen")
+
+    data object SettingsScreen : NavigationScreens("settings_screen")
 }

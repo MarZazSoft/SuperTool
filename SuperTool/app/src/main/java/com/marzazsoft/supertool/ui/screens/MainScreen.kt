@@ -6,6 +6,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,7 +29,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -42,18 +43,20 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
 import com.marzazsoft.supertool.ui.share.SuperToolProgressIndicator
-import com.marzazsoft.supertool.ui.theme.black
-import com.marzazsoft.supertool.ui.theme.gray
+import com.marzazsoft.supertool.ui.theme.darkBlue
 import com.marzazsoft.supertool.ui.theme.superLightBlue
+import com.marzazsoft.supertool.ui.theme.yellow
 import com.marzazsoft.supertool.utils.ApiStatus
 import com.marzazsoft.supertool.utils.LARGE_IMAGE
 import com.marzazsoft.supertool.utils.MEDIUM_PADDING
+import com.marzazsoft.supertool.utils.NORMAL_BORDER
 import com.marzazsoft.supertool.utils.NORMAL_ROUNDED_CORNER
 import com.marzazsoft.supertool.utils.SIMPLE_BORDER
 import com.marzazsoft.supertool.utils.SIMPLE_HEIGHT_BUTTON
 import com.marzazsoft.supertool.utils.SMALL_IMAGE
 import com.marzazsoft.supertool.utils.TAG_LOG
 import com.marzazsoft.supertool.viewModels.MainViewModel
+import com.marzazsoft.supertool.viewModels.MainViewModel.Companion.ERROR_LOG_IN_WITH_GOOGLE
 import org.koin.compose.viewmodel.koinViewModel
 
 @Suppress("ktlint:standard:function-naming")
@@ -90,16 +93,34 @@ fun MainScreen(
                 val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                 viewModel.signInWithGoogleCredentials(credential)
             } catch (e: Exception) {
-                Log.d(TAG_LOG, "Failed Google Sign In")
+                Log.d(TAG_LOG, ERROR_LOG_IN_WITH_GOOGLE)
             }
         }
 
+    MainScreenUi(
+        modifier = modifier,
+        navController = navController,
+        googleSignInAction = {
+            val googleSignClient = GoogleSignIn.getClient(context, viewModel.getGoogleSignInOptions())
+            launcher.launch(googleSignClient.signInIntent)
+        },
+    )
+    if (showProgressBar) SuperToolProgressIndicator()
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+fun MainScreenUi(
+    modifier: Modifier,
+    navController: NavHostController,
+    googleSignInAction: () -> Unit,
+) {
     ConstraintLayout(
         modifier =
             modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .background(Brush.verticalGradient(listOf(gray, black), startY = 100f, endY = 800f))
+                .background(darkBlue)
                 .padding(all = MEDIUM_PADDING),
     ) {
         val (imageIconId, btnGuest, btnEmail, btnGoogleAuth) = createRefs()
@@ -117,7 +138,11 @@ fun MainScreen(
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
                         bottom.linkTo(btnGuest.top, margin = MEDIUM_PADDING)
-                    },
+                    }.border(
+                        width = NORMAL_BORDER,
+                        color = yellow,
+                        shape = CircleShape,
+                    ),
         )
 
         OutlinedButton(
@@ -136,7 +161,24 @@ fun MainScreen(
             shape = RoundedCornerShape(NORMAL_ROUNDED_CORNER),
             border = BorderStroke(SIMPLE_BORDER, superLightBlue),
         ) {
-            Text(text = stringResource(R.string.guest_label))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_guest),
+                    contentDescription = stringResource(R.string.icon_email_description),
+                    modifier = Modifier.weight(1.1f).size(SMALL_IMAGE),
+                    tint = superLightBlue,
+                )
+                Text(
+                    text = stringResource(R.string.guest_label),
+                    modifier = Modifier.weight(2f),
+                    textAlign = TextAlign.Start,
+                    color = superLightBlue,
+                )
+            }
         }
 
         OutlinedButton(
@@ -158,15 +200,17 @@ fun MainScreen(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Image(
+                Icon(
                     painter = painterResource(R.drawable.ic_email),
                     contentDescription = stringResource(R.string.icon_email_description),
                     modifier = Modifier.weight(1.1f).size(SMALL_IMAGE),
+                    tint = superLightBlue,
                 )
                 Text(
                     text = stringResource(R.string.email_label),
                     modifier = Modifier.weight(2f),
                     textAlign = TextAlign.Start,
+                    color = superLightBlue,
                 )
             }
         }
@@ -179,10 +223,7 @@ fun MainScreen(
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
                     }.height(SIMPLE_HEIGHT_BUTTON),
-            onClick = {
-                val googleSignClient = GoogleSignIn.getClient(context, viewModel.getGoogleSignInOptions())
-                launcher.launch(googleSignClient.signInIntent)
-            },
+            onClick = { googleSignInAction() },
             shape = RoundedCornerShape(NORMAL_ROUNDED_CORNER),
             border = BorderStroke(SIMPLE_BORDER, superLightBlue),
         ) {
@@ -200,11 +241,11 @@ fun MainScreen(
                     text = stringResource(R.string.google_label),
                     modifier = Modifier.weight(2f),
                     textAlign = TextAlign.Start,
+                    color = superLightBlue,
                 )
             }
         }
     }
-    if (showProgressBar) SuperToolProgressIndicator()
 }
 
 @Suppress("ktlint:standard:function-naming")

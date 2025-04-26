@@ -55,6 +55,6 @@ class MainViewModel : ViewModel() {
 
     companion object {
         private const val SUCCESS_LOG_IN_WITH_GOOGLE = "Inicio de sesión con éxito"
-        private const val ERROR_LOG_IN_WITH_GOOGLE = "Error al iniciar sesión con Google"
+        const val ERROR_LOG_IN_WITH_GOOGLE = "Error al iniciar sesión con Google"
     }
 }
