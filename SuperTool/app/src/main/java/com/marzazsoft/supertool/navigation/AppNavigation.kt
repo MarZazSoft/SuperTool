@@ -32,7 +32,7 @@ fun AppNavigation(modifier: Modifier) {
             HomeScreenGuest(navController, modifier)
         }
         composable(NavigationScreens.HomeScreen.route) {
-            HomeScreen(navController, modifier)
+            HomeScreen()
         }
     }
 }

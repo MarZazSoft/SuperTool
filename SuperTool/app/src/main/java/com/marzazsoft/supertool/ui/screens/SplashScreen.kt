@@ -7,6 +7,7 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
+import com.marzazsoft.supertool.ui.theme.darkBlue
+import com.marzazsoft.supertool.ui.theme.white
 import com.marzazsoft.supertool.utils.DELAY_TIME_SPLASH_SCREEN
 import com.marzazsoft.supertool.utils.LARGE_FONT_SIZE
 import com.marzazsoft.supertool.utils.LARGE_IMAGE
@@ -70,7 +73,7 @@ fun SplashUi() {
         )
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(darkBlue),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -102,6 +105,7 @@ fun SplashUi() {
             text = stringResource(id = R.string.app_name),
             fontSize = LARGE_FONT_SIZE,
             fontWeight = FontWeight.Bold,
+            color = white,
             modifier = Modifier.padding(all = MEDIUM_PADDING),
         )
     }

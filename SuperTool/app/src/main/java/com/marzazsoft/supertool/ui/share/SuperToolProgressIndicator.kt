@@ -16,23 +16,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.marzazsoft.supertool.R
+import com.marzazsoft.supertool.ui.theme.darkBlue
 import com.marzazsoft.supertool.ui.theme.lightBlue
 import com.marzazsoft.supertool.ui.theme.superLightBlue
 import com.marzazsoft.supertool.ui.theme.yellow
 import com.marzazsoft.supertool.utils.LARGE_INDICATOR
+import com.marzazsoft.supertool.utils.LOADER_TIME_ANIMATION
 import com.marzazsoft.supertool.utils.MEDIUM_IMAGE
 import com.marzazsoft.supertool.utils.MEDIUM_INDICATOR
 import com.marzazsoft.supertool.utils.SIMPLE_BORDER
-import com.marzazsoft.supertool.utils.SIMPLE_TIME_ANIMATION
 import com.marzazsoft.supertool.utils.SMALL_INDICATOR
+import com.marzazsoft.supertool.utils.START_INNER_INDICATOR
+import com.marzazsoft.supertool.utils.START_OUTER_INDICATOR
 
 @Suppress("ktlint:standard:function-naming")
 @Preview(showBackground = true, showSystemUi = true)
@@ -44,7 +45,7 @@ fun SuperToolProgressIndicator() {
         targetValue = 360f,
         animationSpec =
             infiniteRepeatable(
-                animation = tween(durationMillis = SIMPLE_TIME_ANIMATION),
+                animation = tween(durationMillis = LOADER_TIME_ANIMATION),
             ),
     )
 
@@ -56,7 +57,7 @@ fun SuperToolProgressIndicator() {
                 Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
-                    .background(Color.Black.copy(alpha = .8f)),
+                    .background(darkBlue.copy(alpha = .9f)),
         )
         Box(
             contentAlignment = Alignment.Center,
@@ -68,7 +69,7 @@ fun SuperToolProgressIndicator() {
                             width = LARGE_INDICATOR,
                             height = LARGE_INDICATOR,
                         ).graphicsLayer {
-                            rotationZ = rotation
+                            rotationZ = rotation + START_OUTER_INDICATOR
                         },
                 strokeWidth = SIMPLE_BORDER,
                 color = lightBlue,
@@ -92,7 +93,7 @@ fun SuperToolProgressIndicator() {
                             width = SMALL_INDICATOR,
                             height = SMALL_INDICATOR,
                         ).graphicsLayer {
-                            rotationZ = rotation
+                            rotationZ = rotation + START_INNER_INDICATOR
                         },
                 strokeWidth = SIMPLE_BORDER,
                 color = yellow,
