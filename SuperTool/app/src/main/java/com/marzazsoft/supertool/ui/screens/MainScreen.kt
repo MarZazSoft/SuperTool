@@ -77,7 +77,7 @@ fun MainScreen(
             is ApiStatus.Success -> {
                 showProgressBar = false
                 navController.popBackStack()
-                navController.navigate(NavigationScreens.HomeScreen.route)
+                navController.navigate("${NavigationScreens.HomeScreen.route}/${false}")
             }
             else -> showProgressBar = false
         }
@@ -127,7 +127,7 @@ fun MainScreenUi(
 
         Image(
             painter = painterResource(id = R.drawable.super_tool_icon),
-            contentDescription = stringResource(id = R.string.icon_super_tool_description),
+            contentDescription = stringResource(id = R.string.image_super_tool_description),
             modifier =
                 Modifier
                     .size(
@@ -156,7 +156,7 @@ fun MainScreenUi(
                     }.fillMaxWidth()
                     .height(SIMPLE_HEIGHT_BUTTON),
             onClick = {
-                navController.navigate(NavigationScreens.HomeScreenGuest.route)
+                navController.navigate("${NavigationScreens.HomeScreen.route}/${true}")
             },
             shape = RoundedCornerShape(NORMAL_ROUNDED_CORNER),
             border = BorderStroke(SIMPLE_BORDER, superLightBlue),

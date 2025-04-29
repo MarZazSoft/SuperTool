@@ -1,54 +1,75 @@
 package com.marzazsoft.supertool.ui.screens
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.models.ItemNavigation
 import com.marzazsoft.supertool.navigation.HomeNavigation
 import com.marzazsoft.supertool.navigation.NavigationScreens
 import com.marzazsoft.supertool.ui.share.BottomMenu
-import com.marzazsoft.supertool.utils.TAG_LOG
+import com.marzazsoft.supertool.ui.share.SimpleAlert
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Suppress("ktlint:standard:function-naming")
-@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun HomeScreen() {
-    val navController = rememberNavController()
+fun HomeScreen(
+    appNavController: NavHostController,
+    isGuest: Boolean,
+) {
+    val homeNavController = rememberNavController()
+    val activity = LocalActivity.current
     var selectedItem by rememberSaveable { mutableIntStateOf(0) }
+    var showExitAlert by rememberSaveable { mutableStateOf(false) }
 
     BackHandler {
-        if (navController.currentBackStackEntry?.destination?.route
+        if (homeNavController.currentBackStackEntry?.destination?.route
             != NavigationScreens.ToolsScreen.route
         ) {
-            navController.popBackStack()
+            homeNavController.popBackStack()
             selectedItem = 0
-            navController.navigate(NavigationScreens.ToolsScreen.route)
+            homeNavController.navigate(NavigationScreens.ToolsScreen.route)
         } else {
-            Log.d(TAG_LOG, "Mostrar alerta de salir de app")
+            showExitAlert = true
         }
     }
 
     HomeScreenUi(
-        navController = navController,
+        navController = homeNavController,
         selectedItem = selectedItem,
-    ) { index, item ->
-        selectedItem = index
-        navController.popBackStack()
-        navController.navigate(item.route)
-    }
+        isGuest = isGuest,
+        showExistAlert = showExitAlert,
+        cancelExitAlertAction = {
+            showExitAlert = false
+        },
+        okExitAlertAction = {
+            if (isGuest) {
+                homeNavController.popBackStack()
+                appNavController.navigate(NavigationScreens.MainScreen.route)
+            } else {
+                activity?.finish()
+            }
+        },
+        bottomMenuAction = { index, item ->
+            selectedItem = index
+            homeNavController.popBackStack()
+            homeNavController.navigate(item.route)
+        },
+    )
 }
 
 @Suppress("ktlint:standard:function-naming")
@@ -56,15 +77,31 @@ fun HomeScreen() {
 fun HomeScreenUi(
     navController: NavHostController,
     selectedItem: Int,
+    isGuest: Boolean,
+    showExistAlert: Boolean,
+    cancelExitAlertAction: () -> Unit,
+    okExitAlertAction: () -> Unit,
     bottomMenuAction: (index: Int, itemNavigation: ItemNavigation) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            BottomMenu(isGuest = false, selectedItem = selectedItem, onClickAction = bottomMenuAction)
+            BottomMenu(isGuest = isGuest, selectedItem = selectedItem, onClickAction = bottomMenuAction)
         },
     ) { innerPadding ->
         HomeNavigation(modifier = Modifier.padding(innerPadding), navController = navController)
+        if (showExistAlert) {
+            SimpleAlert(
+                titleText =
+                    stringResource(
+                        if (isGuest) R.string.title_exit_guest else R.string.title_exit,
+                    ),
+                cancelButtonText = stringResource(R.string.cancel_button_text),
+                okButtonText = stringResource(R.string.exit_button_text),
+                cancelButtonAction = { cancelExitAlertAction() },
+                okButtonAction = { okExitAlertAction() },
+            )
+        }
     }
 }
 
@@ -72,5 +109,5 @@ fun HomeScreenUi(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(rememberNavController(), isGuest = false)
 }

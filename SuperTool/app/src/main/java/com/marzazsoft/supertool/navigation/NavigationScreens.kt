@@ -9,8 +9,6 @@ sealed class NavigationScreens(
 
     data object LoginScreen : NavigationScreens("login_screen")
 
-    data object HomeScreenGuest : NavigationScreens("home_guest_screen")
-
     data object HomeScreen : NavigationScreens("home_screen")
 
     data object ToolsScreen : NavigationScreens("tools_screen")
