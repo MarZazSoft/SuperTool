@@ -19,6 +19,12 @@ fun ToolsScreen(
     navController: NavController,
     modifier: Modifier,
 ) {
+    ToolsScreenUi(modifier = modifier)
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+fun ToolsScreenUi(modifier: Modifier) {
     Box(
         modifier = modifier.fillMaxSize().background(darkBlue),
         contentAlignment = Alignment.Center,

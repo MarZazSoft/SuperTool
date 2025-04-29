@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SuperTool</string>
-    <string name="icon_super_tool_description">Ícono de SuperTool</string>
+    <string name="image_super_tool_description">Imagen de SuperTool</string>
     <string name="icon_password_description">Ícono de contraseña</string>
     <string name="icon_google_description">Ícono de Google</string>
     <string name="icon_email_description">Ícono de correo electrónico</string>
+    <string name="image_profile_description">Imagen de perfil</string>
     <string name="user_label">Usuario</string>
     <string name="password_label">Contraseña</string>
     <string name="enter_label">Ingresar</string>
     <string name="guest_label">Ingresar como invitado</string>
     <string name="google_label">Ingresar con Google</string>
     <string name="email_label">Ingresar con correo</string>
+    <string name="tools_label">Herramientas</string>
+    <string name="profile_label">Perfil</string>
+    <string name="settings_label">Ajustes</string>
+    <string name="title_exit">¿Deseas salir de la aplicación?</string>
+    <string name="title_exit_guest">¿Quieres salir del modo invitado?</string>
+    <string name="exit_button_text">Salir</string>
+    <string name="cancel_button_text">Cancelar</string>
+    <string name="log_out_text">Cerrar Sesión</string>
 </resources>

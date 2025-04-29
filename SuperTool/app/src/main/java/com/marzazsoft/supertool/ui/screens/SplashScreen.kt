@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,6 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
 import com.marzazsoft.supertool.ui.theme.darkBlue
@@ -46,19 +48,6 @@ import kotlinx.coroutines.delay
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun SplashScreen(navController: NavController) {
-    SplashUi()
-
-    LaunchedEffect(key1 = true) {
-        delay(DELAY_TIME_SPLASH_SCREEN)
-        navController.popBackStack()
-        navController.navigate(NavigationScreens.MainScreen.route)
-    }
-}
-
-@Suppress("ktlint:standard:function-naming")
-@Composable
-@Preview(showBackground = true, showSystemUi = true)
-fun SplashUi() {
     val infiniteTransition = rememberInfiniteTransition()
     val rotationAnimation =
         infiniteTransition.animateFloat(
@@ -72,6 +61,24 @@ fun SplashUi() {
             colors = listOf(Color.Red, Color.Yellow, Color.Green, Color.Blue),
         )
 
+    SplashScreenUi(
+        rotationAnimation = rotationAnimation,
+        brush = brush,
+    )
+
+    LaunchedEffect(key1 = true) {
+        delay(DELAY_TIME_SPLASH_SCREEN)
+        navController.popBackStack()
+        navController.navigate(NavigationScreens.MainScreen.route)
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+fun SplashScreenUi(
+    rotationAnimation: State<Float>,
+    brush: Brush,
+) {
     Column(
         modifier = Modifier.fillMaxSize().background(darkBlue),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -92,7 +99,7 @@ fun SplashUi() {
             ) {}
             Image(
                 painter = painterResource(id = R.drawable.super_tool_icon),
-                contentDescription = stringResource(id = R.string.icon_super_tool_description),
+                contentDescription = stringResource(id = R.string.image_super_tool_description),
                 modifier =
                     Modifier
                         .size(
@@ -109,4 +116,11 @@ fun SplashUi() {
             modifier = Modifier.padding(all = MEDIUM_PADDING),
         )
     }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+@Preview(showBackground = true, showSystemUi = true)
+fun SplashScreenPreview() {
+    SplashScreen(navController = rememberNavController())
 }

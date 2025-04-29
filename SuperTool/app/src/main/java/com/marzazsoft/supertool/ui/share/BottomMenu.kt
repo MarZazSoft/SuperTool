@@ -6,6 +6,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.marzazsoft.supertool.models.ItemNavigation
 import com.marzazsoft.supertool.ui.theme.black
@@ -24,7 +25,7 @@ fun BottomMenu(
     NavigationBar(
         containerColor = lightBlue,
     ) {
-        getHomeItems(isGuest).forEachIndexed { index, item ->
+        getHomeItems(isGuest, context = LocalContext.current).forEachIndexed { index, item ->
             NavigationBarItem(
                 selected = selectedItem == index,
                 onClick = { onClickAction(index, item) },

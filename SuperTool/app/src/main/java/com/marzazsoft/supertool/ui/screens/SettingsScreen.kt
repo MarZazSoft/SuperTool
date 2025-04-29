@@ -19,6 +19,12 @@ fun SettingsScreen(
     navController: NavController,
     modifier: Modifier,
 ) {
+    SettingsScreenUi(modifier = modifier)
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+fun SettingsScreenUi(modifier: Modifier) {
     Box(
         modifier = modifier.fillMaxSize().background(darkBlue),
         contentAlignment = Alignment.Center,

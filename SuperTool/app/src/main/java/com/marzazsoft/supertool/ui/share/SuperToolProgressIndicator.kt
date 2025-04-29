@@ -36,7 +36,6 @@ import com.marzazsoft.supertool.utils.START_INNER_INDICATOR
 import com.marzazsoft.supertool.utils.START_OUTER_INDICATOR
 
 @Suppress("ktlint:standard:function-naming")
-@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun SuperToolProgressIndicator() {
     val infiniteTransition = rememberInfiniteTransition()
@@ -49,6 +48,12 @@ fun SuperToolProgressIndicator() {
             ),
     )
 
+    SuperToolProgressIndicatorUi(rotation = rotation)
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+fun SuperToolProgressIndicatorUi(rotation: Float) {
     Box(
         contentAlignment = Alignment.Center,
     ) {
@@ -100,9 +105,16 @@ fun SuperToolProgressIndicator() {
             )
             Image(
                 painter = painterResource(R.drawable.super_tool_icon),
-                contentDescription = stringResource(R.string.icon_super_tool_description),
+                contentDescription = stringResource(R.string.image_super_tool_description),
                 modifier = Modifier.clip(CircleShape).size(width = MEDIUM_IMAGE, height = MEDIUM_IMAGE),
             )
         }
     }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun SuperToolProgressIndicatorPreview() {
+    SuperToolProgressIndicator()
 }

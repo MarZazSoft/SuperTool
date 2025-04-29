@@ -1,13 +1,22 @@
 <resources>
     <string name="app_name">SuperTool</string>
-    <string name="icon_super_tool_description">SuperTool icon</string>
+    <string name="image_super_tool_description">SuperTool image</string>
     <string name="icon_password_description">Password icon</string>
     <string name="icon_google_description">Google icon</string>
     <string name="icon_email_description">Email icon</string>
+    <string name="image_profile_description">Profile image</string>
     <string name="user_label">User</string>
     <string name="password_label">Password</string>
     <string name="enter_label">Enter</string>
     <string name="guest_label">Enter like guest</string>
     <string name="google_label">Enter with Google</string>
     <string name="email_label">Enter with Email</string>
+    <string name="tools_label">Tools</string>
+    <string name="profile_label">Profile</string>
+    <string name="settings_label">Settings</string>
+    <string name="title_exit">Do you want exit?</string>
+    <string name="title_exit_guest">Do you want to left the guest mode?</string>
+    <string name="exit_button_text">Exit</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="log_out_text">Log out</string>
 </resources>
