@@ -28,7 +28,6 @@ import com.marzazsoft.supertool.ui.theme.darkBlue
 import com.marzazsoft.supertool.ui.theme.white
 import com.marzazsoft.supertool.utils.MEDIUM_PADDING
 import com.marzazsoft.supertool.utils.MEDIUM_X_IMAGE
-import com.marzazsoft.supertool.utils.SIMPLE_PADDING
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
