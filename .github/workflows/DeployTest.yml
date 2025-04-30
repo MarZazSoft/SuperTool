@@ -56,7 +56,7 @@ jobs:
         
       - name: Signing APK 🖋️
         run: |
-          jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
+          cd SuperTool && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
           -keystore keystore.jks \
           -storepass ${{ secrets.KEYSTORE_PASSWORD }} \
           -keypass ${{ secrets.KEY_PASSWORD }} \
