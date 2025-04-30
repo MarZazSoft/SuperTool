@@ -58,8 +58,7 @@ fun HomeScreen(
         },
         okExitAlertAction = {
             if (isGuest) {
-                homeNavController.popBackStack()
-                appNavController.navigate(NavigationScreens.MainScreen.route)
+                appNavController.popBackStack()
             } else {
                 activity?.finish()
             }

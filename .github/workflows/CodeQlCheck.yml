@@ -44,7 +44,7 @@ jobs:
         ${{ secrets.GOOGLE_SERVICES_JSON }}
         EOF
     
-    - name: Set up secrets
+    - name: Set up secrets 😶
       run: |
         cat <<EOF > $GITHUB_WORKSPACE/SuperTool/local.properties
         WEB_ID=${{ secrets.WEB_ID }}
