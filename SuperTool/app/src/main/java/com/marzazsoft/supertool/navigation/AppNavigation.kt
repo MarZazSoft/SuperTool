@@ -2,9 +2,12 @@ package com.marzazsoft.supertool.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.marzazsoft.supertool.ui.screens.HomeScreen
 import com.marzazsoft.supertool.ui.screens.LoginScreen
 import com.marzazsoft.supertool.ui.screens.MainScreen
 import com.marzazsoft.supertool.ui.screens.SplashScreen
@@ -20,11 +23,22 @@ fun AppNavigation(modifier: Modifier) {
         composable(NavigationScreens.SplashScreen.route) {
             SplashScreen(navController)
         }
+        composable(NavigationScreens.MainScreen.route) {
+            MainScreen(navController, modifier)
+        }
         composable(NavigationScreens.LoginScreen.route) {
             LoginScreen(navController, modifier)
         }
-        composable(NavigationScreens.MainScreen.route) {
-            MainScreen(navController, modifier)
+        composable(
+            route = "${NavigationScreens.HomeScreen.route}/{isGuest}",
+            arguments =
+                listOf(
+                    navArgument("isGuest") {
+                        type = NavType.BoolType
+                    },
+                ),
+        ) { argument ->
+            HomeScreen(navController, isGuest = argument.arguments?.getBoolean("isGuest") ?: true)
         }
     }
 }

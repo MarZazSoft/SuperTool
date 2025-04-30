@@ -7,6 +7,7 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,8 +32,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
+import com.marzazsoft.supertool.ui.theme.darkBlue
+import com.marzazsoft.supertool.ui.theme.white
 import com.marzazsoft.supertool.utils.DELAY_TIME_SPLASH_SCREEN
 import com.marzazsoft.supertool.utils.LARGE_FONT_SIZE
 import com.marzazsoft.supertool.utils.LARGE_IMAGE
@@ -43,19 +48,6 @@ import kotlinx.coroutines.delay
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun SplashScreen(navController: NavController) {
-    SplashUi()
-
-    LaunchedEffect(key1 = true) {
-        delay(DELAY_TIME_SPLASH_SCREEN)
-        navController.popBackStack()
-        navController.navigate(NavigationScreens.LoginScreen.route)
-    }
-}
-
-@Suppress("ktlint:standard:function-naming")
-@Composable
-@Preview(showBackground = true, showSystemUi = true)
-fun SplashUi() {
     val infiniteTransition = rememberInfiniteTransition()
     val rotationAnimation =
         infiniteTransition.animateFloat(
@@ -69,8 +61,26 @@ fun SplashUi() {
             colors = listOf(Color.Red, Color.Yellow, Color.Green, Color.Blue),
         )
 
+    SplashScreenUi(
+        rotationAnimation = rotationAnimation,
+        brush = brush,
+    )
+
+    LaunchedEffect(key1 = true) {
+        delay(DELAY_TIME_SPLASH_SCREEN)
+        navController.popBackStack()
+        navController.navigate(NavigationScreens.MainScreen.route)
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+fun SplashScreenUi(
+    rotationAnimation: State<Float>,
+    brush: Brush,
+) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(darkBlue),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -89,7 +99,7 @@ fun SplashUi() {
             ) {}
             Image(
                 painter = painterResource(id = R.drawable.super_tool_icon),
-                contentDescription = stringResource(id = R.string.icon_super_tool_description),
+                contentDescription = stringResource(id = R.string.image_super_tool_description),
                 modifier =
                     Modifier
                         .size(
@@ -102,7 +112,15 @@ fun SplashUi() {
             text = stringResource(id = R.string.app_name),
             fontSize = LARGE_FONT_SIZE,
             fontWeight = FontWeight.Bold,
+            color = white,
             modifier = Modifier.padding(all = MEDIUM_PADDING),
         )
     }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+@Preview(showBackground = true, showSystemUi = true)
+fun SplashScreenPreview() {
+    SplashScreen(navController = rememberNavController())
 }
