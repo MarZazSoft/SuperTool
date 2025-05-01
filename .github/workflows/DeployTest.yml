@@ -48,7 +48,8 @@ jobs:
         run: cd SuperTool && ./gradlew build
 
       - name: Keystore decode 🤖
-        run: echo "${{ secrets.KEYSTORE_B64 }}" | base64 --decode > keystore.jks
+        run: |
+          cd SuperTool && echo "${{ secrets.KEYSTORE_B64 }}" | base64 --decode > keystore.jks
 
       - name: Build unsigned APK 🤖🚥
         run: |
