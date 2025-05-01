@@ -61,7 +61,7 @@ jobs:
           -keystore keystore.jks \
           -storepass ${{ secrets.KEYSTORE_PASSWORD }} \
           -keypass ${{ secrets.KEY_PASSWORD }} \
-          app-release.apk ${{ secrets.KEY_ALIAS }}
+          SuperTool/app/release/app-release.apk ${{ secrets.KEY_ALIAS }}
 
       - name: upload artifact to Firebase App Distribution 🤖🚀
         uses: wzieba/Firebase-Distribution-Github-Action@v1.7.1
