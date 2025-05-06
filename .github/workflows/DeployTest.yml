@@ -32,6 +32,16 @@ jobs:
       - name: Verify Java version 👀
         run: java -version
 
+      - name: Install Android Build Tools 🤖
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y android-sdk-build-tools
+
+      - name: Obtain last build-tools version 🤖
+        run: |
+          BUILD_TOOLS_PATH=$(ls -d /usr/local/lib/android/sdk/build-tools/* | sort -V | tail -n 1)
+          echo "BUILD_TOOLS_PATH=$BUILD_TOOLS_PATH" >> $GITHUB_ENV
+
       - name: Create google-services.json 🤖
         run: |
           cat <<EOF > $GITHUB_WORKSPACE/SuperTool/app/google-services.json
@@ -57,7 +67,7 @@ jobs:
       
       - name: Align APK with zipalign 🤖
         run: |
-          cd SuperTool && zipalign -v 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release.apk
+          cd SuperTool && $BUILD_TOOLS_PATH/zipalign -v 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release.apk
         
       - name: Signing APK 🖋️
         run: |
