@@ -32,6 +32,16 @@ jobs:
       - name: Verify Java version 👀
         run: java -version
 
+      - name: Install Android Build Tools 🤖
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y android-sdk-build-tools
+
+      - name: Obtain last build-tools version 🤖
+        run: |
+          BUILD_TOOLS_PATH=$(ls -d /usr/local/lib/android/sdk/build-tools/* | sort -V | tail -n 1)
+          echo "BUILD_TOOLS_PATH=$BUILD_TOOLS_PATH" >> $GITHUB_ENV
+
       - name: Create google-services.json 🤖
         run: |
           cat <<EOF > $GITHUB_WORKSPACE/SuperTool/app/google-services.json
@@ -48,19 +58,22 @@ jobs:
         run: cd SuperTool && ./gradlew build
 
       - name: Keystore decode 🤖
-        run: echo "${{ secrets.KEYSTORE_B64 }}" | base64 --decode > keystore.jks
+        run: |
+          cd SuperTool && echo "${{ secrets.KEYSTORE_B64 }}" | base64 --decode > keystore.jks
 
       - name: Build unsigned APK 🤖🚥
         run: |
           cd SuperTool && ./gradlew assembleRelease
+      
+      - name: Align APK with zipalign 🤖
+        run: |
+          cd SuperTool && $BUILD_TOOLS_PATH/zipalign -v 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release.apk
         
       - name: Signing APK 🖋️
         run: |
-          jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
-          -keystore keystore.jks \
-          -storepass ${{ secrets.KEYSTORE_PASSWORD }} \
-          -keypass ${{ secrets.KEY_PASSWORD }} \
-          app/build/outputs/apk/release/app-release-unsigned.apk ${{ secrets.KEY_ALIAS }}
+          cd SuperTool && $BUILD_TOOLS_PATH/apksigner sign --ks keystore.jks --ks-pass pass:${{ secrets.KEYSTORE_PASSWORD }} \
+          --key-pass pass:${{ secrets.KEY_PASSWORD }} --ks-key-alias ${{ secrets.KEY_ALIAS }} \
+          --out app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/app-release-unsigned.apk
 
       - name: upload artifact to Firebase App Distribution 🤖🚀
         uses: wzieba/Firebase-Distribution-Github-Action@v1.7.1
@@ -68,4 +81,4 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIAL_FILE_CONTENT }}
           groups: Testers
-          file: SuperTool/app/build/outputs/apk/release/app-release-unsigned.apk
+          file: SuperTool/app/build/outputs/apk/release/app-release.apk
