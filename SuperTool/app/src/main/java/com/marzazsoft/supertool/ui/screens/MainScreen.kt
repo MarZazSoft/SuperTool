@@ -1,8 +1,6 @@
 package com.marzazsoft.supertool.ui.screens
 
-import android.util.Log
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
+import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,6 +8,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,6 +23,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -35,11 +35,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.credentials.CredentialManager
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.GoogleAuthProvider
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
 import com.marzazsoft.supertool.ui.share.SuperToolProgressIndicator
@@ -54,9 +52,8 @@ import com.marzazsoft.supertool.utils.NORMAL_ROUNDED_CORNER
 import com.marzazsoft.supertool.utils.SIMPLE_BORDER
 import com.marzazsoft.supertool.utils.SIMPLE_HEIGHT_BUTTON
 import com.marzazsoft.supertool.utils.SMALL_IMAGE
-import com.marzazsoft.supertool.utils.TAG_LOG
 import com.marzazsoft.supertool.viewModels.MainViewModel
-import com.marzazsoft.supertool.viewModels.MainViewModel.Companion.ERROR_LOG_IN_WITH_GOOGLE
+import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 
 @Suppress("ktlint:standard:function-naming")
@@ -67,7 +64,9 @@ fun MainScreen(
     viewModel: MainViewModel = koinViewModel(),
 ) {
     val context = LocalContext.current
+    val credentialManager = CredentialManager.create(context)
     var showProgressBar by rememberSaveable { mutableStateOf(false) }
+    val coroutineScope = rememberCoroutineScope()
 
     val firebaseAuthState by viewModel.firebaseAuthState.collectAsState()
 
@@ -83,26 +82,16 @@ fun MainScreen(
         }
     }
 
-    val launcher =
-        rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.StartActivityForResult(),
-        ) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
-            try {
-                val account = task.getResult(ApiException::class.java)
-                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-                viewModel.signInWithGoogleCredentials(credential)
-            } catch (e: Exception) {
-                Log.d(TAG_LOG, ERROR_LOG_IN_WITH_GOOGLE)
-            }
-        }
-
     MainScreenUi(
         modifier = modifier,
         navController = navController,
         googleSignInAction = {
-            val googleSignClient = GoogleSignIn.getClient(context, viewModel.getGoogleSignInOptions())
-            launcher.launch(googleSignClient.signInIntent)
+            coroutineScope.launch {
+                viewModel.goToGoogleSignIn(
+                    credentialManager = credentialManager,
+                    context = context,
+                )
+            }
         },
     )
     if (showProgressBar) SuperToolProgressIndicator()
@@ -248,9 +237,10 @@ fun MainScreenUi(
     }
 }
 
+@SuppressLint("ViewModelConstructorInComposable")
 @Suppress("ktlint:standard:function-naming")
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun MainScreenPreview() {
-    MainScreen(rememberNavController(), Modifier, MainViewModel())
+    MainScreen(rememberNavController(), Modifier.fillMaxSize(), MainViewModel())
 }
