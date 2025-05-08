@@ -9,5 +9,5 @@ data class User(
     val id: String,
     val idToken: String,
     val phoneNumber: String?,
-    val profilePictureUri: Uri?
+    val profilePictureUri: Uri?,
 )
