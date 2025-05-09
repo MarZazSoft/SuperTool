@@ -17,6 +17,7 @@ constraintCompose = "1.1.1"
 koinVersion = "4.0.4"
 credentialsVersion = "1.5.0"
 prefDataStoreVersion = "1.1.6"
+lottieVersion = "6.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +43,7 @@ firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics
 constraint-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintCompose" }
 koin = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koinVersion" }
 preferences-data-store = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "prefDataStoreVersion" }
+lottie = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottieVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -1,6 +1,8 @@
 package com.marzazsoft.supertool.ui.screens
 
 import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -35,7 +37,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.credentials.CredentialManager
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.marzazsoft.supertool.R
@@ -64,11 +65,13 @@ fun MainScreen(
     viewModel: MainViewModel = koinViewModel(),
 ) {
     val context = LocalContext.current
-    val credentialManager = CredentialManager.create(context)
+    val activity = LocalActivity.current
     var showProgressBar by rememberSaveable { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
 
     val firebaseAuthState by viewModel.firebaseAuthState.collectAsState()
+
+    BackHandler { activity?.finish() }
 
     LaunchedEffect(firebaseAuthState) {
         when (firebaseAuthState) {
@@ -88,7 +91,7 @@ fun MainScreen(
         googleSignInAction = {
             coroutineScope.launch {
                 viewModel.goToGoogleSignIn(
-                    credentialManager = credentialManager,
+                    credentialManager = viewModel.getCredentialManager(),
                     context = context,
                 )
             }
@@ -242,5 +245,5 @@ fun MainScreenUi(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun MainScreenPreview() {
-    MainScreen(rememberNavController(), Modifier.fillMaxSize(), MainViewModel())
+    MainScreen(rememberNavController(), Modifier.fillMaxSize())
 }

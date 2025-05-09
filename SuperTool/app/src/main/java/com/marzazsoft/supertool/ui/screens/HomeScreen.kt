@@ -49,6 +49,7 @@ fun HomeScreen(
     }
 
     HomeScreenUi(
+        appNavController = appNavController,
         navController = homeNavController,
         selectedItem = selectedItem,
         isGuest = isGuest,
@@ -74,6 +75,7 @@ fun HomeScreen(
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun HomeScreenUi(
+    appNavController: NavHostController,
     navController: NavHostController,
     selectedItem: Int,
     isGuest: Boolean,
@@ -85,10 +87,18 @@ fun HomeScreenUi(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            BottomMenu(isGuest = isGuest, selectedItem = selectedItem, onClickAction = bottomMenuAction)
+            BottomMenu(
+                isGuest = isGuest,
+                selectedItem = selectedItem,
+                onClickAction = bottomMenuAction,
+            )
         },
     ) { innerPadding ->
-        HomeNavigation(modifier = Modifier.padding(innerPadding), navController = navController)
+        HomeNavigation(
+            modifier = Modifier.padding(innerPadding),
+            appNavController = appNavController,
+            navController = navController,
+        )
         if (showExistAlert) {
             SimpleAlert(
                 titleText =

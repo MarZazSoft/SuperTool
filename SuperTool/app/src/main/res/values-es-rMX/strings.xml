@@ -20,4 +20,5 @@
     <string name="exit_button_text">Salir</string>
     <string name="cancel_button_text">Cancelar</string>
     <string name="log_out_text">Cerrar Sesión</string>
+    <string name="working_on_it_text">Trabajando en ello…</string>
 </resources>
