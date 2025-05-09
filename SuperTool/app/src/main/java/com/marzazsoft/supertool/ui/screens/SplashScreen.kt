@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -47,13 +48,12 @@ import com.marzazsoft.supertool.utils.SIMPLE_TIME_ANIMATION
 import com.marzazsoft.supertool.viewModels.SplashViewModel
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
-import androidx.compose.runtime.getValue
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun SplashScreen(
     navController: NavController,
-    viewModel: SplashViewModel = koinViewModel()
+    viewModel: SplashViewModel = koinViewModel(),
 ) {
     val isLogged by viewModel.isLogged().collectAsState(initial = false)
     val infiniteTransition = rememberInfiniteTransition()

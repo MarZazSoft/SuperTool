@@ -10,5 +10,5 @@ data class User(
     val idToken: String,
     val phoneNumber: String?,
     val profilePictureUri: Uri?,
-    val signInWith: SignInMethod = SignInMethod.GUEST
+    val signInWith: SignInMethod = SignInMethod.GUEST,
 )
