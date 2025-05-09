@@ -3,6 +3,7 @@ package com.marzazsoft.supertool.utils
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+val EXTRA_LARGE_IMAGE = 250.dp
 val LARGE_IMAGE = 130.dp
 val MEDIUM_X_IMAGE = 85.dp
 val MEDIUM_IMAGE = 65.dp

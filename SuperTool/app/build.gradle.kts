@@ -85,4 +85,5 @@ dependencies {
     implementation(libs.koin)
     implementation(libs.bundles.compose.utils)
     implementation(libs.bundles.data)
+    implementation(libs.lottie)
 }

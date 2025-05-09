@@ -21,11 +21,6 @@ fun getHomeItems(
                     icon = Icons.Default.Build,
                     route = NavigationScreens.ToolsScreen.route,
                 ),
-                ItemNavigation(
-                    title = getString(R.string.settings_label),
-                    icon = Icons.Default.Settings,
-                    route = NavigationScreens.SettingsScreen.route,
-                ),
             )
         } else {
             listOf(

@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -43,11 +44,18 @@ import com.marzazsoft.supertool.utils.LARGE_IMAGE
 import com.marzazsoft.supertool.utils.MEDIUM_PADDING
 import com.marzazsoft.supertool.utils.NORMAL_STROKE_WIDTH
 import com.marzazsoft.supertool.utils.SIMPLE_TIME_ANIMATION
+import com.marzazsoft.supertool.viewModels.SplashViewModel
 import kotlinx.coroutines.delay
+import org.koin.androidx.compose.koinViewModel
+import androidx.compose.runtime.getValue
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun SplashScreen(navController: NavController) {
+fun SplashScreen(
+    navController: NavController,
+    viewModel: SplashViewModel = koinViewModel()
+) {
+    val isLogged by viewModel.isLogged().collectAsState(initial = false)
     val infiniteTransition = rememberInfiniteTransition()
     val rotationAnimation =
         infiniteTransition.animateFloat(
@@ -68,8 +76,14 @@ fun SplashScreen(navController: NavController) {
 
     LaunchedEffect(key1 = true) {
         delay(DELAY_TIME_SPLASH_SCREEN)
-        navController.popBackStack()
-        navController.navigate(NavigationScreens.MainScreen.route)
+
+        isLogged.takeIf { it }?.let {
+            navController.popBackStack()
+            navController.navigate("${NavigationScreens.HomeScreen.route}/${false}")
+        } ?: run {
+            navController.popBackStack()
+            navController.navigate(NavigationScreens.MainScreen.route)
+        }
     }
 }
 

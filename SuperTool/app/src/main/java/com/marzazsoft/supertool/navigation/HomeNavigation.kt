@@ -2,6 +2,7 @@ package com.marzazsoft.supertool.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,6 +14,7 @@ import com.marzazsoft.supertool.ui.screens.ToolsScreen
 @Composable
 fun HomeNavigation(
     modifier: Modifier,
+    appNavController: NavController,
     navController: NavHostController,
 ) {
     NavHost(
@@ -23,7 +25,7 @@ fun HomeNavigation(
             ToolsScreen(navController, modifier)
         }
         composable(NavigationScreens.ProfileScreen.route) {
-            ProfileScreen(navController, modifier)
+            ProfileScreen(appNavController, navController, modifier)
         }
         composable(NavigationScreens.SettingsScreen.route) {
             SettingsScreen(navController, modifier)

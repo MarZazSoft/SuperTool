@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,26 +22,49 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.credentials.ClearCredentialStateRequest
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.marzazsoft.supertool.R
+import com.marzazsoft.supertool.navigation.NavigationScreens
 import com.marzazsoft.supertool.ui.theme.darkBlue
 import com.marzazsoft.supertool.ui.theme.white
 import com.marzazsoft.supertool.utils.MEDIUM_PADDING
 import com.marzazsoft.supertool.utils.MEDIUM_X_IMAGE
+import com.marzazsoft.supertool.viewModels.ProfileViewModel
+import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun ProfileScreen(
+    appNavController: NavController,
     navController: NavController,
     modifier: Modifier,
+    viewModel: ProfileViewModel = koinViewModel(),
 ) {
-    ProfileScreenUi(modifier = modifier)
+    val coroutineScope = rememberCoroutineScope()
+
+    ProfileScreenUi(
+        modifier = modifier,
+        logOutAction = {
+            coroutineScope.launch {
+                viewModel.resetSignInPreference()
+                viewModel.clearCredentialManager()
+            }
+            appNavController.navigate(NavigationScreens.MainScreen.route) {
+                popUpTo(appNavController.graph.startDestinationId) { inclusive = true }
+            }
+        },
+    )
 }
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun ProfileScreenUi(modifier: Modifier) {
+fun ProfileScreenUi(
+    modifier: Modifier,
+    logOutAction: () -> Unit,
+) {
     Column(modifier = modifier.fillMaxSize().background(darkBlue)) {
         Box(
             modifier = Modifier.fillMaxWidth().padding(all = MEDIUM_PADDING),
@@ -55,7 +79,7 @@ fun ProfileScreenUi(modifier: Modifier) {
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = darkBlue),
-                onClick = {},
+                onClick = { logOutAction() },
             ) {
                 Text(
                     text = stringResource(R.string.log_out_text),
@@ -72,5 +96,5 @@ fun ProfileScreenUi(modifier: Modifier) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun ProfileScreenPreview() {
-    ProfileScreen(rememberNavController(), modifier = Modifier.fillMaxSize())
+    ProfileScreen(rememberNavController(), rememberNavController(), modifier = Modifier.fillMaxSize())
 }
