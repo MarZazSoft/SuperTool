@@ -6,6 +6,7 @@ import com.marzazsoft.supertool.data.dataStore
 import com.marzazsoft.supertool.viewModels.MainViewModel
 import com.marzazsoft.supertool.viewModels.ProfileViewModel
 import com.marzazsoft.supertool.viewModels.SplashViewModel
+import com.marzazsoft.supertool.viewModels.ToolsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -38,6 +39,11 @@ val appModule =
             ProfileViewModel(
                 dataStoreRepository = get(),
                 credentialManager = get(),
+            )
+        }
+        viewModel {
+            ToolsViewModel(
+                dataStoreRepository = get(),
             )
         }
     }
