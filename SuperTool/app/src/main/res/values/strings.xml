@@ -20,4 +20,5 @@
     <string name="cancel_button_text">Cancel</string>
     <string name="log_out_text">Log out</string>
     <string name="working_on_it_text">Working on it…</string>
+    <string name="welcome_text">Welcome</string>
 </resources>

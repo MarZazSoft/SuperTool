@@ -2,6 +2,7 @@ package com.marzazsoft.supertool.viewModels
 
 import android.content.Context
 import android.util.Log
+import androidx.credentials.Credential
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
@@ -13,6 +14,8 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.marzazsoft.supertool.BuildConfig
 import com.marzazsoft.supertool.data.DataStoreRepository
+import com.marzazsoft.supertool.models.SignInMethod
+import com.marzazsoft.supertool.models.User
 import com.marzazsoft.supertool.utils.ApiStatus
 import com.marzazsoft.supertool.utils.TAG_LOG
 import kotlinx.coroutines.Dispatchers
@@ -62,31 +65,58 @@ class MainViewModel(
     private suspend fun handleSignInResponse(result: GetCredentialResponse) {
         _firebaseAuthState.value = ApiStatus.Loading
         when (val credential = result.credential) {
-            is CustomCredential -> {
-                if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
-                    try {
-                        // TODO - It's necessary save the client information in Preferences data store :D
-                        val googleIdTokenCredential: GoogleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
-                        dataStoreRepository.saveLogPreference(true)
-                        _firebaseAuthState.value = ApiStatus.Success(true)
-                        Log.d(TAG_LOG, SUCCESS_LOG_IN_WITH_GOOGLE)
-                    } catch (e: GoogleIdTokenParsingException) {
-                        _firebaseAuthState.value = ApiStatus.Error(ERROR_LOG_IN_WITH_GOOGLE)
-                        Log.e(TAG_LOG, "$ERROR_LOG_IN_WITH_GOOGLE - ${e.localizedMessage}")
-                    }
-                } else {
-                    _firebaseAuthState.value = ApiStatus.Error(ERROR_LOG_IN_WITH_GOOGLE)
-                    Log.e(TAG_LOG, ERROR_LOG_IN_WITH_GOOGLE)
-                }
-            }
-            else -> {
-                _firebaseAuthState.value = ApiStatus.Error(ERROR_LOG_IN_WITH_GOOGLE)
-                Log.e(TAG_LOG, ERROR_LOG_IN_WITH_GOOGLE)
-            }
+            is CustomCredential -> onSuccessGoogleSignIn(credential)
+            else -> onFailureGoogleSignIn()
         }
     }
 
+    private suspend fun onSuccessGoogleSignIn(credential: Credential) {
+        if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+            try {
+                saveUser(GoogleIdTokenCredential.createFrom(credential.data))
+                activateSignInFlag()
+                _firebaseAuthState.value = ApiStatus.Success(true)
+                Log.d(TAG_LOG, SUCCESS_LOG_IN_WITH_GOOGLE)
+            } catch (e: GoogleIdTokenParsingException) {
+                _firebaseAuthState.value = ApiStatus.Error(ERROR_LOG_IN_WITH_GOOGLE)
+                Log.e(TAG_LOG, "$ERROR_LOG_IN_WITH_GOOGLE - ${e.localizedMessage}")
+            }
+        } else {
+            _firebaseAuthState.value = ApiStatus.Error(ERROR_LOG_IN_WITH_GOOGLE)
+            Log.e(TAG_LOG, ERROR_LOG_IN_WITH_GOOGLE)
+        }
+    }
+
+    private fun onFailureGoogleSignIn() {
+        _firebaseAuthState.value = ApiStatus.Error(ERROR_LOG_IN_WITH_GOOGLE)
+        Log.e(TAG_LOG, ERROR_LOG_IN_WITH_GOOGLE)
+    }
+
+    private suspend fun activateSignInFlag() =
+        withContext(Dispatchers.IO) {
+            dataStoreRepository.saveLogPreference(true)
+        }
+
     fun getCredentialManager() = credentialManager
+
+    private suspend fun saveUser(googleTokenIdCredential: GoogleIdTokenCredential) =
+        withContext(Dispatchers.IO) {
+            val user =
+                with(googleTokenIdCredential) {
+                    User(
+                        displayName = displayName,
+                        familyName = familyName,
+                        givenName = givenName,
+                        id = id,
+                        idToken = idToken,
+                        phoneNumber = phoneNumber,
+                        profilePictureUri = profilePictureUri.toString(),
+                        signInWith = SignInMethod.GOOGLE,
+                    )
+                }
+
+            dataStoreRepository.saveSignInUser(user)
+        }
 
     companion object {
         const val SUCCESS_LOG_IN_WITH_GOOGLE = "Inicio de sesión con éxito"

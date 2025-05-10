@@ -13,7 +13,10 @@ class ProfileViewModel(
 ) : ViewModel() {
     suspend fun resetSignInPreference() {
         withContext(Dispatchers.IO) {
-            dataStoreRepository.saveLogPreference(false)
+            with(dataStoreRepository) {
+                saveLogPreference(false)
+                deleteSignInUser()
+            }
         }
     }
 
