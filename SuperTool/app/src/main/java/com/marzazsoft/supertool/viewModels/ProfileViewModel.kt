@@ -27,4 +27,23 @@ class ProfileViewModel(
             )
         }
     }
+
+    suspend fun getUserName(): String =
+        withContext(Dispatchers.IO) {
+            dataStoreRepository.getSignInUser()?.displayName.orEmpty()
+        }
+
+    suspend fun getEmail(): String =
+        withContext(Dispatchers.IO) {
+            dataStoreRepository.getSignInUser()?.id.orEmpty()
+        }
+
+    suspend fun getProfileImage(): String =
+        withContext(Dispatchers.IO) {
+            dataStoreRepository
+                .getSignInUser()
+                ?.profilePictureUri
+                ?.substringBefore("\\")
+                .orEmpty()
+        }
 }

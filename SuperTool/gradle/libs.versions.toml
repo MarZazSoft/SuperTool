@@ -19,6 +19,9 @@ credentialsVersion = "1.5.0"
 prefDataStoreVersion = "1.1.6"
 lottieVersion = "6.3.0"
 gsonVersion = "2.11.0"
+coilVersion = "2.6.0"
+appcompat = "1.6.1"
+material = "1.10.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,12 +49,16 @@ koin = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref =
 preferences-data-store = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "prefDataStoreVersion" }
 lottie = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottieVersion" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonVersion" }
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilVersion" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "firebase"  }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 
 [bundles]
 compose-utils = ["constraint-compose"]
