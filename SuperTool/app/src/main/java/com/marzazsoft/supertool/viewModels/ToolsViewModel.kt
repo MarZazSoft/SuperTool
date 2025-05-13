@@ -10,6 +10,6 @@ class ToolsViewModel(
 ) : ViewModel() {
     suspend fun getUserName(): String =
         withContext(Dispatchers.IO) {
-            dataStoreRepository.getSignInUser()?.givenName.orEmpty()
+            dataStoreRepository.getSignInUser()?.displayName.orEmpty()
         }
 }

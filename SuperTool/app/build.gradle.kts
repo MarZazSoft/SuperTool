@@ -86,4 +86,5 @@ dependencies {
     implementation(libs.bundles.compose.utils)
     implementation(libs.bundles.data)
     implementation(libs.lottie)
+    implementation(libs.coil)
 }
