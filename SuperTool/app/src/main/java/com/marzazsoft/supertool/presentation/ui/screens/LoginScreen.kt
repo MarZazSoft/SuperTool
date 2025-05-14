@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.ui.screens
+package com.marzazsoft.supertool.presentation.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,9 +33,9 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.marzazsoft.supertool.R
-import com.marzazsoft.supertool.ui.theme.darkBlue
-import com.marzazsoft.supertool.ui.theme.superLightBlue
-import com.marzazsoft.supertool.ui.theme.yellow
+import com.marzazsoft.supertool.presentation.ui.theme.darkBlue
+import com.marzazsoft.supertool.presentation.ui.theme.superLightBlue
+import com.marzazsoft.supertool.presentation.ui.theme.yellow
 import com.marzazsoft.supertool.utils.LARGE_IMAGE
 import com.marzazsoft.supertool.utils.MEDIUM_PADDING
 import com.marzazsoft.supertool.utils.NORMAL_BORDER

@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.ui.share
+package com.marzazsoft.supertool.presentation.ui.screens.share
 
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -22,10 +22,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.marzazsoft.supertool.R
-import com.marzazsoft.supertool.ui.theme.darkBlue
-import com.marzazsoft.supertool.ui.theme.lightBlue
-import com.marzazsoft.supertool.ui.theme.superLightBlue
-import com.marzazsoft.supertool.ui.theme.yellow
+import com.marzazsoft.supertool.presentation.ui.theme.darkBlue
+import com.marzazsoft.supertool.presentation.ui.theme.lightBlue
+import com.marzazsoft.supertool.presentation.ui.theme.superLightBlue
+import com.marzazsoft.supertool.presentation.ui.theme.yellow
 import com.marzazsoft.supertool.utils.LARGE_INDICATOR
 import com.marzazsoft.supertool.utils.LOADER_TIME_ANIMATION
 import com.marzazsoft.supertool.utils.MEDIUM_IMAGE

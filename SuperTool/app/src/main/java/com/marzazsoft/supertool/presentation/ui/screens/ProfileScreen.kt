@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.ui.screens
+package com.marzazsoft.supertool.presentation.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -34,11 +34,11 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
-import com.marzazsoft.supertool.ui.theme.darkBlue
-import com.marzazsoft.supertool.ui.theme.white
+import com.marzazsoft.supertool.presentation.ui.theme.darkBlue
+import com.marzazsoft.supertool.presentation.ui.theme.white
+import com.marzazsoft.supertool.presentation.viewModels.ProfileViewModel
 import com.marzazsoft.supertool.utils.MEDIUM_PADDING
 import com.marzazsoft.supertool.utils.MEDIUM_X_IMAGE
-import com.marzazsoft.supertool.viewModels.ProfileViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 

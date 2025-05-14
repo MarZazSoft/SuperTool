@@ -6,9 +6,11 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.marzazsoft.supertool.ui.screens.ProfileScreen
-import com.marzazsoft.supertool.ui.screens.SettingsScreen
-import com.marzazsoft.supertool.ui.screens.ToolsScreen
+import com.marzazsoft.mobile.games.navigation.LibraryNavigation
+import com.marzazsoft.mobile.games.presentation.screens.MainScreen
+import com.marzazsoft.supertool.presentation.ui.screens.ProfileScreen
+import com.marzazsoft.supertool.presentation.ui.screens.SettingsScreen
+import com.marzazsoft.supertool.presentation.ui.screens.ToolsScreen
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -29,6 +31,9 @@ fun HomeNavigation(
         }
         composable(NavigationScreens.SettingsScreen.route) {
             SettingsScreen(navController, modifier)
+        }
+        composable(LibraryNavigation.ROUTE) {
+            MainScreen()
         }
     }
 }
