@@ -28,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.marzazsoft.mobile.games.navigation.LibraryNavigation
+import com.marzazsoft.mobile.games.navigation.NavigationScreens
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.presentation.ui.theme.darkBlue
 import com.marzazsoft.supertool.presentation.ui.theme.yellow
@@ -42,7 +42,7 @@ import org.koin.androidx.compose.koinViewModel
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun ToolsScreen(
-    navController: NavController,
+    appNavController: NavController,
     modifier: Modifier,
     viewModel: ToolsViewModel = koinViewModel(),
 ) {
@@ -58,7 +58,9 @@ fun ToolsScreen(
         modifier = modifier,
         welcomeText = welcomeText,
         goToGamesModule = {
-            navController.navigate(LibraryNavigation.ROUTE)
+            appNavController.navigate(NavigationScreens.MainScreen.route) {
+                popUpTo(appNavController.graph.startDestinationId) { inclusive = true }
+            }
         },
     )
 }
@@ -130,5 +132,8 @@ fun ToolsScreenUi(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun ToolsScreenPreview() {
-    ToolsScreen(rememberNavController(), modifier = Modifier.fillMaxSize())
+    ToolsScreen(
+        appNavController = rememberNavController(),
+        modifier = Modifier.fillMaxSize(),
+    )
 }

@@ -1,5 +1,7 @@
 package com.marzazsoft.mobile.games.navigation
 
-object LibraryNavigation {
-    const val ROUTE = "main_screen"
+sealed class NavigationScreens(
+    val route: String,
+) {
+    data object MainScreen : NavigationScreens("games_main_screen")
 }

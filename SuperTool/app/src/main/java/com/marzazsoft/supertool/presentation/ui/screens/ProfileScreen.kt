@@ -46,7 +46,6 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ProfileScreen(
     appNavController: NavController,
-    navController: NavController,
     modifier: Modifier,
     viewModel: ProfileViewModel = koinViewModel(),
 ) {
@@ -144,5 +143,5 @@ fun ProfileScreenUi(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun ProfileScreenPreview() {
-    ProfileScreen(rememberNavController(), rememberNavController(), modifier = Modifier.fillMaxSize())
+    ProfileScreen(rememberNavController(), modifier = Modifier.fillMaxSize())
 }
