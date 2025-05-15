@@ -7,7 +7,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.marzazsoft.mobile.games.presentation.screens.GameScreen
-import com.marzazsoft.mobile.games.presentation.screens.MainScreen
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
