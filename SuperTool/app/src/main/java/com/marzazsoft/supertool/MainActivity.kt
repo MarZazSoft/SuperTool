@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.marzazsoft.supertool.navigation.AppNavigation
-import com.marzazsoft.supertool.ui.theme.SuperToolTheme
+import com.marzazsoft.supertool.presentation.ui.theme.SuperToolTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

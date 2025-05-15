@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.ui.share
+package com.marzazsoft.supertool.presentation.ui.screens.share
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,10 +28,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.marzazsoft.supertool.R
-import com.marzazsoft.supertool.ui.theme.black
-import com.marzazsoft.supertool.ui.theme.darkBlue
-import com.marzazsoft.supertool.ui.theme.lightBlue
-import com.marzazsoft.supertool.ui.theme.white
+import com.marzazsoft.supertool.presentation.ui.theme.black
+import com.marzazsoft.supertool.presentation.ui.theme.darkBlue
+import com.marzazsoft.supertool.presentation.ui.theme.lightBlue
+import com.marzazsoft.supertool.presentation.ui.theme.white
 import com.marzazsoft.supertool.utils.MEDIUM_PADDING
 import com.marzazsoft.supertool.utils.SIMPLE_PADDING
 import com.marzazsoft.supertool.utils.SMALL_X_IMAGE

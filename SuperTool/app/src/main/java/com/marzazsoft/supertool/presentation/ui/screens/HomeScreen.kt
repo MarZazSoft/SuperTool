@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.ui.screens
+package com.marzazsoft.supertool.presentation.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
@@ -21,8 +21,8 @@ import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.models.ItemNavigation
 import com.marzazsoft.supertool.navigation.HomeNavigation
 import com.marzazsoft.supertool.navigation.NavigationScreens
-import com.marzazsoft.supertool.ui.share.BottomMenu
-import com.marzazsoft.supertool.ui.share.SimpleAlert
+import com.marzazsoft.supertool.presentation.ui.screens.share.BottomMenu
+import com.marzazsoft.supertool.presentation.ui.screens.share.SimpleAlert
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Suppress("ktlint:standard:function-naming")

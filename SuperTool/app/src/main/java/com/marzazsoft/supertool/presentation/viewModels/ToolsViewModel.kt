@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.viewModels
+package com.marzazsoft.supertool.presentation.viewModels
 
 import androidx.lifecycle.ViewModel
 import com.marzazsoft.supertool.data.DataStoreRepository

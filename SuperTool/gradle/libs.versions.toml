@@ -20,8 +20,8 @@ prefDataStoreVersion = "1.1.6"
 lottieVersion = "6.3.0"
 gsonVersion = "2.11.0"
 coilVersion = "2.6.0"
-appcompat = "1.6.1"
-material = "1.10.0"
+appcompat = "1.7.0"
+material = "1.12.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,7 +38,7 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-auth-play-services = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "firebaseAuthPlayServices"}
 credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentialsVersion" }
@@ -61,7 +61,7 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 android-library = { id = "com.android.library", version.ref = "agp" }
 
 [bundles]
-compose-utils = ["constraint-compose"]
+compose-utils = ["constraint-compose", "androidx-compose-navigation", "androidx-ui-tooling-preview", "androidx-material3"]
 firebase = ["firebase-analytics", "firebase-auth-play-services", "credentials", "google-identity"]
 data = ["preferences-data-store", "gson"]
 

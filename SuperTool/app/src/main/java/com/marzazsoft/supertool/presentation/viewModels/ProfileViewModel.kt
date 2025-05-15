@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.viewModels
+package com.marzazsoft.supertool.presentation.viewModels
 
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager

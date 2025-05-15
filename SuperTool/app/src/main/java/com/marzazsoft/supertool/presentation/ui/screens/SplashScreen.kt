@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.ui.screens
+package com.marzazsoft.supertool.presentation.ui.screens
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloat
@@ -37,15 +37,15 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
-import com.marzazsoft.supertool.ui.theme.darkBlue
-import com.marzazsoft.supertool.ui.theme.white
+import com.marzazsoft.supertool.presentation.ui.theme.darkBlue
+import com.marzazsoft.supertool.presentation.ui.theme.white
+import com.marzazsoft.supertool.presentation.viewModels.SplashViewModel
 import com.marzazsoft.supertool.utils.DELAY_TIME_SPLASH_SCREEN
 import com.marzazsoft.supertool.utils.LARGE_FONT_SIZE
 import com.marzazsoft.supertool.utils.LARGE_IMAGE
 import com.marzazsoft.supertool.utils.MEDIUM_PADDING
 import com.marzazsoft.supertool.utils.NORMAL_STROKE_WIDTH
 import com.marzazsoft.supertool.utils.SIMPLE_TIME_ANIMATION
-import com.marzazsoft.supertool.viewModels.SplashViewModel
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 

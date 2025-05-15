@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.ui.screens
+package com.marzazsoft.supertool.presentation.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -22,8 +22,8 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.marzazsoft.supertool.R
-import com.marzazsoft.supertool.ui.theme.darkBlue
-import com.marzazsoft.supertool.ui.theme.white
+import com.marzazsoft.supertool.presentation.ui.theme.darkBlue
+import com.marzazsoft.supertool.presentation.ui.theme.white
 import com.marzazsoft.supertool.utils.EXTRA_LARGE_IMAGE
 
 @Suppress("ktlint:standard:function-naming")

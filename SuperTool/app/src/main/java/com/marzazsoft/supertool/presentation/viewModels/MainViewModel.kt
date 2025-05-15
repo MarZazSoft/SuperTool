@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.viewModels
+package com.marzazsoft.supertool.presentation.viewModels
 
 import android.content.Context
 import android.util.Log

@@ -1,6 +1,5 @@
-package com.marzazsoft.supertool.ui.screens
+package com.marzazsoft.supertool.presentation.ui.screens
 
-import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.BorderStroke
@@ -41,10 +40,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
-import com.marzazsoft.supertool.ui.share.SuperToolProgressIndicator
-import com.marzazsoft.supertool.ui.theme.darkBlue
-import com.marzazsoft.supertool.ui.theme.superLightBlue
-import com.marzazsoft.supertool.ui.theme.yellow
+import com.marzazsoft.supertool.presentation.ui.screens.share.SuperToolProgressIndicator
+import com.marzazsoft.supertool.presentation.ui.theme.darkBlue
+import com.marzazsoft.supertool.presentation.ui.theme.superLightBlue
+import com.marzazsoft.supertool.presentation.ui.theme.yellow
+import com.marzazsoft.supertool.presentation.viewModels.MainViewModel
 import com.marzazsoft.supertool.utils.ApiStatus
 import com.marzazsoft.supertool.utils.LARGE_IMAGE
 import com.marzazsoft.supertool.utils.MEDIUM_PADDING
@@ -53,7 +53,6 @@ import com.marzazsoft.supertool.utils.NORMAL_ROUNDED_CORNER
 import com.marzazsoft.supertool.utils.SIMPLE_BORDER
 import com.marzazsoft.supertool.utils.SIMPLE_HEIGHT_BUTTON
 import com.marzazsoft.supertool.utils.SMALL_IMAGE
-import com.marzazsoft.supertool.viewModels.MainViewModel
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -240,7 +239,6 @@ fun MainScreenUi(
     }
 }
 
-@SuppressLint("ViewModelConstructorInComposable")
 @Suppress("ktlint:standard:function-naming")
 @Preview(showBackground = true, showSystemUi = true)
 @Composable

@@ -3,10 +3,10 @@ package com.marzazsoft.supertool.di
 import androidx.credentials.CredentialManager
 import com.marzazsoft.supertool.data.DataStoreRepository
 import com.marzazsoft.supertool.data.dataStore
-import com.marzazsoft.supertool.viewModels.MainViewModel
-import com.marzazsoft.supertool.viewModels.ProfileViewModel
-import com.marzazsoft.supertool.viewModels.SplashViewModel
-import com.marzazsoft.supertool.viewModels.ToolsViewModel
+import com.marzazsoft.supertool.presentation.viewModels.MainViewModel
+import com.marzazsoft.supertool.presentation.viewModels.ProfileViewModel
+import com.marzazsoft.supertool.presentation.viewModels.SplashViewModel
+import com.marzazsoft.supertool.presentation.viewModels.ToolsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
