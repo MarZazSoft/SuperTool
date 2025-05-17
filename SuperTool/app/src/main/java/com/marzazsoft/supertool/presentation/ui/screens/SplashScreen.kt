@@ -19,8 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -55,7 +53,6 @@ fun SplashScreen(
     navController: NavController,
     viewModel: SplashViewModel = koinViewModel(),
 ) {
-    val isLogged by viewModel.isLogged().collectAsState(initial = false)
     val infiniteTransition = rememberInfiniteTransition()
     val rotationAnimation =
         infiniteTransition.animateFloat(
@@ -63,6 +60,7 @@ fun SplashScreen(
             targetValue = 360f,
             animationSpec = infiniteRepeatable(tween(SIMPLE_TIME_ANIMATION, easing = LinearEasing)),
         )
+    var isLogged = false
 
     val brush =
         Brush.sweepGradient(
@@ -74,8 +72,10 @@ fun SplashScreen(
         brush = brush,
     )
 
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(Unit) {
         delay(DELAY_TIME_SPLASH_SCREEN)
+
+        isLogged = viewModel.isLogged()
 
         isLogged.takeIf { it }?.let {
             navController.popBackStack()

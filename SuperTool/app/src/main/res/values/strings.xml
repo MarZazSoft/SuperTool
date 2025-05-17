@@ -5,6 +5,7 @@
     <string name="icon_google_description">Google icon</string>
     <string name="icon_email_description">Email icon</string>
     <string name="image_profile_description">Profile image</string>
+    <string name="list_icon_description">List icon</string>
     <string name="user_label">User</string>
     <string name="password_label">Password</string>
     <string name="enter_label">Enter</string>
@@ -21,4 +22,10 @@
     <string name="log_out_text">Log out</string>
     <string name="working_on_it_text">Working on it…</string>
     <string name="welcome_text">Welcome</string>
+    <string name="online_games_title">Games</string>
+    <string name="online_games_resume">Enjoy the funniest online video games</string>
+    <string name="radio_title">Radio</string>
+    <string name="radio_resume">Enjoy of the Mexican radio</string>
+    <string name="notes_title">Notes</string>
+    <string name="notes_resume">Add your notes of easy way</string>
 </resources>
