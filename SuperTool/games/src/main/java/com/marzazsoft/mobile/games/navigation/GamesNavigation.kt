@@ -6,7 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.marzazsoft.mobile.games.presentation.screens.GameScreen
+import com.marzazsoft.mobile.games.presentation.screens.GamesScreen
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -20,7 +20,7 @@ fun GamesNavigation(
         startDestination = NavigationScreens.MainScreen.route,
     ) {
         composable(NavigationScreens.MainScreen.route) {
-            GameScreen()
+            GamesScreen(modifier)
         }
     }
 }

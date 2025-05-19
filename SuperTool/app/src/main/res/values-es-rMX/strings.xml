@@ -6,6 +6,7 @@
     <string name="icon_google_description">Ícono de Google</string>
     <string name="icon_email_description">Ícono de correo electrónico</string>
     <string name="image_profile_description">Imagen de perfil</string>
+    <string name="list_icon_description">ícono de lista</string>
     <string name="user_label">Usuario</string>
     <string name="password_label">Contraseña</string>
     <string name="enter_label">Ingresar</string>
@@ -22,4 +23,10 @@
     <string name="log_out_text">Cerrar Sesión</string>
     <string name="working_on_it_text">Trabajando en ello…</string>
     <string name="welcome_text">Bienvenido</string>
+    <string name="online_games_title">Juegos</string>
+    <string name="online_games_resume">Disfruta de los videojuegos online más divertidos</string>
+    <string name="radio_title">Radio</string>
+    <string name="radio_resume">Disfruta de la radio de México</string>
+    <string name="notes_title">Notas</string>
+    <string name="notes_resume">Agrega tus notas rápidas de manera sencilla</string>
 </resources>

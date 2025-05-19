@@ -7,7 +7,6 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.gson.Gson
 import com.marzazsoft.supertool.models.User
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
@@ -23,10 +22,11 @@ class DataStoreRepository(
         }
     }
 
-    fun getLogPreference(): Flow<Boolean> =
-        dataStore.data.map { preference ->
-            preference[isLogged] ?: false
-        }
+    suspend fun getLogPreference(): Boolean =
+        dataStore.data
+            .map { preference ->
+                preference[isLogged] == true
+            }.first()
 
     suspend fun saveSignInUser(user: User?) {
         val gson = Gson()

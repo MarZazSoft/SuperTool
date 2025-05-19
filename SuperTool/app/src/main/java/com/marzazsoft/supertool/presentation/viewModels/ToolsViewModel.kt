@@ -12,4 +12,9 @@ class ToolsViewModel(
         withContext(Dispatchers.IO) {
             dataStoreRepository.getSignInUser()?.displayName.orEmpty()
         }
+
+    suspend fun getIfGuest(): Boolean =
+        withContext(Dispatchers.IO) {
+            dataStoreRepository.getLogPreference()
+        }
 }

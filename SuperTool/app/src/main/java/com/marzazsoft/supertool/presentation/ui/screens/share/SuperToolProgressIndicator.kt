@@ -22,18 +22,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.marzazsoft.supertool.R
-import com.marzazsoft.supertool.presentation.ui.theme.darkBlue
-import com.marzazsoft.supertool.presentation.ui.theme.lightBlue
-import com.marzazsoft.supertool.presentation.ui.theme.superLightBlue
-import com.marzazsoft.supertool.presentation.ui.theme.yellow
-import com.marzazsoft.supertool.utils.LARGE_INDICATOR
 import com.marzazsoft.supertool.utils.LOADER_TIME_ANIMATION
-import com.marzazsoft.supertool.utils.MEDIUM_IMAGE
-import com.marzazsoft.supertool.utils.MEDIUM_INDICATOR
-import com.marzazsoft.supertool.utils.SIMPLE_BORDER
-import com.marzazsoft.supertool.utils.SMALL_INDICATOR
-import com.marzazsoft.supertool.utils.START_INNER_INDICATOR
-import com.marzazsoft.supertool.utils.START_OUTER_INDICATOR
+import com.marzazsoft.supertooldesign.utils.LARGE_INDICATOR
+import com.marzazsoft.supertooldesign.utils.MEDIUM_IMAGE
+import com.marzazsoft.supertooldesign.utils.MEDIUM_INDICATOR
+import com.marzazsoft.supertooldesign.utils.SIMPLE_BORDER
+import com.marzazsoft.supertooldesign.utils.SMALL_INDICATOR
+import com.marzazsoft.supertooldesign.utils.START_INNER_INDICATOR
+import com.marzazsoft.supertooldesign.utils.START_OUTER_INDICATOR
+import com.marzazsoft.supertooldesign.utils.darkBlue
+import com.marzazsoft.supertooldesign.utils.lightBlue
+import com.marzazsoft.supertooldesign.utils.superLightBlue
+import com.marzazsoft.supertooldesign.utils.yellow
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

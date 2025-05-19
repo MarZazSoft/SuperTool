@@ -13,14 +13,16 @@ import androidx.compose.ui.viewinterop.AndroidView
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun GameScreen() {
-    GameScreenUi()
+fun GameViewScreen(modifier: Modifier) {
+    GameViewScreenUi(
+        modifier = modifier,
+    )
 }
 
 @Suppress("ktlint:standard:function-naming")
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
-fun GameScreenUi() {
+fun GameViewScreenUi(modifier: Modifier) {
     Box(
         modifier = Modifier.fillMaxSize().background(Color.Blue),
     ) {
@@ -39,6 +41,6 @@ fun GameScreenUi() {
 @Suppress("ktlint:standard:function-naming")
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GameScreenPreview() {
-    GameScreen()
+fun GameViewScreenPreview() {
+    GameViewScreen(modifier = Modifier.fillMaxSize())
 }

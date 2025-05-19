@@ -59,6 +59,7 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 google-services = { id = "com.google.gms.google-services", version.ref = "firebase"  }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+parcelize = { id = "kotlin-parcelize" }
 
 [bundles]
 compose-utils = ["constraint-compose", "androidx-compose-navigation", "androidx-ui-tooling-preview", "androidx-material3"]

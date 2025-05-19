@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.utils
+package com.marzazsoft.supertooldesign.utils
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,6 +26,7 @@ val SIMPLE_HEIGHT_BUTTON = 50.dp
 
 val LARGE_FONT_SIZE = 25.sp
 
+val MEDIUM_HEIGHT = 100.dp
 val SMALL_HEIGHT = 50.dp
 
 const val NORMAL_STROKE_WIDTH = 20f
