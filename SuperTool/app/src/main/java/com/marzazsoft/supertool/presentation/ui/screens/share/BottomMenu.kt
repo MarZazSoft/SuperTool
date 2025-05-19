@@ -9,11 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.marzazsoft.supertool.models.ItemNavigation
-import com.marzazsoft.supertool.presentation.ui.theme.black
-import com.marzazsoft.supertool.presentation.ui.theme.gray
-import com.marzazsoft.supertool.presentation.ui.theme.lightBlue
-import com.marzazsoft.supertool.presentation.ui.theme.superLightBlue
 import com.marzazsoft.supertool.utils.getHomeItems
+import com.marzazsoft.supertool_design.utils.black
+import com.marzazsoft.supertool_design.utils.gray
+import com.marzazsoft.supertool_design.utils.lightBlue
+import com.marzazsoft.supertool_design.utils.superLightBlue
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

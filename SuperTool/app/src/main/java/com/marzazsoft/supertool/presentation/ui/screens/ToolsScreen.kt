@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -31,11 +30,10 @@ import com.marzazsoft.supertool.data.getGuestUserTools
 import com.marzazsoft.supertool.data.getLoggedUserTools
 import com.marzazsoft.supertool.models.Tool
 import com.marzazsoft.supertool.presentation.ui.screens.share.MenuItem
-import com.marzazsoft.supertool.presentation.ui.theme.darkBlue
 import com.marzazsoft.supertool.presentation.viewModels.ToolsViewModel
-import com.marzazsoft.supertool.utils.MEDIUM_PADDING
-import com.marzazsoft.supertool.utils.SMALL_HEIGHT
-import kotlinx.coroutines.launch
+import com.marzazsoft.supertool_design.utils.MEDIUM_PADDING
+import com.marzazsoft.supertool_design.utils.SMALL_HEIGHT
+import com.marzazsoft.supertool_design.utils.darkBlue
 import org.koin.androidx.compose.koinViewModel
 
 @Suppress("ktlint:standard:function-naming")
@@ -46,24 +44,19 @@ fun ToolsScreen(
     viewModel: ToolsViewModel = koinViewModel(),
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
     var userName by rememberSaveable { mutableStateOf("") }
-    var isLogged = false
-    var toolsList: List<Tool> = listOf()
+    var isLogged by rememberSaveable { mutableStateOf(false) }
+    var toolsList by rememberSaveable { mutableStateOf(emptyList<Tool>()) }
 
     LaunchedEffect(Unit) {
-        val job =
-            scope.launch {
-                userName = viewModel.getUserName()
-                isLogged = viewModel.getIfGuest()
-                toolsList =
-                    isLogged.takeIf { it }?.let {
-                        getLoggedUserTools(context)
-                    } ?: run {
-                        getGuestUserTools(context)
-                    }
+        userName = viewModel.getUserName()
+        isLogged = viewModel.getIfGuest()
+        toolsList =
+            isLogged.takeIf { it }?.let {
+                getLoggedUserTools(context)
+            } ?: run {
+                getGuestUserTools(context)
             }
-        job.join()
     }
 
     val welcomeText = "${stringResource(R.string.welcome_text)} $userName"
@@ -119,7 +112,7 @@ fun ToolsScreenUi(
                 items(toolsList) { item ->
                     MenuItem(
                         icon = item.icon,
-                        color = item.color,
+                        color = item.getColor(),
                         title = item.title,
                         resume = item.resume,
                     ) { goToAction(item.id) }

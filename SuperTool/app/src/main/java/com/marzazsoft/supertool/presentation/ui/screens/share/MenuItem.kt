@@ -23,13 +23,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.marzazsoft.supertool.R
-import com.marzazsoft.supertool.presentation.ui.theme.darkBlue
-import com.marzazsoft.supertool.presentation.ui.theme.white
-import com.marzazsoft.supertool.presentation.ui.theme.yellow
-import com.marzazsoft.supertool.utils.MEDIUM_HEIGHT
-import com.marzazsoft.supertool.utils.NORMAL_BORDER
-import com.marzazsoft.supertool.utils.SIMPLE_BORDER
-import com.marzazsoft.supertool.utils.SIMPLE_PADDING
+import com.marzazsoft.supertool_design.utils.MEDIUM_HEIGHT
+import com.marzazsoft.supertool_design.utils.NORMAL_BORDER
+import com.marzazsoft.supertool_design.utils.SIMPLE_BORDER
+import com.marzazsoft.supertool_design.utils.SIMPLE_PADDING
+import com.marzazsoft.supertool_design.utils.darkBlue
+import com.marzazsoft.supertool_design.utils.white
+import com.marzazsoft.supertool_design.utils.yellow
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -104,5 +104,5 @@ fun MenuItemPreview() {
         color = yellow,
         title = stringResource(R.string.online_games_title),
         resume = stringResource(R.string.online_games_resume),
-    ) { Unit }
+    ) {}
 }

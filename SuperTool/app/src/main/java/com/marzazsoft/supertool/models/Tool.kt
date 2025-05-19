@@ -7,8 +7,10 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Tool(
     val id: Int,
-    val color: Color,
+    val color: Int,
     val icon: Int,
     val title: String,
     val resume: String,
-) : Parcelable
+) : Parcelable {
+    fun getColor(): Color = Color(color = color)
+}

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.marzazsoft.mobile.games"
+    namespace = "com.marzazsoft.supertool_design"
     compileSdk = 35
 
     defaultConfig {
@@ -43,9 +43,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.bundles.compose.utils)
-    implementation(libs.bundles.data)
-    implementation(libs.koin)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
 
-    implementation(project(":supertool-design"))
+    implementation(libs.bundles.compose.utils)
 }

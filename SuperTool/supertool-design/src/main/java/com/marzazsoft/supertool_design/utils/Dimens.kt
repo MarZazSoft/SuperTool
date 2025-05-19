@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.utils
+package com.marzazsoft.supertool_design.utils
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp

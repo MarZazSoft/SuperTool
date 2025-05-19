@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.presentation.ui.theme
+package com.marzazsoft.supertool_design.utils
 
 import androidx.compose.ui.graphics.Color
 
