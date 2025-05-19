@@ -33,16 +33,16 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.marzazsoft.supertool.R
-import com.marzazsoft.supertool_design.utils.LARGE_IMAGE
-import com.marzazsoft.supertool_design.utils.MEDIUM_PADDING
-import com.marzazsoft.supertool_design.utils.NORMAL_BORDER
-import com.marzazsoft.supertool_design.utils.NORMAL_ROUNDED_CORNER
-import com.marzazsoft.supertool_design.utils.SIMPLE_HEIGHT_BUTTON
-import com.marzazsoft.supertool_design.utils.SIMPLE_PADDING
-import com.marzazsoft.supertool_design.utils.SMALL_IMAGE
-import com.marzazsoft.supertool_design.utils.darkBlue
-import com.marzazsoft.supertool_design.utils.superLightBlue
-import com.marzazsoft.supertool_design.utils.yellow
+import com.marzazsoft.supertooldesign.utils.LARGE_IMAGE
+import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
+import com.marzazsoft.supertooldesign.utils.NORMAL_BORDER
+import com.marzazsoft.supertooldesign.utils.NORMAL_ROUNDED_CORNER
+import com.marzazsoft.supertooldesign.utils.SIMPLE_HEIGHT_BUTTON
+import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
+import com.marzazsoft.supertooldesign.utils.SMALL_IMAGE
+import com.marzazsoft.supertooldesign.utils.darkBlue
+import com.marzazsoft.supertooldesign.utils.superLightBlue
+import com.marzazsoft.supertooldesign.utils.yellow
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

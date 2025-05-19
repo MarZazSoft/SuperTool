@@ -43,16 +43,16 @@ import com.marzazsoft.supertool.navigation.NavigationScreens
 import com.marzazsoft.supertool.presentation.ui.screens.share.SuperToolProgressIndicator
 import com.marzazsoft.supertool.presentation.viewModels.MainViewModel
 import com.marzazsoft.supertool.utils.ApiStatus
-import com.marzazsoft.supertool_design.utils.LARGE_IMAGE
-import com.marzazsoft.supertool_design.utils.MEDIUM_PADDING
-import com.marzazsoft.supertool_design.utils.NORMAL_BORDER
-import com.marzazsoft.supertool_design.utils.NORMAL_ROUNDED_CORNER
-import com.marzazsoft.supertool_design.utils.SIMPLE_BORDER
-import com.marzazsoft.supertool_design.utils.SIMPLE_HEIGHT_BUTTON
-import com.marzazsoft.supertool_design.utils.SMALL_IMAGE
-import com.marzazsoft.supertool_design.utils.darkBlue
-import com.marzazsoft.supertool_design.utils.superLightBlue
-import com.marzazsoft.supertool_design.utils.yellow
+import com.marzazsoft.supertooldesign.utils.LARGE_IMAGE
+import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
+import com.marzazsoft.supertooldesign.utils.NORMAL_BORDER
+import com.marzazsoft.supertooldesign.utils.NORMAL_ROUNDED_CORNER
+import com.marzazsoft.supertooldesign.utils.SIMPLE_BORDER
+import com.marzazsoft.supertooldesign.utils.SIMPLE_HEIGHT_BUTTON
+import com.marzazsoft.supertooldesign.utils.SMALL_IMAGE
+import com.marzazsoft.supertooldesign.utils.darkBlue
+import com.marzazsoft.supertooldesign.utils.superLightBlue
+import com.marzazsoft.supertooldesign.utils.yellow
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 

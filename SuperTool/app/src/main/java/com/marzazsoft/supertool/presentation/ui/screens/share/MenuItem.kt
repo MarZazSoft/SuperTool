@@ -23,13 +23,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.marzazsoft.supertool.R
-import com.marzazsoft.supertool_design.utils.MEDIUM_HEIGHT
-import com.marzazsoft.supertool_design.utils.NORMAL_BORDER
-import com.marzazsoft.supertool_design.utils.SIMPLE_BORDER
-import com.marzazsoft.supertool_design.utils.SIMPLE_PADDING
-import com.marzazsoft.supertool_design.utils.darkBlue
-import com.marzazsoft.supertool_design.utils.white
-import com.marzazsoft.supertool_design.utils.yellow
+import com.marzazsoft.supertooldesign.utils.MEDIUM_HEIGHT
+import com.marzazsoft.supertooldesign.utils.NORMAL_BORDER
+import com.marzazsoft.supertooldesign.utils.SIMPLE_BORDER
+import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
+import com.marzazsoft.supertooldesign.utils.darkBlue
+import com.marzazsoft.supertooldesign.utils.white
+import com.marzazsoft.supertooldesign.utils.yellow
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

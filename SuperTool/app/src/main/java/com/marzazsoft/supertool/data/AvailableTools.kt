@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.compose.ui.graphics.toArgb
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.models.Tool
-import com.marzazsoft.supertool_design.utils.green
-import com.marzazsoft.supertool_design.utils.superLightBlue
-import com.marzazsoft.supertool_design.utils.yellow
+import com.marzazsoft.supertooldesign.utils.green
+import com.marzazsoft.supertooldesign.utils.superLightBlue
+import com.marzazsoft.supertooldesign.utils.yellow
 
 fun getLoggedUserTools(context: Context): List<Tool> =
     with(context) {

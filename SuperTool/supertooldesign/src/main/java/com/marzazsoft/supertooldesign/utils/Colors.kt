@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool_design.utils
+package com.marzazsoft.supertooldesign.utils
 
 import androidx.compose.ui.graphics.Color
 

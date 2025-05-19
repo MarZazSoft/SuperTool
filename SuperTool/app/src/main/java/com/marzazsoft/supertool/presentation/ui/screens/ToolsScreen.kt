@@ -31,9 +31,9 @@ import com.marzazsoft.supertool.data.getLoggedUserTools
 import com.marzazsoft.supertool.models.Tool
 import com.marzazsoft.supertool.presentation.ui.screens.share.MenuItem
 import com.marzazsoft.supertool.presentation.viewModels.ToolsViewModel
-import com.marzazsoft.supertool_design.utils.MEDIUM_PADDING
-import com.marzazsoft.supertool_design.utils.SMALL_HEIGHT
-import com.marzazsoft.supertool_design.utils.darkBlue
+import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
+import com.marzazsoft.supertooldesign.utils.SMALL_HEIGHT
+import com.marzazsoft.supertooldesign.utils.darkBlue
 import org.koin.androidx.compose.koinViewModel
 
 @Suppress("ktlint:standard:function-naming")

@@ -87,5 +87,5 @@ dependencies {
     implementation(libs.coil)
 
     implementation(project(":games"))
-    implementation(project(":supertool-design"))
+    implementation(project(":supertooldesign"))
 }

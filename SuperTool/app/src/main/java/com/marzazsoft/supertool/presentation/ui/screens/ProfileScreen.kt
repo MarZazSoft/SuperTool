@@ -35,10 +35,10 @@ import coil.request.ImageRequest
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
 import com.marzazsoft.supertool.presentation.viewModels.ProfileViewModel
-import com.marzazsoft.supertool_design.utils.MEDIUM_PADDING
-import com.marzazsoft.supertool_design.utils.MEDIUM_X_IMAGE
-import com.marzazsoft.supertool_design.utils.darkBlue
-import com.marzazsoft.supertool_design.utils.white
+import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
+import com.marzazsoft.supertooldesign.utils.MEDIUM_X_IMAGE
+import com.marzazsoft.supertooldesign.utils.darkBlue
+import com.marzazsoft.supertooldesign.utils.white
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 

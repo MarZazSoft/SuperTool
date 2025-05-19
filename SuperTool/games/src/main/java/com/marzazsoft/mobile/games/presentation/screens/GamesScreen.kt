@@ -13,11 +13,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.marzazsoft.supertool_design.utils.MEDIUM_PADDING
-import com.marzazsoft.supertool_design.utils.SMALL_HEIGHT
-import com.marzazsoft.supertool_design.utils.black
-import com.marzazsoft.supertool_design.utils.darkBlue
-import com.marzazsoft.supertool_design.utils.yellow
+import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
+import com.marzazsoft.supertooldesign.utils.SMALL_HEIGHT
+import com.marzazsoft.supertooldesign.utils.black
+import com.marzazsoft.supertooldesign.utils.darkBlue
+import com.marzazsoft.supertooldesign.utils.yellow
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

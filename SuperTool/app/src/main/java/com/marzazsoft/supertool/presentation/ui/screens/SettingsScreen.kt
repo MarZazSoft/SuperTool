@@ -22,9 +22,9 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.marzazsoft.supertool.R
-import com.marzazsoft.supertool_design.utils.EXTRA_LARGE_IMAGE
-import com.marzazsoft.supertool_design.utils.darkBlue
-import com.marzazsoft.supertool_design.utils.white
+import com.marzazsoft.supertooldesign.utils.EXTRA_LARGE_IMAGE
+import com.marzazsoft.supertooldesign.utils.darkBlue
+import com.marzazsoft.supertooldesign.utils.white
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

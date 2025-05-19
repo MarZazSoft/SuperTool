@@ -28,13 +28,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.marzazsoft.supertool.R
-import com.marzazsoft.supertool_design.utils.MEDIUM_PADDING
-import com.marzazsoft.supertool_design.utils.SIMPLE_PADDING
-import com.marzazsoft.supertool_design.utils.SMALL_X_IMAGE
-import com.marzazsoft.supertool_design.utils.black
-import com.marzazsoft.supertool_design.utils.darkBlue
-import com.marzazsoft.supertool_design.utils.lightBlue
-import com.marzazsoft.supertool_design.utils.white
+import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
+import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
+import com.marzazsoft.supertooldesign.utils.SMALL_X_IMAGE
+import com.marzazsoft.supertooldesign.utils.black
+import com.marzazsoft.supertooldesign.utils.darkBlue
+import com.marzazsoft.supertooldesign.utils.lightBlue
+import com.marzazsoft.supertooldesign.utils.white
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
