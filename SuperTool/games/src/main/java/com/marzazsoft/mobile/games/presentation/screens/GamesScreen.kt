@@ -1,36 +1,73 @@
 package com.marzazsoft.mobile.games.presentation.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.marzazsoft.mobile.games.R
+import com.marzazsoft.mobile.games.data.getGamesList
+import com.marzazsoft.mobile.games.models.Game
+import com.marzazsoft.mobile.games.navigation.NavigationScreens
+import com.marzazsoft.mobile.games.presentation.screens.shared.GameItem
 import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
+import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
 import com.marzazsoft.supertooldesign.utils.SMALL_HEIGHT
 import com.marzazsoft.supertooldesign.utils.black
 import com.marzazsoft.supertooldesign.utils.darkBlue
 import com.marzazsoft.supertooldesign.utils.yellow
+import com.marzazsoft.supertooldesign.R as DesignR
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun GamesScreen(modifier: Modifier) {
+fun GamesScreen(
+    appNavController: NavController,
+    gameNavController: NavController,
+    modifier: Modifier,
+) {
     GamesScreenUi(
         modifier = modifier,
+        backAction = {
+            appNavController.popBackStack()
+        },
+        gamesList = getGamesList(),
+        goToGame = { url ->
+            gameNavController.navigate("${NavigationScreens.GameViewScreen.route}/$url")
+        },
     )
 }
 
 @Suppress("ktlint:standard:function-naming")
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
-fun GamesScreenUi(modifier: Modifier) {
+fun GamesScreenUi(
+    modifier: Modifier,
+    backAction: () -> Unit,
+    gamesList: List<Game>,
+    goToGame: (url: String) -> Unit,
+) {
     ConstraintLayout(
         modifier = modifier.fillMaxSize().background(darkBlue),
     ) {
@@ -48,15 +85,48 @@ fun GamesScreenUi(modifier: Modifier) {
                 },
             contentAlignment = Alignment.Center,
         ) {
-            Text(text = "Videojuegos", color = black)
+            Row(
+                modifier = Modifier.fillMaxSize().padding(SIMPLE_PADDING),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Image(
+                    painter = painterResource(DesignR.drawable.ic_back),
+                    contentDescription = stringResource(R.string.back_description),
+                    modifier =
+                        Modifier.weight(1f).clickable {
+                            backAction()
+                        },
+                )
+                Text(
+                    text = stringResource(R.string.games_title),
+                    color = black,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.weight(7f),
+                )
+                Spacer(modifier = Modifier.weight(1f))
+            }
         }
         Box(
-            Modifier.background(darkBlue).padding(MEDIUM_PADDING).constrainAs(contentId) {
+            Modifier.background(darkBlue).constrainAs(contentId) {
                 top.linkTo(headerId.bottom)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
             },
         ) {
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                modifier = Modifier.padding(SIMPLE_PADDING),
+            ) {
+                items(gamesList) { game ->
+                    GameItem(
+                        title = game.title,
+                        posterIcon = game.posterUrl,
+                    ) {
+                        goToGame(game.gameUrl)
+                    }
+                }
+            }
         }
     }
 }
@@ -65,5 +135,9 @@ fun GamesScreenUi(modifier: Modifier) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GamesScreenPreview() {
-    GamesScreen(modifier = Modifier.fillMaxSize())
+    GamesScreen(
+        appNavController = rememberNavController(),
+        gameNavController = rememberNavController(),
+        modifier = Modifier.fillMaxSize(),
+    )
 }

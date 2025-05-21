@@ -55,6 +55,7 @@ import com.marzazsoft.supertooldesign.utils.superLightBlue
 import com.marzazsoft.supertooldesign.utils.yellow
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
+import com.marzazsoft.supertooldesign.R as DesignR
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -117,7 +118,7 @@ fun MainScreenUi(
         val (imageIconId, btnGuest, btnEmail, btnGoogleAuth) = createRefs()
 
         Image(
-            painter = painterResource(id = R.drawable.super_tool_icon),
+            painter = painterResource(id = DesignR.drawable.super_tool_icon),
             contentDescription = stringResource(id = R.string.image_super_tool_description),
             modifier =
                 Modifier

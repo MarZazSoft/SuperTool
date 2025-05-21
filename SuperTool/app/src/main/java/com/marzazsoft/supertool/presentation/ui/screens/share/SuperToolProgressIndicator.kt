@@ -34,6 +34,7 @@ import com.marzazsoft.supertooldesign.utils.darkBlue
 import com.marzazsoft.supertooldesign.utils.lightBlue
 import com.marzazsoft.supertooldesign.utils.superLightBlue
 import com.marzazsoft.supertooldesign.utils.yellow
+import com.marzazsoft.supertooldesign.R as DesignR
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -104,7 +105,7 @@ fun SuperToolProgressIndicatorUi(rotation: Float) {
                 color = yellow,
             )
             Image(
-                painter = painterResource(R.drawable.super_tool_icon),
+                painter = painterResource(DesignR.drawable.super_tool_icon),
                 contentDescription = stringResource(R.string.image_super_tool_description),
                 modifier = Modifier.clip(CircleShape).size(width = MEDIUM_IMAGE, height = MEDIUM_IMAGE),
             )

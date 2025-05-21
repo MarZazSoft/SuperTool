@@ -13,16 +13,23 @@ import androidx.compose.ui.viewinterop.AndroidView
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun GameViewScreen(modifier: Modifier) {
+fun GameViewScreen(
+    modifier: Modifier,
+    gameUrl: String,
+) {
     GameViewScreenUi(
         modifier = modifier,
+        gameUrl = gameUrl,
     )
 }
 
 @Suppress("ktlint:standard:function-naming")
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
-fun GameViewScreenUi(modifier: Modifier) {
+fun GameViewScreenUi(
+    modifier: Modifier,
+    gameUrl: String,
+) {
     Box(
         modifier = Modifier.fillMaxSize().background(Color.Blue),
     ) {
@@ -31,7 +38,7 @@ fun GameViewScreenUi(modifier: Modifier) {
             factory = { context ->
                 WebView(context).apply {
                     settings.javaScriptEnabled = true
-                    loadUrl("https://microstudio.io/gilles/indiebird/")
+                    loadUrl("https://microstudio.io/gilles/$gameUrl/")
                 }
             },
         )
@@ -42,5 +49,5 @@ fun GameViewScreenUi(modifier: Modifier) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GameViewScreenPreview() {
-    GameViewScreen(modifier = Modifier.fillMaxSize())
+    GameViewScreen(modifier = Modifier.fillMaxSize(), gameUrl = "")
 }

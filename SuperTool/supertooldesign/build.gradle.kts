@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.marzazsoft.supertool_design"
+    namespace = "com.marzazsoft.supertooldesign"
     compileSdk = 35
 
     defaultConfig {
