@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,7 +31,6 @@ import com.marzazsoft.mobile.games.data.getGamesList
 import com.marzazsoft.mobile.games.models.Game
 import com.marzazsoft.mobile.games.navigation.NavigationScreens
 import com.marzazsoft.mobile.games.presentation.screens.shared.GameItem
-import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
 import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
 import com.marzazsoft.supertooldesign.utils.SMALL_HEIGHT
 import com.marzazsoft.supertooldesign.utils.black
