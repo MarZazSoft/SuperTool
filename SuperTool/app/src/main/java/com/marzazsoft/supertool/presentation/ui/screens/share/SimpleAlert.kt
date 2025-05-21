@@ -35,6 +35,7 @@ import com.marzazsoft.supertooldesign.utils.black
 import com.marzazsoft.supertooldesign.utils.darkBlue
 import com.marzazsoft.supertooldesign.utils.lightBlue
 import com.marzazsoft.supertooldesign.utils.white
+import com.marzazsoft.supertooldesign.R as DesignR
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -85,7 +86,7 @@ fun SimpleAlertUi(
                     modifier = Modifier.padding(all = MEDIUM_PADDING),
                 ) {
                     Image(
-                        painter = painterResource(R.drawable.super_tool_icon),
+                        painter = painterResource(DesignR.drawable.super_tool_icon),
                         contentDescription = stringResource(R.string.image_super_tool_description),
                         modifier = Modifier.size(SMALL_X_IMAGE).clip(shape = CircleShape),
                     )

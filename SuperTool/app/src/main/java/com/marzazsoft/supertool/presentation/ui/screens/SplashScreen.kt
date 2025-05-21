@@ -46,6 +46,7 @@ import com.marzazsoft.supertooldesign.utils.darkBlue
 import com.marzazsoft.supertooldesign.utils.white
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
+import com.marzazsoft.supertooldesign.R as DesignR
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -112,7 +113,7 @@ fun SplashScreenUi(
                     },
             ) {}
             Image(
-                painter = painterResource(id = R.drawable.super_tool_icon),
+                painter = painterResource(id = DesignR.drawable.super_tool_icon),
                 contentDescription = stringResource(id = R.string.image_super_tool_description),
                 modifier =
                     Modifier

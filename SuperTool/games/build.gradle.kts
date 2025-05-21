@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.parcelize)
 }
 
 android {
@@ -43,8 +44,11 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
     implementation(libs.bundles.compose.utils)
     implementation(libs.bundles.data)
     implementation(libs.koin)
+    implementation(libs.coil)
     implementation(project(":supertooldesign"))
 }

@@ -41,6 +41,7 @@ import com.marzazsoft.supertooldesign.utils.darkBlue
 import com.marzazsoft.supertooldesign.utils.white
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import com.marzazsoft.supertooldesign.R as DesignR
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -101,8 +102,8 @@ fun ProfileScreenUi(
                         .Builder(LocalContext.current)
                         .data(profileImage)
                         .crossfade(true)
-                        .placeholder(R.drawable.super_tool_icon)
-                        .error(R.drawable.super_tool_icon)
+                        .placeholder(DesignR.drawable.super_tool_icon)
+                        .error(DesignR.drawable.super_tool_icon)
                         .build(),
                 contentScale = ContentScale.Fit,
                 contentDescription = stringResource(R.string.image_profile_description),
