@@ -10,10 +10,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.marzazsoft.supertool.models.ItemNavigation
 import com.marzazsoft.supertool.utils.getHomeItems
-import com.marzazsoft.supertooldesign.utils.black
-import com.marzazsoft.supertooldesign.utils.gray
+import com.marzazsoft.supertooldesign.utils.darkBlue
 import com.marzazsoft.supertooldesign.utils.lightBlue
 import com.marzazsoft.supertooldesign.utils.superLightBlue
+import com.marzazsoft.supertooldesign.utils.white
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -33,14 +33,14 @@ fun BottomMenu(
                 label = {
                     Text(
                         text = item.title,
-                        color = if (index == selectedItem) superLightBlue else gray,
+                        color = if (index == selectedItem) white else superLightBlue,
                     )
                 },
                 colors =
                     NavigationBarItemDefaults.colors(
-                        selectedIconColor = black,
-                        indicatorColor = superLightBlue,
-                        unselectedIconColor = gray,
+                        selectedIconColor = darkBlue,
+                        indicatorColor = white,
+                        unselectedIconColor = superLightBlue,
                     ),
             )
         }

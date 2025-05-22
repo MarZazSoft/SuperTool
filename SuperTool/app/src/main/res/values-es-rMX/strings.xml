@@ -29,4 +29,6 @@
     <string name="radio_resume">Disfruta de la radio de México</string>
     <string name="notes_title">Notas</string>
     <string name="notes_resume">Agrega tus notas rápidas de manera sencilla</string>
+    <string name="spend_manager_title">Administrador de gastos</string>
+    <string name="spend_manager_resume">Controla tu dinero de forma fácil</string>
 </resources>
