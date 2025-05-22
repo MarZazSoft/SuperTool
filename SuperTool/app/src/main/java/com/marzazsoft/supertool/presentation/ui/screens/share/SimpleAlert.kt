@@ -33,7 +33,6 @@ import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
 import com.marzazsoft.supertooldesign.utils.SMALL_X_IMAGE
 import com.marzazsoft.supertooldesign.utils.black
 import com.marzazsoft.supertooldesign.utils.darkBlue
-import com.marzazsoft.supertooldesign.utils.superLightBlue
 import com.marzazsoft.supertooldesign.utils.white
 import com.marzazsoft.supertooldesign.R as DesignR
 

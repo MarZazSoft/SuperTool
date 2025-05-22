@@ -1,7 +1,6 @@
 package com.marzazsoft.supertool.presentation.ui.screens.share
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,14 +25,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertooldesign.utils.MEDIUM_HEIGHT
-import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
 import com.marzazsoft.supertooldesign.utils.NORMAL_BORDER
 import com.marzazsoft.supertooldesign.utils.SIMPLE_BORDER
 import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
 import com.marzazsoft.supertooldesign.utils.SMALL_PADDING
 import com.marzazsoft.supertooldesign.utils.darkBlue
 import com.marzazsoft.supertooldesign.utils.superLightBlue
-import com.marzazsoft.supertooldesign.utils.white
 import com.marzazsoft.supertooldesign.utils.yellow
 
 @Suppress("ktlint:standard:function-naming")

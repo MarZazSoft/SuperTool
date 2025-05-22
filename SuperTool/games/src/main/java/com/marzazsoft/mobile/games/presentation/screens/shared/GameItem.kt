@@ -34,7 +34,6 @@ import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
 import com.marzazsoft.supertooldesign.utils.darkBlue
 import com.marzazsoft.supertooldesign.utils.green
 import com.marzazsoft.supertooldesign.utils.superLightBlue
-import com.marzazsoft.supertooldesign.utils.white
 import com.marzazsoft.supertooldesign.R as DesignR
 
 @Suppress("ktlint:standard:function-naming")
