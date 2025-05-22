@@ -20,9 +20,9 @@ fun GamesNavigation(
     val gameController = rememberNavController()
     NavHost(
         navController = gameController,
-        startDestination = NavigationScreens.MainScreen.route,
+        startDestination = NavigationScreens.GamesScreen.route,
     ) {
-        composable(NavigationScreens.MainScreen.route) {
+        composable(NavigationScreens.GamesScreen.route) {
             GamesScreen(
                 appNavController = appNavController,
                 gameNavController = gameController,

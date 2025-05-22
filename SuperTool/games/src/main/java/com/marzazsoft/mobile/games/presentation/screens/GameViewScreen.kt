@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
+import com.marzazsoft.supertooldesign.utils.fromB64toString
 import kotlin.apply
 
 @Suppress("ktlint:standard:function-naming")
@@ -27,7 +28,7 @@ fun GameViewScreen(
         WebView(context).apply {
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
-            loadUrl("https://microstudio.io/gilles/$gameUrl/")
+            loadUrl(gameUrl.fromB64toString())
         }
 
     DisposableEffect(Unit) {

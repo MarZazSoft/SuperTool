@@ -7,6 +7,7 @@
     <string name="icon_email_description">Ícono de correo electrónico</string>
     <string name="image_profile_description">Imagen de perfil</string>
     <string name="list_icon_description">ícono de lista</string>
+    <string name="next_icon_description">ícono ir</string>
     <string name="user_label">Usuario</string>
     <string name="password_label">Contraseña</string>
     <string name="enter_label">Ingresar</string>

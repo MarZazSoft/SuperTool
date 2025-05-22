@@ -29,6 +29,7 @@ val LARGE_FONT_SIZE = 25.sp
 
 val MEDIUM_HEIGHT = 100.dp
 val SMALL_HEIGHT = 50.dp
+val BOTTOM_HEIGHT = 60.dp
 
 const val NORMAL_STROKE_WIDTH = 20f
 const val NORMAL_ROUNDED_CORNER = 10

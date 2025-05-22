@@ -6,6 +6,7 @@
     <string name="icon_email_description">Email icon</string>
     <string name="image_profile_description">Profile image</string>
     <string name="list_icon_description">List icon</string>
+    <string name="next_icon_description">Go icon</string>
     <string name="user_label">User</string>
     <string name="password_label">Password</string>
     <string name="enter_label">Enter</string>
