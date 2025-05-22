@@ -16,6 +16,10 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -31,10 +35,12 @@ import com.marzazsoft.mobile.games.data.getGamesList
 import com.marzazsoft.mobile.games.models.Game
 import com.marzazsoft.mobile.games.navigation.NavigationScreens
 import com.marzazsoft.mobile.games.presentation.screens.shared.GameItem
+import com.marzazsoft.supertooldesign.utils.BOTTOM_HEIGHT
 import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
 import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
 import com.marzazsoft.supertooldesign.utils.SMALL_HEIGHT
 import com.marzazsoft.supertooldesign.utils.darkBlue
+import com.marzazsoft.supertooldesign.utils.toB64
 import com.marzazsoft.supertooldesign.utils.white
 import com.marzazsoft.supertooldesign.R as DesignR
 
@@ -45,11 +51,16 @@ fun GamesScreen(
     gameNavController: NavController,
     modifier: Modifier,
 ) {
+    var backActionFlag by rememberSaveable { mutableStateOf(true) }
+
     GamesScreenUi(
         modifier = modifier,
         backAction = {
-            gameNavController.popBackStack()
-            appNavController.popBackStack()
+            if (backActionFlag) {
+                backActionFlag = false
+                gameNavController.popBackStack()
+                appNavController.popBackStack()
+            }
         },
         gamesList = getGamesList(),
         goToGame = { url ->
@@ -68,7 +79,7 @@ fun GamesScreenUi(
     goToGame: (url: String) -> Unit,
 ) {
     ConstraintLayout(
-        modifier = modifier.fillMaxSize().background(darkBlue),
+        modifier = modifier.background(darkBlue),
     ) {
         val (headerId, contentId) = createRefs()
 
@@ -108,7 +119,7 @@ fun GamesScreenUi(
             }
         }
         Box(
-            Modifier.background(darkBlue).constrainAs(contentId) {
+            Modifier.background(darkBlue).padding(bottom = BOTTOM_HEIGHT).constrainAs(contentId) {
                 top.linkTo(headerId.bottom)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
@@ -123,7 +134,7 @@ fun GamesScreenUi(
                         title = game.title,
                         posterIcon = game.posterUrl,
                     ) {
-                        goToGame(game.gameUrl)
+                        goToGame(game.gameUrl.toB64())
                     }
                 }
             }

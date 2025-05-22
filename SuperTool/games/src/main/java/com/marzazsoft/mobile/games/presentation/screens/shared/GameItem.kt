@@ -32,8 +32,8 @@ import com.marzazsoft.supertooldesign.utils.NORMAL_BORDER
 import com.marzazsoft.supertooldesign.utils.SIMPLE_BORDER
 import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
 import com.marzazsoft.supertooldesign.utils.darkBlue
-import com.marzazsoft.supertooldesign.utils.green
 import com.marzazsoft.supertooldesign.utils.superLightBlue
+import com.marzazsoft.supertooldesign.utils.yellow
 import com.marzazsoft.supertooldesign.R as DesignR
 
 @Suppress("ktlint:standard:function-naming")
@@ -92,7 +92,7 @@ fun GameItemUi(
                 },
                 colors =
                     ButtonDefaults.buttonColors(
-                        containerColor = green,
+                        containerColor = yellow,
                     ),
                 modifier = Modifier.fillMaxWidth(),
             ) {

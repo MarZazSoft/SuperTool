@@ -31,6 +31,7 @@ import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
 import com.marzazsoft.supertooldesign.utils.SMALL_PADDING
 import com.marzazsoft.supertooldesign.utils.darkBlue
 import com.marzazsoft.supertooldesign.utils.superLightBlue
+import com.marzazsoft.supertooldesign.utils.white
 import com.marzazsoft.supertooldesign.utils.yellow
 
 @Suppress("ktlint:standard:function-naming")
@@ -92,6 +93,17 @@ fun MenuItemUi(
                 Text(title, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(NORMAL_BORDER))
                 Text(resume, maxLines = 2, overflow = TextOverflow.Ellipsis)
+            }
+            Box(
+                modifier = Modifier.weight(.5f).background(darkBlue),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_next_arrow),
+                    tint = white,
+                    contentDescription = stringResource(R.string.next_icon_description),
+                    modifier = Modifier.fillMaxSize().padding(SIMPLE_PADDING),
+                )
             }
         }
     }
