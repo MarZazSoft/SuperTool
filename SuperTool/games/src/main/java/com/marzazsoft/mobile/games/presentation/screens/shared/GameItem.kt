@@ -1,30 +1,40 @@
 package com.marzazsoft.mobile.games.presentation.screens.shared
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.marzazsoft.supertooldesign.R
+import com.marzazsoft.mobile.games.R
 import com.marzazsoft.supertooldesign.utils.LARGE_IMAGE
 import com.marzazsoft.supertooldesign.utils.NORMAL_BORDER
 import com.marzazsoft.supertooldesign.utils.SIMPLE_BORDER
 import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
-import com.marzazsoft.supertooldesign.utils.white
+import com.marzazsoft.supertooldesign.utils.darkBlue
+import com.marzazsoft.supertooldesign.utils.green
+import com.marzazsoft.supertooldesign.utils.superLightBlue
+import com.marzazsoft.supertooldesign.R as DesignR
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -50,11 +60,11 @@ fun GameItemUi(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(SIMPLE_PADDING),
-        border = BorderStroke(SIMPLE_BORDER, white),
+        border = BorderStroke(SIMPLE_BORDER, superLightBlue),
         onClick = { onClickAction() },
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth().padding(SIMPLE_PADDING),
+            modifier = Modifier.fillMaxWidth().background(darkBlue).padding(SIMPLE_PADDING),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Box(
@@ -66,8 +76,8 @@ fun GameItemUi(
                             .Builder(LocalContext.current)
                             .data(posterIcon)
                             .crossfade(true)
-                            .placeholder(R.drawable.super_tool_icon)
-                            .error(R.drawable.super_tool_icon)
+                            .placeholder(DesignR.drawable.super_tool_icon)
+                            .error(DesignR.drawable.super_tool_icon)
                             .build(),
                     contentScale = ContentScale.Fit,
                     contentDescription = "",
@@ -80,8 +90,22 @@ fun GameItemUi(
                 onClick = {
                     onClickAction()
                 },
+                colors =
+                    ButtonDefaults.buttonColors(
+                        containerColor = green,
+                    ),
+                modifier = Modifier.fillMaxWidth(),
             ) {
-                Text(text = "Jugar")
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    Icon(
+                        painter = painterResource(DesignR.drawable.ic_play),
+                        tint = darkBlue,
+                        contentDescription = stringResource(R.string.play_icon_description),
+                    )
+                    Text(text = stringResource(R.string.play_description))
+                }
             }
         }
     }

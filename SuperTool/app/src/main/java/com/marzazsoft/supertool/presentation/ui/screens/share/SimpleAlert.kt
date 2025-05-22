@@ -33,7 +33,6 @@ import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
 import com.marzazsoft.supertooldesign.utils.SMALL_X_IMAGE
 import com.marzazsoft.supertooldesign.utils.black
 import com.marzazsoft.supertooldesign.utils.darkBlue
-import com.marzazsoft.supertooldesign.utils.lightBlue
 import com.marzazsoft.supertooldesign.utils.white
 import com.marzazsoft.supertooldesign.R as DesignR
 
@@ -95,10 +94,10 @@ fun SimpleAlertUi(
                     Spacer(modifier = Modifier.height(SIMPLE_PADDING))
                     Row(horizontalArrangement = Arrangement.End) {
                         TextButton(onClick = { cancelButtonAction() }) {
-                            Text(cancelButtonText, textAlign = TextAlign.End, color = lightBlue)
+                            Text(cancelButtonText, textAlign = TextAlign.End, color = darkBlue)
                         }
                         TextButton(onClick = { okButtonAction() }) {
-                            Text(okButtonText, textAlign = TextAlign.End, color = lightBlue)
+                            Text(okButtonText, textAlign = TextAlign.End, color = darkBlue)
                         }
                     }
                 }

@@ -17,9 +17,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
@@ -89,17 +89,17 @@ fun ToolsScreenUi(
 
         Box(
             Modifier
-                .background(Color.Blue)
+                .background(darkBlue)
                 .fillMaxWidth()
                 .height(SMALL_HEIGHT)
                 .constrainAs(headerId) {
-                    top.linkTo(parent.top)
+                    top.linkTo(parent.top, margin = MEDIUM_PADDING)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 },
             contentAlignment = Alignment.Center,
         ) {
-            Text(text = welcomeText)
+            Text(text = welcomeText, fontWeight = FontWeight.Bold)
         }
         Box(
             Modifier.background(darkBlue).padding(MEDIUM_PADDING).constrainAs(contentId) {

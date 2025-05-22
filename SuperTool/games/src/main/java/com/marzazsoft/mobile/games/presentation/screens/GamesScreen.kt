@@ -1,7 +1,6 @@
 package com.marzazsoft.mobile.games.presentation.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -14,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,11 +31,11 @@ import com.marzazsoft.mobile.games.data.getGamesList
 import com.marzazsoft.mobile.games.models.Game
 import com.marzazsoft.mobile.games.navigation.NavigationScreens
 import com.marzazsoft.mobile.games.presentation.screens.shared.GameItem
+import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
 import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
 import com.marzazsoft.supertooldesign.utils.SMALL_HEIGHT
-import com.marzazsoft.supertooldesign.utils.black
 import com.marzazsoft.supertooldesign.utils.darkBlue
-import com.marzazsoft.supertooldesign.utils.yellow
+import com.marzazsoft.supertooldesign.utils.white
 import com.marzazsoft.supertooldesign.R as DesignR
 
 @Suppress("ktlint:standard:function-naming")
@@ -48,6 +48,7 @@ fun GamesScreen(
     GamesScreenUi(
         modifier = modifier,
         backAction = {
+            gameNavController.popBackStack()
             appNavController.popBackStack()
         },
         gamesList = getGamesList(),
@@ -73,11 +74,11 @@ fun GamesScreenUi(
 
         Box(
             Modifier
-                .background(yellow)
+                .background(darkBlue)
                 .fillMaxWidth()
                 .height(SMALL_HEIGHT)
                 .constrainAs(headerId) {
-                    top.linkTo(parent.top)
+                    top.linkTo(parent.top, margin = MEDIUM_PADDING)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 },
@@ -87,8 +88,9 @@ fun GamesScreenUi(
                 modifier = Modifier.fillMaxSize().padding(SIMPLE_PADDING),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Image(
+                Icon(
                     painter = painterResource(DesignR.drawable.ic_back),
+                    tint = white,
                     contentDescription = stringResource(R.string.back_description),
                     modifier =
                         Modifier.weight(1f).clickable {
@@ -97,7 +99,7 @@ fun GamesScreenUi(
                 )
                 Text(
                     text = stringResource(R.string.games_title),
-                    color = black,
+                    color = white,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.weight(7f),

@@ -28,4 +28,6 @@
     <string name="radio_resume">Enjoy of the Mexican radio</string>
     <string name="notes_title">Notes</string>
     <string name="notes_resume">Add your notes of easy way</string>
+    <string name="spend_manager_title">Spend Manager</string>
+    <string name="spend_manager_resume">Controller your money of easy way</string>
 </resources>

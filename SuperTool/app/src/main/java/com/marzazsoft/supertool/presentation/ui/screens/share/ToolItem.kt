@@ -1,7 +1,6 @@
 package com.marzazsoft.supertool.presentation.ui.screens.share
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.marzazsoft.supertool.R
@@ -27,8 +28,9 @@ import com.marzazsoft.supertooldesign.utils.MEDIUM_HEIGHT
 import com.marzazsoft.supertooldesign.utils.NORMAL_BORDER
 import com.marzazsoft.supertooldesign.utils.SIMPLE_BORDER
 import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
+import com.marzazsoft.supertooldesign.utils.SMALL_PADDING
 import com.marzazsoft.supertooldesign.utils.darkBlue
-import com.marzazsoft.supertooldesign.utils.white
+import com.marzazsoft.supertooldesign.utils.superLightBlue
 import com.marzazsoft.supertooldesign.utils.yellow
 
 @Suppress("ktlint:standard:function-naming")
@@ -61,20 +63,21 @@ fun MenuItemUi(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        border = BorderStroke(SIMPLE_BORDER, white),
+        border = BorderStroke(SIMPLE_BORDER, superLightBlue),
         onClick = { onClickAction() },
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().height(MEDIUM_HEIGHT),
         ) {
             Box(
-                modifier = Modifier.background(color).weight(1f),
+                modifier = Modifier.weight(1f).background(darkBlue),
                 contentAlignment = Alignment.Center,
             ) {
-                Image(
+                Icon(
                     painter = painterResource(icon),
+                    tint = color,
                     contentDescription = stringResource(R.string.list_icon_description),
-                    modifier = Modifier.fillMaxSize().padding(SIMPLE_PADDING),
+                    modifier = Modifier.fillMaxSize().padding(SMALL_PADDING),
                 )
             }
             Column(
@@ -86,7 +89,7 @@ fun MenuItemUi(
                         .fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
             ) {
-                Text(title)
+                Text(title, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(NORMAL_BORDER))
                 Text(resume, maxLines = 2, overflow = TextOverflow.Ellipsis)
             }
