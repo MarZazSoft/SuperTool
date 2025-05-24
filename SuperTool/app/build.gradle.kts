@@ -87,5 +87,6 @@ dependencies {
     implementation(libs.coil)
 
     implementation(project(":games"))
+    implementation(project(":radio"))
     implementation(project(":supertooldesign"))
 }
