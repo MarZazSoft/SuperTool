@@ -13,6 +13,8 @@ import com.marzazsoft.supertool.presentation.ui.screens.MainScreen
 import com.marzazsoft.supertool.presentation.ui.screens.SplashScreen
 import com.marzazsoft.mobile.games.navigation.NavigationScreens as GamesNavigationScreens
 import com.marzazsoft.mobile.games.presentation.screens.MainScreen as MainGamesScreen
+import com.marzazsoft.mobile.radio.navigation.NavigationScreens as RadioNavigationScreens
+import com.marzazsoft.mobile.radio.presentation.screens.MainScreen as MainRadioScreen
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -44,6 +46,9 @@ fun AppNavigation(modifier: Modifier) {
         }
         composable(GamesNavigationScreens.MainScreen.route) {
             MainGamesScreen(appNavController = navController)
+        }
+        composable(RadioNavigationScreens.MainScreen.route) {
+            MainRadioScreen(appNavController = navController)
         }
     }
 }

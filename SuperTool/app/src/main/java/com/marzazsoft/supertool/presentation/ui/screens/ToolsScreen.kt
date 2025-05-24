@@ -24,7 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.marzazsoft.mobile.games.navigation.NavigationScreens
+import com.marzazsoft.mobile.games.navigation.NavigationScreens as GamesNavigationScreens
+import com.marzazsoft.mobile.radio.navigation.NavigationScreens as RadioNavigationScreens
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.data.getGuestUserTools
 import com.marzazsoft.supertool.data.getLoggedUserTools
@@ -67,7 +68,8 @@ fun ToolsScreen(
         welcomeText = welcomeText,
         goToAction = { id ->
             when (id) {
-                0 -> appNavController.navigate(NavigationScreens.MainScreen.route)
+                0 -> appNavController.navigate(GamesNavigationScreens.MainScreen.route)
+                1 -> appNavController.navigate(RadioNavigationScreens.MainScreen.route)
                 else -> Unit
             }
         },
