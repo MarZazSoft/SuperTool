@@ -2,6 +2,7 @@ package com.marzazsoft.mobile.radio.data
 
 import com.marzazsoft.mobile.radio.models.Station
 
+@Suppress("ktlint:standard:max-line-length")
 fun getGamesList(): List<Station> =
     listOf(
         Station(
