@@ -96,7 +96,7 @@ fun LoginScreenUi(
 
         Image(
             painter = painterResource(id = DesignR.drawable.super_tool_icon),
-            contentDescription = stringResource(id = R.string.image_super_tool_description),
+            contentDescription = stringResource(id = DesignR.string.image_super_tool_description),
             modifier =
                 Modifier
                     .size(

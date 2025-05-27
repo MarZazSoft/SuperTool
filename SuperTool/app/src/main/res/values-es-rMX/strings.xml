@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SuperTool</string>
-    <string name="image_super_tool_description">Imagen de SuperTool</string>
     <string name="icon_password_description">Ícono de contraseña</string>
     <string name="icon_google_description">Ícono de Google</string>
     <string name="icon_email_description">Ícono de correo electrónico</string>

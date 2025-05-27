@@ -24,6 +24,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 mediaExoplayerVersion = "1.3.1"
 mediaExoplayerUiVersion = "1.3.1"
+ktorCoreVersion = "2.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -56,6 +57,12 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 media-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "mediaExoplayerVersion" }
 media-exoplayer-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "mediaExoplayerUiVersion" }
+ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorCoreVersion" }
+ktor-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktorCoreVersion" }
+ktor-content = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktorCoreVersion" }
+ktor-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorCoreVersion" }
+firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -67,8 +74,9 @@ parcelize = { id = "kotlin-parcelize" }
 
 [bundles]
 compose-utils = ["constraint-compose", "androidx-compose-navigation", "androidx-ui-tooling-preview", "androidx-material3"]
-firebase = ["firebase-analytics", "firebase-auth-play-services", "credentials", "google-identity"]
+firebase = ["firebase-analytics", "firebase-auth-play-services", "credentials", "google-identity", "firebase-auth"]
 data = ["preferences-data-store", "gson"]
 exoplayer = ["media-exoplayer", "media-exoplayer-ui"]
+ktor = ["ktor-core", "ktor-cio", "ktor-content", "ktor-serialization"]
 
 

@@ -86,7 +86,7 @@ fun SimpleAlertUi(
                 ) {
                     Image(
                         painter = painterResource(DesignR.drawable.super_tool_icon),
-                        contentDescription = stringResource(R.string.image_super_tool_description),
+                        contentDescription = stringResource(DesignR.string.image_super_tool_description),
                         modifier = Modifier.size(SMALL_X_IMAGE).clip(shape = CircleShape),
                     )
                     Spacer(modifier = Modifier.height(MEDIUM_PADDING))

@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.parcelize)
 }
 
 android {
-    namespace = "com.marzazsoft.mobile.games"
+    namespace = "com.marzazsoft.mobile.supertool.common"
     compileSdk = 35
 
     defaultConfig {
@@ -44,16 +42,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(platform(libs.firebase.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.bundles.compose.utils)
-    implementation(libs.bundles.data)
-    implementation(libs.koin)
-    implementation(libs.coil)
-    implementation(libs.bundles.ktor)
     implementation(libs.bundles.firebase)
-    implementation(libs.firestore)
-
-    implementation(project(":common"))
-    implementation(project(":supertooldesign"))
 }

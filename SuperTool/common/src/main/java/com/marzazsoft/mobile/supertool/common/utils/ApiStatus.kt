@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.utils
+package com.marzazsoft.mobile.supertool.common.utils
 
 sealed class ApiStatus<out T> {
     data object Empty : ApiStatus<Nothing>()
