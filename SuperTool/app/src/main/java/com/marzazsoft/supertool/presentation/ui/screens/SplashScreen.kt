@@ -37,11 +37,11 @@ import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
 import com.marzazsoft.supertool.presentation.viewModels.SplashViewModel
 import com.marzazsoft.supertooldesign.utils.DELAY_TIME_SPLASH_SCREEN
-import com.marzazsoft.supertooldesign.utils.SIMPLE_TIME_ANIMATION
 import com.marzazsoft.supertooldesign.utils.LARGE_FONT_SIZE
 import com.marzazsoft.supertooldesign.utils.LARGE_IMAGE
 import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
 import com.marzazsoft.supertooldesign.utils.NORMAL_STROKE_WIDTH
+import com.marzazsoft.supertooldesign.utils.SIMPLE_TIME_ANIMATION
 import com.marzazsoft.supertooldesign.utils.darkBlue
 import com.marzazsoft.supertooldesign.utils.white
 import kotlinx.coroutines.delay
