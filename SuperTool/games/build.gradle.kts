@@ -49,5 +49,6 @@ dependencies {
     implementation(libs.bundles.data)
     implementation(libs.koin)
     implementation(libs.coil)
+    implementation(libs.bundles.ktor)
     implementation(project(":supertooldesign"))
 }
