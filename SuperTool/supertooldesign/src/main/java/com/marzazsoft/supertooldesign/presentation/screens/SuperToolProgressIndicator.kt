@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.presentation.ui.screens.share
+package com.marzazsoft.supertooldesign.presentation.screens
 
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -21,9 +21,9 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.marzazsoft.supertool.R
-import com.marzazsoft.supertool.utils.LOADER_TIME_ANIMATION
+import com.marzazsoft.supertooldesign.R
 import com.marzazsoft.supertooldesign.utils.LARGE_INDICATOR
+import com.marzazsoft.supertooldesign.utils.LOADER_TIME_ANIMATION
 import com.marzazsoft.supertooldesign.utils.MEDIUM_IMAGE
 import com.marzazsoft.supertooldesign.utils.MEDIUM_INDICATOR
 import com.marzazsoft.supertooldesign.utils.SIMPLE_BORDER

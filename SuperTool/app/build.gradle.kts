@@ -86,6 +86,7 @@ dependencies {
     implementation(libs.lottie)
     implementation(libs.coil)
 
+    implementation(project(":common"))
     implementation(project(":games"))
     implementation(project(":radio"))
     implementation(project(":supertooldesign"))

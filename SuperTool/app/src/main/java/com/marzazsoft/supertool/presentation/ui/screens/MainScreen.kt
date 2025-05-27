@@ -40,9 +40,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.navigation.NavigationScreens
-import com.marzazsoft.supertool.presentation.ui.screens.share.SuperToolProgressIndicator
+import com.marzazsoft.supertooldesign.presentation.screens.SuperToolProgressIndicator
 import com.marzazsoft.supertool.presentation.viewModels.MainViewModel
-import com.marzazsoft.supertool.utils.ApiStatus
+import com.marzazsoft.mobile.supertool.common.utils.ApiStatus
 import com.marzazsoft.supertooldesign.utils.LARGE_IMAGE
 import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
 import com.marzazsoft.supertooldesign.utils.NORMAL_BORDER
@@ -119,7 +119,7 @@ fun MainScreenUi(
 
         Image(
             painter = painterResource(id = DesignR.drawable.super_tool_icon),
-            contentDescription = stringResource(id = R.string.image_super_tool_description),
+            contentDescription = stringResource(id = DesignR.string.image_super_tool_description),
             modifier =
                 Modifier
                     .size(

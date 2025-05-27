@@ -16,8 +16,11 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -31,10 +34,12 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.marzazsoft.mobile.games.R
-import com.marzazsoft.mobile.games.data.getGamesList
 import com.marzazsoft.mobile.games.models.Game
 import com.marzazsoft.mobile.games.navigation.NavigationScreens
 import com.marzazsoft.mobile.games.presentation.screens.shared.GameItem
+import com.marzazsoft.mobile.games.presentation.viewModels.GamesScreenViewModel
+import com.marzazsoft.mobile.supertool.common.utils.ApiStatus
+import com.marzazsoft.supertooldesign.presentation.screens.SuperToolProgressIndicator
 import com.marzazsoft.supertooldesign.utils.BOTTOM_HEIGHT
 import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
 import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
@@ -42,6 +47,8 @@ import com.marzazsoft.supertooldesign.utils.SMALL_HEIGHT
 import com.marzazsoft.supertooldesign.utils.darkBlue
 import com.marzazsoft.supertooldesign.utils.toB64
 import com.marzazsoft.supertooldesign.utils.white
+import kotlinx.coroutines.launch
+import org.koin.compose.viewmodel.koinViewModel
 import com.marzazsoft.supertooldesign.R as DesignR
 
 @Suppress("ktlint:standard:function-naming")
@@ -50,8 +57,31 @@ fun GamesScreen(
     appNavController: NavController,
     gameNavController: NavController,
     modifier: Modifier,
+    viewModel: GamesScreenViewModel = koinViewModel(),
 ) {
     var backActionFlag by rememberSaveable { mutableStateOf(true) }
+    var showProgressBar by rememberSaveable { mutableStateOf(false) }
+    var gamesList by rememberSaveable { mutableStateOf(emptyList<Game>()) }
+
+    val gameState by viewModel.gamesStatus.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(gameState) {
+        when (gameState) {
+            is ApiStatus.Loading -> showProgressBar = true
+            is ApiStatus.Success -> {
+                showProgressBar = false
+                gamesList = (gameState as ApiStatus.Success<List<Game>>).data
+            }
+            else -> showProgressBar = false
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        coroutineScope.launch {
+            viewModel.getGamesList()
+        }
+    }
 
     GamesScreenUi(
         modifier = modifier,
@@ -62,11 +92,12 @@ fun GamesScreen(
                 appNavController.popBackStack()
             }
         },
-        gamesList = getGamesList(),
+        gamesList = gamesList,
         goToGame = { url ->
             gameNavController.navigate("${NavigationScreens.GameViewScreen.route}/$url")
         },
     )
+    if (showProgressBar) SuperToolProgressIndicator()
 }
 
 @Suppress("ktlint:standard:function-naming")
@@ -79,7 +110,7 @@ fun GamesScreenUi(
     goToGame: (url: String) -> Unit,
 ) {
     ConstraintLayout(
-        modifier = modifier.background(darkBlue),
+        modifier = modifier.background(darkBlue).fillMaxSize(),
     ) {
         val (headerId, contentId) = createRefs()
 

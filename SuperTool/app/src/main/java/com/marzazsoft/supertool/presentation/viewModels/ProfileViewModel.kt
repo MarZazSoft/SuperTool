@@ -1,11 +1,9 @@
 package com.marzazsoft.supertool.presentation.viewModels
 
-import android.util.Log
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.lifecycle.ViewModel
 import com.marzazsoft.supertool.data.DataStoreRepository
-import com.marzazsoft.supertool.utils.TAG_LOG
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -32,7 +30,6 @@ class ProfileViewModel(
 
     suspend fun getUserName(): String =
         withContext(Dispatchers.IO) {
-            Log.d(TAG_LOG, "Este es el token -> ${dataStoreRepository.getSignInUser()?.idToken}")
             dataStoreRepository.getSignInUser()?.displayName.orEmpty()
         }
 

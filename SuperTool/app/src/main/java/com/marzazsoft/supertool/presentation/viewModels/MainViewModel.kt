@@ -12,12 +12,15 @@ import androidx.lifecycle.ViewModel
 import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.marzazsoft.supertool.BuildConfig
 import com.marzazsoft.supertool.data.DataStoreRepository
 import com.marzazsoft.supertool.models.SignInMethod
 import com.marzazsoft.supertool.models.User
-import com.marzazsoft.supertool.utils.ApiStatus
-import com.marzazsoft.supertool.utils.TAG_LOG
+import com.marzazsoft.mobile.supertool.common.utils.ApiStatus
+import com.marzazsoft.supertooldesign.utils.TAG_LOG
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -73,13 +76,17 @@ class MainViewModel(
     private suspend fun onSuccessGoogleSignIn(credential: Credential) {
         if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
             try {
-                saveUser(GoogleIdTokenCredential.createFrom(credential.data))
+                val googleCredential = GoogleIdTokenCredential.createFrom(credential.data)
+                saveLoggedUserIntoFirebaseAuth(
+                    GoogleAuthProvider.getCredential(googleCredential.idToken, null),
+                )
+                saveUser(googleCredential)
                 activateSignInFlag()
                 _firebaseAuthState.value = ApiStatus.Success(true)
                 Log.d(TAG_LOG, SUCCESS_LOG_IN_WITH_GOOGLE)
             } catch (e: GoogleIdTokenParsingException) {
                 _firebaseAuthState.value = ApiStatus.Error(ERROR_LOG_IN_WITH_GOOGLE)
-                Log.e(TAG_LOG, "$ERROR_LOG_IN_WITH_GOOGLE - ${e.localizedMessage}")
+                Log.e(TAG_LOG, "$ERROR_LOG_IN_WITH_GOOGLE ${e.localizedMessage}")
             }
         } else {
             _firebaseAuthState.value = ApiStatus.Error(ERROR_LOG_IN_WITH_GOOGLE)
@@ -98,6 +105,19 @@ class MainViewModel(
         }
 
     fun getCredentialManager() = credentialManager
+
+    private fun saveLoggedUserIntoFirebaseAuth(credential: AuthCredential) {
+        FirebaseAuth
+            .getInstance()
+            .signInWithCredential(credential)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG_LOG, SUCCESS_LOGIN_WITH_FIREBASE_AUTH)
+                } else {
+                    Log.d(TAG_LOG, "$ERROR_LOG_IN_WITH_FIREBASE_AUTH ${task.exception?.message}")
+                }
+            }
+    }
 
     private suspend fun saveUser(googleTokenIdCredential: GoogleIdTokenCredential) =
         withContext(Dispatchers.IO) {
@@ -120,6 +140,8 @@ class MainViewModel(
 
     companion object {
         const val SUCCESS_LOG_IN_WITH_GOOGLE = "Inicio de sesión con éxito"
-        private const val ERROR_LOG_IN_WITH_GOOGLE = "Error al iniciar sesión con Google"
+        const val SUCCESS_LOGIN_WITH_FIREBASE_AUTH = "Autenticación exitosa con Firebase"
+        private const val ERROR_LOG_IN_WITH_GOOGLE = "Error al iniciar sesión con Google:"
+        private const val ERROR_LOG_IN_WITH_FIREBASE_AUTH = "Error en autenticación:"
     }
 }

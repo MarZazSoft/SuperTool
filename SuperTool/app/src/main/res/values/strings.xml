@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">SuperTool</string>
-    <string name="image_super_tool_description">SuperTool image</string>
     <string name="icon_password_description">Password icon</string>
     <string name="icon_google_description">Google icon</string>
     <string name="icon_email_description">Email icon</string>

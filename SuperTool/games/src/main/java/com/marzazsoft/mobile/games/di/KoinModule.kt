@@ -1,5 +1,6 @@
 package com.marzazsoft.mobile.games.di
 
+import com.google.firebase.firestore.FirebaseFirestore
 import com.marzazsoft.mobile.games.presentation.viewModels.GamesScreenViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
@@ -18,9 +19,12 @@ val gamesLibraryModule =
                 }
             }
         }
+        single {
+            FirebaseFirestore.getInstance()
+        }
         viewModel {
             GamesScreenViewModel(
-                ktorClient = get(),
+                firebaseFireStore = get(),
             )
         }
     }
