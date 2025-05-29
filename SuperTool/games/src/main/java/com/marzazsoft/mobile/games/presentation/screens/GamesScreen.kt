@@ -38,10 +38,10 @@ import com.marzazsoft.mobile.games.models.Game
 import com.marzazsoft.mobile.games.navigation.NavigationScreens
 import com.marzazsoft.mobile.games.presentation.screens.shared.GameItem
 import com.marzazsoft.mobile.games.presentation.viewModels.GamesScreenViewModel
+import com.marzazsoft.mobile.games.utils.MICRO_STUDIO_URL
 import com.marzazsoft.mobile.supertool.common.utils.ApiStatus
 import com.marzazsoft.supertooldesign.presentation.screens.SuperToolProgressIndicator
 import com.marzazsoft.supertooldesign.utils.BOTTOM_HEIGHT
-import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
 import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
 import com.marzazsoft.supertooldesign.utils.SMALL_HEIGHT
 import com.marzazsoft.supertooldesign.utils.darkBlue
@@ -112,15 +112,15 @@ fun GamesScreenUi(
     ConstraintLayout(
         modifier = modifier.background(darkBlue).fillMaxSize(),
     ) {
-        val (headerId, contentId) = createRefs()
+        val (appBarId, headerId, contentId) = createRefs()
 
         Box(
             Modifier
                 .background(darkBlue)
                 .fillMaxWidth()
                 .height(SMALL_HEIGHT)
-                .constrainAs(headerId) {
-                    top.linkTo(parent.top, margin = MEDIUM_PADDING)
+                .constrainAs(appBarId) {
+                    top.linkTo(parent.top, margin = SIMPLE_PADDING)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 },
@@ -147,6 +147,18 @@ fun GamesScreenUi(
                     modifier = Modifier.weight(7f),
                 )
                 Spacer(modifier = Modifier.weight(1f))
+            }
+        }
+        Box(
+            modifier =
+                Modifier.padding(SIMPLE_PADDING).constrainAs(headerId) {
+                    top.linkTo(appBarId.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                },
+        ) {
+            Row {
+                Text("${stringResource(R.string.from_label)} $MICRO_STUDIO_URL")
             }
         }
         Box(

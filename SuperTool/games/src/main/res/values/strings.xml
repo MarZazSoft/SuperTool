@@ -4,4 +4,5 @@
     <string name="back_description">Go back icon</string>
     <string name="play_description">Play</string>
     <string name="play_icon_description">Play icon</string>
+    <string name="from_label">By</string>
 </resources>
