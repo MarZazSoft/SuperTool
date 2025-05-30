@@ -48,18 +48,11 @@ fun getGuestUserTools(context: Context): List<Tool> =
     with(context) {
         listOf<Tool>(
             Tool(
-                id = 0,
-                color = yellow.toArgb(),
-                icon = R.drawable.ic_games,
-                title = getString(R.string.online_games_title),
-                resume = getString(R.string.online_games_resume),
-            ),
-            Tool(
-                id = 1,
-                color = superLightBlue.toArgb(),
-                icon = R.drawable.ic_radio,
-                title = getString(R.string.radio_title),
-                resume = getString(R.string.radio_resume),
+                id = 2,
+                color = green.toArgb(),
+                icon = R.drawable.ic_notes,
+                title = getString(R.string.notes_title),
+                resume = getString(R.string.notes_resume),
             ),
         )
     }

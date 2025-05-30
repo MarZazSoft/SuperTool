@@ -31,6 +31,7 @@ import com.marzazsoft.supertool.models.Tool
 import com.marzazsoft.supertool.presentation.ui.screens.share.MenuItem
 import com.marzazsoft.supertool.presentation.viewModels.ToolsViewModel
 import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
+import com.marzazsoft.supertooldesign.utils.SIMPLE_PADDING
 import com.marzazsoft.supertooldesign.utils.SMALL_HEIGHT
 import com.marzazsoft.supertooldesign.utils.darkBlue
 import org.koin.androidx.compose.koinViewModel
@@ -95,7 +96,7 @@ fun ToolsScreenUi(
                 .fillMaxWidth()
                 .height(SMALL_HEIGHT)
                 .constrainAs(headerId) {
-                    top.linkTo(parent.top, margin = MEDIUM_PADDING)
+                    top.linkTo(parent.top, margin = SIMPLE_PADDING)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 },
