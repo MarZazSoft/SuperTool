@@ -21,4 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "SuperTool"
 include(":app")
- 
+include(":games")
+include(":supertooldesign")
+include(":radio")
+include(":common")

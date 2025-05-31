@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="games_title">Videojuegos</string>
+    <string name="back_description">ícono de ir atrás</string>
+    <string name="play_description">Jugar</string>
+    <string name="play_icon_description">Ícono jugar</string>
+    <string name="from_label">De</string>
+</resources>
