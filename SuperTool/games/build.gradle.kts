@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.parcelize)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -53,6 +54,10 @@ dependencies {
     implementation(libs.bundles.ktor)
     implementation(libs.bundles.firebase)
     implementation(libs.firestore)
+
+    implementation(libs.room.runtime)
+
+    ksp(libs.room.compiler)
 
     implementation(project(":common"))
     implementation(project(":supertooldesign"))

@@ -38,7 +38,8 @@ import com.marzazsoft.mobile.games.models.Game
 import com.marzazsoft.mobile.games.navigation.NavigationScreens
 import com.marzazsoft.mobile.games.presentation.screens.shared.GameItem
 import com.marzazsoft.mobile.games.presentation.viewModels.GamesScreenViewModel
-import com.marzazsoft.mobile.games.utils.MICRO_STUDIO_URL
+import com.marzazsoft.mobile.games.utils.MICRO_STUDIO
+import com.marzazsoft.mobile.supertool.common.extensionfunctions.addTextWithLink
 import com.marzazsoft.mobile.supertool.common.utils.ApiStatus
 import com.marzazsoft.supertooldesign.presentation.screens.SuperToolProgressIndicator
 import com.marzazsoft.supertooldesign.utils.BOTTOM_HEIGHT
@@ -158,7 +159,7 @@ fun GamesScreenUi(
                 },
         ) {
             Row {
-                Text("${stringResource(R.string.from_label)} $MICRO_STUDIO_URL")
+                Text(text = stringResource(R.string.from_label).addTextWithLink(MICRO_STUDIO))
             }
         }
         Box(
@@ -174,8 +175,7 @@ fun GamesScreenUi(
             ) {
                 items(gamesList) { game ->
                     GameItem(
-                        title = game.title,
-                        posterIcon = game.posterUrl,
+                        game = game,
                     ) {
                         goToGame(game.gameUrl.toB64())
                     }

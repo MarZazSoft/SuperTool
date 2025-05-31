@@ -41,6 +41,12 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.firebase.bom))
     implementation(libs.bundles.firebase)
+    implementation(libs.bundles.compose.utils)
+
+    testImplementation(libs.bundles.unit.tests)
+
+    implementation(project(":supertooldesign"))
 }

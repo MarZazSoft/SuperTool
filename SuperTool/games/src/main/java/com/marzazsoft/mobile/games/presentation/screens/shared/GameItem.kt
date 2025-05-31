@@ -27,6 +27,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.marzazsoft.mobile.games.R
+import com.marzazsoft.mobile.games.models.Game
+import com.marzazsoft.mobile.supertool.common.extensionfunctions.addTextWithLink
 import com.marzazsoft.supertooldesign.utils.LARGE_IMAGE
 import com.marzazsoft.supertooldesign.utils.NORMAL_BORDER
 import com.marzazsoft.supertooldesign.utils.SIMPLE_BORDER
@@ -39,13 +41,13 @@ import com.marzazsoft.supertooldesign.R as DesignR
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun GameItem(
-    title: String,
-    posterIcon: String,
+    game: Game,
     onClickAction: () -> Unit,
 ) {
     GameItemUi(
-        title = title,
-        posterIcon = posterIcon,
+        title = game.title,
+        author = game.author,
+        posterIcon = game.posterUrl,
     ) {
         onClickAction()
     }
@@ -55,6 +57,7 @@ fun GameItem(
 @Composable
 fun GameItemUi(
     title: String,
+    author: String,
     posterIcon: String,
     onClickAction: () -> Unit,
 ) {
@@ -84,7 +87,9 @@ fun GameItemUi(
                     modifier = Modifier.size(LARGE_IMAGE),
                 )
             }
+            Spacer(modifier = Modifier.height(NORMAL_BORDER))
             Text(title)
+            Text(text = stringResource(R.string.from_label).addTextWithLink("  $author"))
             Spacer(modifier = Modifier.height(NORMAL_BORDER))
             Button(
                 onClick = {
@@ -116,7 +121,6 @@ fun GameItemUi(
 @Preview(showBackground = true, showSystemUi = true)
 fun GameItemPreview() {
     GameItem(
-        title = "Juego Dummy",
-        posterIcon = "https://dummygame.com",
+        game = Game(),
     ) {}
 }
