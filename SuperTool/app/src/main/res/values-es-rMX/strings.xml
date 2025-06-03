@@ -31,4 +31,6 @@
     <string name="notes_resume">Agrega tus notas rápidas de manera sencilla</string>
     <string name="spend_manager_title">Administrador de gastos</string>
     <string name="spend_manager_resume">Controla tu dinero de forma fácil</string>
+    <string name="name_label">Nombre</string>
+    <string name="email_text_label">Correo</string>
 </resources>

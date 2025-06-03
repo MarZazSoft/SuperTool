@@ -103,7 +103,7 @@ fun ProfileScreenUi(
                         .data(profileImage)
                         .crossfade(true)
                         .placeholder(DesignR.drawable.super_tool_icon)
-                        .error(DesignR.drawable.super_tool_icon)
+                        .error(DesignR.drawable.super_tool_icon_error)
                         .build(),
                 contentScale = ContentScale.Fit,
                 contentDescription = stringResource(R.string.image_profile_description),
@@ -111,11 +111,11 @@ fun ProfileScreenUi(
             )
         }
         Row {
-            Text(text = "Nombre", modifier = Modifier.weight(1f))
+            Text(text = stringResource(R.string.name_label), modifier = Modifier.weight(1f))
             Text(text = name, modifier = Modifier.weight(2f))
         }
         Row {
-            Text(text = "E-mail", modifier = Modifier.weight(1f))
+            Text(text = stringResource(R.string.email_text_label), modifier = Modifier.weight(1f))
             Text(text = email, modifier = Modifier.weight(2f))
         }
         Box(
