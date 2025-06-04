@@ -15,13 +15,15 @@ class FetchGamesApi(
                 .collection(GAMES_COLLECTION)
                 .get()
                 .addOnSuccessListener { data ->
-                    var gamesList = mutableListOf<Game>()
-                    for (game in data) {
-                        gamesList.add(game.toObject(Game::class.java))
-                    }
+                    var gamesList =
+                        data.mapNotNull {
+                            it.toObject(Game::class.java).takeIf { game -> game.visible }
+                        }
                     coroutine.resume(ApiStatus.Success(gamesList))
                 }.addOnFailureListener { error ->
-                    coroutine.resume(ApiStatus.Error("$ERROR_LOGGED_USER ${error.localizedMessage}"))
+                    coroutine.resume(
+                        ApiStatus.Error("$ERROR_LOGGED_USER ${error.localizedMessage}"),
+                    )
                 }
         }
 

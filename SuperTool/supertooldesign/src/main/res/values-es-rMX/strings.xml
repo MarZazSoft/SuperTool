@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="image_super_tool_description">Imagen de SuperTool</string>
+    <string name="back_description">ícono de ir atrás</string>
 </resources>
