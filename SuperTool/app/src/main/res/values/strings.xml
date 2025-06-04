@@ -30,6 +30,8 @@
     <string name="notes_resume">Add your notes of easy way</string>
     <string name="spend_manager_title">Spend Manager</string>
     <string name="spend_manager_resume">Controller your money of easy way</string>
+    <string name="subscription_manager_title">Subscription Manager</string>
+    <string name="subscription_manager_resume">Controller your subscriptions of easy way</string>
     <string name="name_label">Name</string>
     <string name="email_text_label">E-mail</string>
 </resources>
