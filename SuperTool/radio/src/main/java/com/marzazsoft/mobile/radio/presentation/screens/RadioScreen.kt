@@ -52,9 +52,8 @@ fun RadioScreen(
     radioController: NavController,
     modifier: Modifier,
 ) {
-    var backActionFlag by rememberSaveable { mutableStateOf(true) }
-
     val context = LocalContext.current
+    var backActionFlag by rememberSaveable { mutableStateOf(true) }
     val exoPlayer = remember { ExoPlayer.Builder(context).build() }
     var isPlaying by rememberSaveable { mutableStateOf(false) }
 
@@ -85,6 +84,7 @@ fun RadioScreen(
             }
             isPlaying = !isPlaying
         },
+        playIcon = if (isPlaying) R.drawable.ic_stop else DesignR.drawable.ic_play,
     )
 }
 
@@ -94,6 +94,7 @@ fun RadioScreenUi(
     modifier: Modifier,
     backAction: () -> Unit,
     playAction: () -> Unit,
+    playIcon: Int,
 ) {
     ConstraintLayout(
         modifier = modifier.fillMaxSize().background(darkBlue),
@@ -185,7 +186,7 @@ fun RadioScreenUi(
                 modifier = Modifier.weight(1f).size(SMALL_X_IMAGE),
             )
             Icon(
-                painter = painterResource(DesignR.drawable.ic_play),
+                painter = painterResource(playIcon),
                 contentDescription = "",
                 modifier =
                     Modifier.weight(1f).size(SMALL_X_IMAGE).clickable {
