@@ -2,7 +2,9 @@ package com.marzazsoft.mobile.radio.presentation.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +12,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +26,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -35,6 +41,8 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.marzazsoft.mobile.radio.R
+import com.marzazsoft.mobile.radio.data.getRadioStationsList
+import com.marzazsoft.mobile.radio.models.Station
 import com.marzazsoft.supertooldesign.utils.EXTRA_LARGE_IMAGE
 import com.marzazsoft.supertooldesign.utils.LARGE_PADDING
 import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
@@ -85,6 +93,7 @@ fun RadioScreen(
             isPlaying = !isPlaying
         },
         playIcon = if (isPlaying) R.drawable.ic_stop else DesignR.drawable.ic_play,
+        stationsList = getRadioStationsList(),
     )
 }
 
@@ -95,6 +104,7 @@ fun RadioScreenUi(
     backAction: () -> Unit,
     playAction: () -> Unit,
     playIcon: Int,
+    stationsList: List<Station>,
 ) {
     ConstraintLayout(
         modifier = modifier.fillMaxSize().background(darkBlue),
@@ -168,7 +178,7 @@ fun RadioScreenUi(
                         .error(DesignR.drawable.super_tool_icon_error)
                         .build(),
                 contentDescription = "",
-                modifier = Modifier.size(EXTRA_LARGE_IMAGE),
+                modifier = Modifier.size(EXTRA_LARGE_IMAGE).clip(CircleShape),
             )
         }
         Row(
@@ -199,23 +209,15 @@ fun RadioScreenUi(
                 modifier = Modifier.weight(1f).size(SMALL_X_IMAGE),
             )
         }
-        /*AndroidView(
-            factory = { context ->
-                PlayerView(context).apply {
-                    player =
-                        ExoPlayer.Builder(context).build().apply {
-                            setMediaItem(
-                                MediaItem.fromUri(
-                                    "https://19313.live.streamtheworld.com/XEQR_FMAAC.aac?dist=grc-web&key=grc-web&tdsdk=js-2.9&swm=false&pname=TDSdk&pversion=2.9&banners=none&burst-time=15&sbmid=b2e5e9f8-ceb2-4923-8c52-30025333b1e5",
-                                ),
-                            )
-                            prepare()
-                            play()
-                        }
-                }
-            },
-            modifier = Modifier.fillMaxSize(),
-        )*/
+        LazyRow (
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(SIMPLE_PADDING),
+            contentPadding = PaddingValues(horizontal = SIMPLE_PADDING),
+        ) {
+            items(stationsList) {
+
+            }
+        }
     }
 }
 
