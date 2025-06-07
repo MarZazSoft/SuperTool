@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,8 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -43,6 +42,7 @@ import coil.request.ImageRequest
 import com.marzazsoft.mobile.radio.R
 import com.marzazsoft.mobile.radio.data.getRadioStationsList
 import com.marzazsoft.mobile.radio.models.Station
+import com.marzazsoft.mobile.radio.presentation.screens.shared.RadioStationItem
 import com.marzazsoft.supertooldesign.utils.EXTRA_LARGE_IMAGE
 import com.marzazsoft.supertooldesign.utils.LARGE_PADDING
 import com.marzazsoft.supertooldesign.utils.MEDIUM_PADDING
@@ -61,9 +61,12 @@ fun RadioScreen(
     modifier: Modifier,
 ) {
     val context = LocalContext.current
-    var backActionFlag by rememberSaveable { mutableStateOf(true) }
     val exoPlayer = remember { ExoPlayer.Builder(context).build() }
+    var backActionFlag by rememberSaveable { mutableStateOf(true) }
     var isPlaying by rememberSaveable { mutableStateOf(false) }
+    var uriStation by rememberSaveable { mutableStateOf("") }
+    var uriIconStation by rememberSaveable { mutableStateOf("") }
+    var titleStation by rememberSaveable { mutableStateOf("") }
 
     DisposableEffect(Unit) {
         onDispose { exoPlayer.release() }
@@ -82,18 +85,29 @@ fun RadioScreen(
             if (isPlaying) {
                 exoPlayer.pause()
             } else {
-                exoPlayer.setMediaItem(
-                    MediaItem.fromUri(
-                        "https://19313.live.streamtheworld.com/XEQR_FMAAC.aac?dist=grc-web&key=grc-web&tdsdk=js-2.9&swm=false&pname=TDSdk&pversion=2.9&banners=none&burst-time=15&sbmid=b2e5e9f8-ceb2-4923-8c52-30025333b1e5",
-                    ),
-                )
-                exoPlayer.prepare()
                 exoPlayer.play()
             }
             isPlaying = !isPlaying
         },
         playIcon = if (isPlaying) R.drawable.ic_stop else DesignR.drawable.ic_play,
+        titleRadioStation = titleStation,
+        uriIconStation = uriIconStation,
         stationsList = getRadioStationsList(),
+        actionStationSelected = { station ->
+            uriStation = station.stationUri
+            uriIconStation = station.stationIcon
+            titleStation = station.name
+            if (isPlaying) {
+                exoPlayer.pause()
+                isPlaying = false
+            }
+            exoPlayer.setMediaItem(
+                MediaItem.fromUri(
+                    uriStation,
+                ),
+            )
+            exoPlayer.prepare()
+        },
     )
 }
 
@@ -104,12 +118,15 @@ fun RadioScreenUi(
     backAction: () -> Unit,
     playAction: () -> Unit,
     playIcon: Int,
+    titleRadioStation: String,
+    uriIconStation: String,
     stationsList: List<Station>,
+    actionStationSelected: (radioStation: Station) -> Unit,
 ) {
     ConstraintLayout(
         modifier = modifier.fillMaxSize().background(darkBlue),
     ) {
-        val (appBarId, headerId, contentId, toolsId) = createRefs()
+        val (appBarId, headerId, contentId, toolsId, listId) = createRefs()
 
         Box(
             Modifier
@@ -156,7 +173,7 @@ fun RadioScreenUi(
                     }.padding(MEDIUM_PADDING),
         ) {
             Row {
-                Text(text = "La Z XD")
+                Text(text = titleRadioStation)
             }
         }
         Box(
@@ -171,9 +188,8 @@ fun RadioScreenUi(
                 model =
                     ImageRequest
                         .Builder(LocalContext.current)
-                        .data(
-                            "https://imgsvr.radiocut.site/get/crop/center/200/200/radio_logos/96/b2/96b243f3-b93b-4964-823f-d23f5e1a28ea.jpg",
-                        ).crossfade(true)
+                        .data(uriIconStation)
+                        .crossfade(true)
                         .placeholder(DesignR.drawable.super_tool_icon)
                         .error(DesignR.drawable.super_tool_icon_error)
                         .build(),
@@ -209,13 +225,27 @@ fun RadioScreenUi(
                 modifier = Modifier.weight(1f).size(SMALL_X_IMAGE),
             )
         }
-        LazyRow (
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(SIMPLE_PADDING),
-            contentPadding = PaddingValues(horizontal = SIMPLE_PADDING),
+        LazyRow(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MEDIUM_PADDING,
+                        end = MEDIUM_PADDING,
+                        bottom = MEDIUM_PADDING,
+                    ).constrainAs(listId) {
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom)
+                    },
+            horizontalArrangement = Arrangement.spacedBy(MEDIUM_PADDING),
         ) {
-            items(stationsList) {
-
+            items(stationsList) { radioStation ->
+                RadioStationItem(
+                    radioStation = radioStation,
+                ) {
+                    actionStationSelected(radioStation)
+                }
             }
         }
     }

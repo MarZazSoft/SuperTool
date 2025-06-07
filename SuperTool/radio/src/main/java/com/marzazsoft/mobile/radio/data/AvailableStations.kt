@@ -9,7 +9,7 @@ fun getRadioStationsList(): List<Station> =
         Station(
             name = "La Mejor 95.5 fm",
             stationType = RadioType.FM,
-            stationIcon = "https://lamejor.com.mx/u/plantillas/p/la-mejor-fm/imgs/main-logo.svg?vok",
+            stationIcon = "https://i.iheart.com/v3/re/new_assets/5ee43a62c4c516799194024d?ops=fit(960%2C960)%2Cresize(0%2C390)",
             stationUri = "https://19003.live.streamtheworld.com/XERCFM.mp3?dist=tunein&DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc0ODA0NDc4MSwiaXNzIjoidGlzcnYifQ.w7th5PbUwv03GryFqtBVOeYcP2wiklWY-yeakhd5G2s",
         ),
         Station(

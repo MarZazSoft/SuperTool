@@ -1,6 +1,7 @@
 package com.marzazsoft.supertool.presentation.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -105,13 +106,20 @@ fun ToolsScreenUi(
             Text(text = welcomeText, fontWeight = FontWeight.Bold)
         }
         Box(
-            Modifier.background(darkBlue).padding(MEDIUM_PADDING).constrainAs(contentId) {
-                top.linkTo(headerId.bottom)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            },
+            Modifier
+                .background(darkBlue)
+                .padding(
+                    start = MEDIUM_PADDING,
+                    end = MEDIUM_PADDING,
+                ).constrainAs(contentId) {
+                    top.linkTo(headerId.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                },
         ) {
-            LazyColumn {
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(SIMPLE_PADDING),
+            ) {
                 items(toolsList) { item ->
                     MenuItem(
                         icon = item.icon,
