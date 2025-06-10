@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.marzazsoft.mobile.supertool.common.utils.ApiStatus
 import com.marzazsoft.supertool.BuildConfig
-import com.marzazsoft.supertool.data.DataStoreRepository
+import com.marzazsoft.supertool.repositories.DataStoreRepository
 import com.marzazsoft.supertool.models.SignInMethod
 import com.marzazsoft.supertool.models.User
 import com.marzazsoft.supertooldesign.utils.TAG_LOG

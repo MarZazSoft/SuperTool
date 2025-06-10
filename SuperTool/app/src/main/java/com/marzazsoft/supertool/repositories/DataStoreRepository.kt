@@ -1,4 +1,4 @@
-package com.marzazsoft.supertool.data
+package com.marzazsoft.supertool.repositories
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

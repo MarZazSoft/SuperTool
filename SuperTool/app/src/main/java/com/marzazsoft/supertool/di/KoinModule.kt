@@ -1,7 +1,7 @@
 package com.marzazsoft.supertool.di
 
 import androidx.credentials.CredentialManager
-import com.marzazsoft.supertool.data.DataStoreRepository
+import com.marzazsoft.supertool.repositories.DataStoreRepository
 import com.marzazsoft.supertool.data.dataStore
 import com.marzazsoft.supertool.presentation.viewModels.MainViewModel
 import com.marzazsoft.supertool.presentation.viewModels.ProfileViewModel
