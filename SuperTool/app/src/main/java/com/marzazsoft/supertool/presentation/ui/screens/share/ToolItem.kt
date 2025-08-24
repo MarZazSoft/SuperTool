@@ -107,7 +107,6 @@ fun MenuItemUi(
             }
         }
     }
-    Spacer(modifier = Modifier.height(SIMPLE_PADDING))
 }
 
 @Suppress("ktlint:standard:function-naming")

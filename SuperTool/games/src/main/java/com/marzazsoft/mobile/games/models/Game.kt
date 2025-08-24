@@ -9,4 +9,5 @@ data class Game(
     val author: String = "",
     val posterUrl: String = "",
     val gameUrl: String = "",
+    val visible: Boolean = false,
 ) : Parcelable
