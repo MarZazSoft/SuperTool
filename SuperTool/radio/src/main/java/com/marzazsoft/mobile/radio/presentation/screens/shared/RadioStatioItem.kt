@@ -21,7 +21,7 @@ import com.marzazsoft.supertooldesign.utils.LARGE_IMAGE
 import com.marzazsoft.supertooldesign.utils.MEDIUM_BORDER
 import com.marzazsoft.supertooldesign.utils.MEDIUM_INDICATOR
 import com.marzazsoft.supertooldesign.utils.black
-import com.marzazsoft.supertooldesign.utils.white
+import com.marzazsoft.supertooldesign.utils.superLightBlue
 import com.marzazsoft.supertooldesign.R as DesignR
 
 @Suppress("ktlint:standard:function-naming")
@@ -52,10 +52,10 @@ fun RadioStationItemUi(
             ),
         colors =
             CardColors(
-                containerColor = white,
-                contentColor = white,
-                disabledContentColor = white,
-                disabledContainerColor = white,
+                containerColor = superLightBlue,
+                contentColor = superLightBlue,
+                disabledContentColor = superLightBlue,
+                disabledContainerColor = superLightBlue,
             ),
         shape = RoundedCornerShape(MEDIUM_BORDER),
         onClick = { onClickAction() },
@@ -78,7 +78,7 @@ fun RadioStationItemUi(
             Text(
                 text = stationTitle,
                 color = black,
-                modifier = Modifier.background(white).weight(1f),
+                modifier = Modifier.background(superLightBlue).weight(1f),
                 maxLines = 1,
                 overflow = TextOverflow.Clip,
             )

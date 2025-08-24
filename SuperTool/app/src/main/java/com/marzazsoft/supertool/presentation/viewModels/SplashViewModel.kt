@@ -1,7 +1,7 @@
 package com.marzazsoft.supertool.presentation.viewModels
 
 import androidx.lifecycle.ViewModel
-import com.marzazsoft.supertool.data.DataStoreRepository
+import com.marzazsoft.supertool.repositories.DataStoreRepository
 import kotlinx.coroutines.Dispatchers
 
 class SplashViewModel(
