@@ -3,6 +3,7 @@ package com.marzazsoft.supertool
 import android.app.Application
 import com.google.firebase.FirebaseApp
 import com.marzazsoft.mobile.games.di.gamesLibraryModule
+import com.marzazsoft.mobile.radio.di.radioLibraryModule
 import com.marzazsoft.supertool.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -15,7 +16,11 @@ class MyApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MyApp)
-            modules(appModule, gamesLibraryModule)
+            modules(
+                appModule,
+                gamesLibraryModule,
+                radioLibraryModule,
+            )
         }
         FirebaseApp.initializeApp(this)
     }

@@ -3,7 +3,7 @@ package com.marzazsoft.supertool.presentation.viewModels
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.lifecycle.ViewModel
-import com.marzazsoft.supertool.data.DataStoreRepository
+import com.marzazsoft.supertool.repositories.DataStoreRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

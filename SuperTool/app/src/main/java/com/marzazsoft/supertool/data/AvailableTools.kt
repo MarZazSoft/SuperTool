@@ -6,6 +6,7 @@ import com.marzazsoft.supertool.R
 import com.marzazsoft.supertool.models.Tool
 import com.marzazsoft.supertooldesign.utils.blue
 import com.marzazsoft.supertooldesign.utils.green
+import com.marzazsoft.supertooldesign.utils.red
 import com.marzazsoft.supertooldesign.utils.superLightBlue
 import com.marzazsoft.supertooldesign.utils.yellow
 import com.marzazsoft.supertooldesign.R as DesignR
@@ -41,6 +42,13 @@ fun getLoggedUserTools(context: Context): List<Tool> =
                 title = getString(R.string.spend_manager_title),
                 resume = getString(R.string.spend_manager_resume),
             ),
+            Tool(
+                id = 4,
+                color = red.toArgb(),
+                icon = DesignR.drawable.ic_wallet,
+                title = getString(R.string.subscription_manager_title),
+                resume = getString(R.string.subscription_manager_resume),
+            ),
         )
     }
 
@@ -53,6 +61,13 @@ fun getGuestUserTools(context: Context): List<Tool> =
                 icon = R.drawable.ic_notes,
                 title = getString(R.string.notes_title),
                 resume = getString(R.string.notes_resume),
+            ),
+            Tool(
+                id = 4,
+                color = red.toArgb(),
+                icon = DesignR.drawable.ic_wallet,
+                title = getString(R.string.subscription_manager_title),
+                resume = getString(R.string.subscription_manager_resume),
             ),
         )
     }

@@ -134,7 +134,7 @@ fun GamesScreenUi(
                 Icon(
                     painter = painterResource(DesignR.drawable.ic_back),
                     tint = white,
-                    contentDescription = stringResource(R.string.back_description),
+                    contentDescription = stringResource(DesignR.string.back_description),
                     modifier =
                         Modifier.weight(1f).clickable {
                             backAction()
@@ -152,7 +152,7 @@ fun GamesScreenUi(
         }
         Box(
             modifier =
-                Modifier.padding(SIMPLE_PADDING).constrainAs(headerId) {
+                Modifier.constrainAs(headerId) {
                     top.linkTo(appBarId.bottom)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -163,15 +163,24 @@ fun GamesScreenUi(
             }
         }
         Box(
-            Modifier.background(darkBlue).padding(bottom = BOTTOM_HEIGHT).constrainAs(contentId) {
-                top.linkTo(headerId.bottom)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            },
+            modifier =
+                Modifier.background(darkBlue).constrainAs(contentId) {
+                    top.linkTo(headerId.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                },
         ) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
-                modifier = Modifier.padding(SIMPLE_PADDING),
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(
+                            top = SIMPLE_PADDING,
+                            end = SIMPLE_PADDING,
+                            start = SIMPLE_PADDING,
+                            bottom = BOTTOM_HEIGHT,
+                        ),
             ) {
                 items(gamesList) { game ->
                     GameItem(

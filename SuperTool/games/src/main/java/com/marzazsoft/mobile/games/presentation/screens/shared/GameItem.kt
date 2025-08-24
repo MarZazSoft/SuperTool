@@ -23,6 +23,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -80,7 +81,7 @@ fun GameItemUi(
                             .data(posterIcon)
                             .crossfade(true)
                             .placeholder(DesignR.drawable.super_tool_icon)
-                            .error(DesignR.drawable.super_tool_icon)
+                            .error(DesignR.drawable.super_tool_icon_error)
                             .build(),
                     contentScale = ContentScale.Fit,
                     contentDescription = "",
@@ -88,8 +89,16 @@ fun GameItemUi(
                 )
             }
             Spacer(modifier = Modifier.height(NORMAL_BORDER))
-            Text(title)
-            Text(text = stringResource(R.string.from_label).addTextWithLink("  $author"))
+            Text(
+                text = title,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+            Text(
+                text = stringResource(R.string.from_label).addTextWithLink(" $author"),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
             Spacer(modifier = Modifier.height(NORMAL_BORDER))
             Button(
                 onClick = {
