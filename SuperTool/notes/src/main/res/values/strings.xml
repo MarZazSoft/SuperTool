@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="module_name">Notas</string>
+    <string name="empty_notes">No tienes notas aún</string>
+    <string name="new_note">Nueva nota</string>
+    <string name="edit_note">Editar nota</string>
+    <string name="save_note">Guardar</string>
+    <string name="delete_note">Eliminar</string>
+    <string name="note_title_hint">Título</string>
+    <string name="note_content_hint">Contenido</string>
+</resources>

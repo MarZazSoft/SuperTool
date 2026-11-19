@@ -3,6 +3,7 @@ package com.marzazsoft.supertool
 import android.app.Application
 import com.google.firebase.FirebaseApp
 import com.marzazsoft.mobile.games.di.gamesLibraryModule
+import com.marzazsoft.mobile.notes.di.notesLibraryModule
 import com.marzazsoft.mobile.radio.di.radioLibraryModule
 import com.marzazsoft.supertool.di.appModule
 import org.koin.android.ext.koin.androidContext
@@ -20,6 +21,7 @@ class MyApp : Application() {
                 appModule,
                 gamesLibraryModule,
                 radioLibraryModule,
+                notesLibraryModule,
             )
         }
         FirebaseApp.initializeApp(this)

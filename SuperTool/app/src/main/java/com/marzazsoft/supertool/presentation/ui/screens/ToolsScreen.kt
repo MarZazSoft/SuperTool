@@ -37,6 +37,7 @@ import com.marzazsoft.supertooldesign.utils.SMALL_HEIGHT
 import com.marzazsoft.supertooldesign.utils.darkBlue
 import org.koin.androidx.compose.koinViewModel
 import com.marzazsoft.mobile.games.navigation.NavigationScreens as GamesNavigationScreens
+import com.marzazsoft.mobile.notes.navigation.NavigationScreens as NotesNavigationScreens
 import com.marzazsoft.mobile.radio.navigation.NavigationScreens as RadioNavigationScreens
 
 @Suppress("ktlint:standard:function-naming")
@@ -72,6 +73,7 @@ fun ToolsScreen(
             when (id) {
                 0 -> appNavController.navigate(GamesNavigationScreens.MainScreen.route)
                 1 -> appNavController.navigate(RadioNavigationScreens.MainScreen.route)
+                2 -> appNavController.navigate(NotesNavigationScreens.MainScreen.route)
                 else -> Unit
             }
         },

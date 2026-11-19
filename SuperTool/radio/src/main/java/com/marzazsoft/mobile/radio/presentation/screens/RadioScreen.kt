@@ -14,12 +14,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -33,6 +36,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.media3.common.MediaItem
+import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -67,26 +71,32 @@ fun RadioScreen(
     var uriStation by rememberSaveable { mutableStateOf("") }
     var uriIconStation by rememberSaveable { mutableStateOf("") }
     var titleStation by rememberSaveable { mutableStateOf("") }
-    var exoPlayer = remember { viewModel.getExoPlayer() }
-    var isPlaying by rememberSaveable {
-        mutableStateOf(
-            exoPlayer.playWhenReady && exoPlayer.playbackState == Player.STATE_READY,
-        )
-    }
+    var isPlaying by rememberSaveable { mutableStateOf(false) }
+
+    val player by viewModel.player.collectAsState()
+    val errorState by viewModel.errorState.collectAsState()
 
     val stationsList = getRadioStationsList()
 
-    if (uriStation.isEmpty() && !isPlaying) {
-        uriStation = stationsList[0].stationUri
-        titleStation = stationsList[0].name
-        uriIconStation = stationsList[0].stationIcon
+    // Sync isPlaying when the controller connects (e.g. user navigates back to screen)
+    LaunchedEffect(player) {
+        player?.let { isPlaying = it.isPlaying }
+    }
 
-        exoPlayer.setMediaItem(
-            MediaItem.fromUri(
-                uriStation,
-            ),
-        )
-        exoPlayer.prepare()
+    // Auto-load and prepare the first station once the player is ready
+    LaunchedEffect(player) {
+        if (uriStation.isEmpty() && player != null) {
+            uriStation = stationsList[0].stationUri
+            titleStation = stationsList[0].name
+            uriIconStation = stationsList[0].stationIcon
+            player!!.setMediaItem(
+                MediaItem.Builder()
+                    .setUri(uriStation)
+                    .setMediaMetadata(MediaMetadata.Builder().setTitle(titleStation).build())
+                    .build(),
+            )
+            player!!.prepare()
+        }
     }
 
     val attributes =
@@ -101,9 +111,9 @@ fun RadioScreen(
             },
             playAction = {
                 if (isPlaying) {
-                    exoPlayer.pause()
+                    player?.pause()
                 } else {
-                    exoPlayer.play()
+                    player?.play()
                 }
                 isPlaying = !isPlaying
             },
@@ -116,19 +126,35 @@ fun RadioScreen(
                 uriIconStation = station.stationIcon
                 titleStation = station.name
                 if (isPlaying) {
-                    exoPlayer.pause()
+                    player?.pause()
                     isPlaying = false
                 }
-                exoPlayer.setMediaItem(
-                    MediaItem.fromUri(
-                        uriStation,
-                    ),
+                player?.setMediaItem(
+                    MediaItem.Builder()
+                        .setUri(uriStation)
+                        .setMediaMetadata(MediaMetadata.Builder().setTitle(titleStation).build())
+                        .build(),
                 )
-                exoPlayer.prepare()
+                player?.prepare()
+                player?.play()
+                isPlaying = true
             },
         )
 
     RadioScreenUi(attributes)
+
+    errorState?.let { errorMessage ->
+        AlertDialog(
+            onDismissRequest = {},
+            title = { Text(text = "Error de reproducción") },
+            text = { Text(text = errorMessage) },
+            confirmButton = {
+                TextButton(onClick = { viewModel.clearError() }) {
+                    Text(text = "De acuerdo")
+                }
+            },
+        )
+    }
 }
 
 @Suppress("ktlint:standard:function-naming")

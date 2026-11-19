@@ -89,5 +89,6 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":games"))
     implementation(project(":radio"))
+    implementation(project(":notes"))
     implementation(project(":supertooldesign"))
 }

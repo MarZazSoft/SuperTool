@@ -1,0 +1,1 @@
+# Notes module ProGuard rules
